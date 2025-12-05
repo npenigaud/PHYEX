@@ -81,7 +81,8 @@ INTEGER :: JKK                  !loop counters
 INTEGER :: JIJ, JK
 INTEGER :: IIJB,IIJE ! physical horizontal domain indices
 INTEGER :: IKT,IKB,IKA,IKE,IKL
-REAL    :: ZTEST,ZTEST0,ZTESTM  !test for vectorization
+REAL    :: ZTEST  !test for vectorization
+REAL, DIMENSION(D%NIJT) :: ZTEST0
 !-------------------------------------------------------------------------------------
 !
 !*       1.    INITIALISATION
@@ -121,77 +122,75 @@ ZHLVPT(IIJB:IIJE,IKB)=PVPT(IIJB:IIJE,IKB)-ZDELTVPT(IIJB:IIJE,IKB)*0.5
 !
 
 IF (OUPORDN.EQV..TRUE.) THEN 
- !$mnh_expand_array(JIJ=IIJB:IIJE)
- ZINTE(IIJB:IIJE)=PTKEM_DEP(IIJB:IIJE)
- !$mnh_end_expand_array(JIJ=IIJB:IIJE)
- PLWORK=0.
- ZTESTM=1.
- IF(OFLUX)THEN
-   !$mnh_expand_array(JIJ=IIJB:IIJE)
-   ZVPT_DEP(IIJB:IIJE)=ZHLVPT(IIJB:IIJE,KK) ! departure point is on flux level
-   !$mnh_end_expand_array(JIJ=IIJB:IIJE)
-   !We must compute what happens between flux level KK and mass level KK
-   DO JIJ=IIJB,IIJE
-     ZTEST0=0.5+SIGN(0.5,ZINTE(JIJ)) ! test if there's energy to consume
-     ! Energy consumed if parcel cross the entire layer
-     ZPOTE(JIJ) = ZTEST0*(PG_O_THVREF(JIJ)      *      &
-         (0.5*(ZHLVPT(JIJ,KK)+ PVPT(JIJ,KK)) - ZVPT_DEP(JIJ)) + &
-         CSTURB%XRM17*PSHEAR(JIJ,KK)*SQRT(ABS(PTKEM_DEP(JIJ))))  * &
-         PDZZ2D(JIJ,KK)*0.5
-     ! Test if it rests some energy to consume
-     ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE(JIJ))
-     ! Length travelled by parcel if it rests energy to consume
-     ZLWORK1(JIJ)=PDZZ2D(JIJ,KK)*0.5
-     ! Lenght travelled by parcel to nullify energy
-     ZLWORK2(JIJ)=        ( - PG_O_THVREF(JIJ) *                     &
-            (  ZHLVPT(JIJ,KK) - ZVPT_DEP(JIJ) )                              &
-            - CSTURB%XRM17*PSHEAR(JIJ,KK)*SQRT(ABS(PTKEM_DEP(JIJ))) &
-          + SQRT (ABS(                                                       &
-            (CSTURB%XRM17*PSHEAR(JIJ,KK)*SQRT(ABS(PTKEM_DEP(JIJ))) +  &
-             PG_O_THVREF(JIJ) * (ZHLVPT(JIJ,KK) - ZVPT_DEP(JIJ)) )**2  &
-            + 2. * ZINTE(JIJ) * PG_O_THVREF(JIJ)                        &
-                 * ZDELTVPT(JIJ,KK) / PDZZ2D(JIJ,KK) ))    ) /             &
-        ( PG_O_THVREF(JIJ) * ZDELTVPT(JIJ,KK) / PDZZ2D(JIJ,KK) ) 
-      ! Effective length travelled by parcel
-      PLWORK(JIJ)=PLWORK(JIJ)+ZTEST0*(ZTEST*ZLWORK1(JIJ)+  &
-                                    (1-ZTEST)*ZLWORK2(JIJ))
-      ! Rest of energy to consume
+  !$mnh_expand_array(JIJ=IIJB:IIJE)
+  ZINTE(IIJB:IIJE)=PTKEM_DEP(IIJB:IIJE)
+  !$mnh_end_expand_array(JIJ=IIJB:IIJE)
+  PLWORK=0.
+  IF(OFLUX)THEN
+    !$mnh_expand_array(JIJ=IIJB:IIJE)
+    ZVPT_DEP(IIJB:IIJE)=ZHLVPT(IIJB:IIJE,KK) ! departure point is on flux level
+    !$mnh_end_expand_array(JIJ=IIJB:IIJE)
+    !We must compute what happens between flux level KK and mass level KK
+    DO JIJ=IIJB,IIJE
+      ZTEST0(JIJ)=0.5+SIGN(0.5,ZINTE(JIJ)) ! test if there's energy to consume
+      ! Energy consumed if parcel cross the entire layer
+      ZPOTE(JIJ) = ZTEST0(JIJ)*(PG_O_THVREF(JIJ)      *      &
+          (0.5*(ZHLVPT(JIJ,KK)+ PVPT(JIJ,KK)) - ZVPT_DEP(JIJ)) + &
+          CSTURB%XRM17*PSHEAR(JIJ,KK)*SQRT(ABS(PTKEM_DEP(JIJ))))  * &
+          PDZZ2D(JIJ,KK)*0.5
+      ! Test if it rests some energy to consume
+      ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE(JIJ))
+      ! Length travelled by parcel if it rests energy to consume
+      ZLWORK1(JIJ)=PDZZ2D(JIJ,KK)*0.5
+      ! Lenght travelled by parcel to nullify energy
+      ZLWORK2(JIJ)=        ( - PG_O_THVREF(JIJ) *                     &
+             (  ZHLVPT(JIJ,KK) - ZVPT_DEP(JIJ) )                              &
+             - CSTURB%XRM17*PSHEAR(JIJ,KK)*SQRT(ABS(PTKEM_DEP(JIJ))) &
+           + SQRT (ABS(                                                       &
+             (CSTURB%XRM17*PSHEAR(JIJ,KK)*SQRT(ABS(PTKEM_DEP(JIJ))) +  &
+              PG_O_THVREF(JIJ) * (ZHLVPT(JIJ,KK) - ZVPT_DEP(JIJ)) )**2  &
+             + 2. * ZINTE(JIJ) * PG_O_THVREF(JIJ)                        &
+                  * ZDELTVPT(JIJ,KK) / PDZZ2D(JIJ,KK) ))    ) /             &
+         ( PG_O_THVREF(JIJ) * ZDELTVPT(JIJ,KK) / PDZZ2D(JIJ,KK) ) 
+       ! Effective length travelled by parcel
+       PLWORK(JIJ)=PLWORK(JIJ)+ZTEST0(JIJ)*(ZTEST*ZLWORK1(JIJ)+  &
+                                     (1-ZTEST)*ZLWORK2(JIJ))
+       ! Rest of energy to consume
+       ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE(JIJ)
+    ENDDO
+  ELSE
+    !$mnh_expand_array(JIJ=IIJB:IIJE)
+    ZVPT_DEP(IIJB:IIJE)=PVPT(IIJB:IIJE,KK) ! departure point is on mass level
+    !$mnh_end_expand_array(JIJ=IIJB:IIJE)
+  ENDIF
+ 
+  DO JKK=KK+IKL,IKE,IKL
+    DO JIJ=IIJB,IIJE
+      ZTEST0(JIJ)=0.5+SIGN(0.5,ZINTE(JIJ))
+      ZPOTE(JIJ) = ZTEST0(JIJ)*(PG_O_THVREF(JIJ)      *      &
+          (ZHLVPT(JIJ,JKK) - ZVPT_DEP(JIJ))   &
+         + CSTURB%XRM17*PSHEAR(JIJ,JKK)*SQRT(ABS(PTKEM_DEP(JIJ))))* PDZZ2D(JIJ,JKK) 
+      ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE(JIJ))
+      ZLWORK1(JIJ)=PDZZ2D(JIJ,JKK)
+      !ZLWORK2 jump of the last reached level
+      ZLWORK2(JIJ)=        ( - PG_O_THVREF(JIJ) *                     &
+          (  PVPT(JIJ,JKK-IKL) - ZVPT_DEP(JIJ) )                              &
+          - CSTURB%XRM17*PSHEAR(JIJ,JKK)*sqrt(abs(PTKEM_DEP(JIJ))) &
+        + SQRT (ABS(                                                   &
+          (CSTURB%XRM17*PSHEAR(JIJ,JKK)*sqrt(abs(PTKEM_DEP(JIJ))) +  &
+           PG_O_THVREF(JIJ) * (PVPT(JIJ,JKK-IKL) - ZVPT_DEP(JIJ)) )**2  &
+          + 2. * ZINTE(JIJ) * PG_O_THVREF(JIJ)                        &
+               * ZDELTVPT(JIJ,JKK) / PDZZ2D(JIJ,JKK) ))    ) /             &
+      ( PG_O_THVREF(JIJ) * ZDELTVPT(JIJ,JKK) / PDZZ2D(JIJ,JKK) ) 
+    !
+      PLWORK(JIJ)=PLWORK(JIJ)+ZTEST0(JIJ)*(ZTEST*ZLWORK1(JIJ)+  &
+                                  (1-ZTEST)*ZLWORK2(JIJ))
       ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE(JIJ)
-   ENDDO
- ELSE
-   !$mnh_expand_array(JIJ=IIJB:IIJE)
-   ZVPT_DEP(IIJB:IIJE)=PVPT(IIJB:IIJE,KK) ! departure point is on mass level
-   !$mnh_end_expand_array(JIJ=IIJB:IIJE)
- ENDIF
-
- DO JKK=KK+IKL,IKE,IKL
-    IF(ZTESTM > 0.) THEN
-      ZTESTM=0
-      DO JIJ=IIJB,IIJE
-        ZTEST0=0.5+SIGN(0.5,ZINTE(JIJ))
-        ZPOTE(JIJ) = ZTEST0*(PG_O_THVREF(JIJ)      *      &
-            (ZHLVPT(JIJ,JKK) - ZVPT_DEP(JIJ))   &
-           + CSTURB%XRM17*PSHEAR(JIJ,JKK)*SQRT(ABS(PTKEM_DEP(JIJ))))* PDZZ2D(JIJ,JKK) 
-        ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE(JIJ))
-        ZTESTM=ZTESTM+ZTEST0
-        ZLWORK1(JIJ)=PDZZ2D(JIJ,JKK)
-        !ZLWORK2 jump of the last reached level
-        ZLWORK2(JIJ)=        ( - PG_O_THVREF(JIJ) *                     &
-            (  PVPT(JIJ,JKK-IKL) - ZVPT_DEP(JIJ) )                              &
-            - CSTURB%XRM17*PSHEAR(JIJ,JKK)*sqrt(abs(PTKEM_DEP(JIJ))) &
-          + SQRT (ABS(                                                   &
-            (CSTURB%XRM17*PSHEAR(JIJ,JKK)*sqrt(abs(PTKEM_DEP(JIJ))) +  &
-             PG_O_THVREF(JIJ) * (PVPT(JIJ,JKK-IKL) - ZVPT_DEP(JIJ)) )**2  &
-            + 2. * ZINTE(JIJ) * PG_O_THVREF(JIJ)                        &
-                 * ZDELTVPT(JIJ,JKK) / PDZZ2D(JIJ,JKK) ))    ) /             &
-        ( PG_O_THVREF(JIJ) * ZDELTVPT(JIJ,JKK) / PDZZ2D(JIJ,JKK) ) 
-      !
-        PLWORK(JIJ)=PLWORK(JIJ)+ZTEST0*(ZTEST*ZLWORK1(JIJ)+  &
-                                    (1-ZTEST)*ZLWORK2(JIJ))
-        ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE(JIJ)
-      END DO 
+    END DO
+    IF (SUM(ZTEST0(IIJB:IIJE))<0.5) THEN
+      EXIT
     ENDIF
-  END DO 
+  END DO
 ENDIF
 !!
 !*       2.    CALCULATION OF THE DOWNWARD MIXING LENGTH
@@ -199,44 +198,42 @@ ENDIF
 !
 
 IF (OUPORDN.EQV..FALSE.) THEN 
- !$mnh_expand_array(JIJ=IIJB:IIJE)
- ZINTE(IIJB:IIJE)=PTKEM_DEP(IIJB:IIJE)
- !$mnh_end_expand_array(JIJ=IIJB:IIJE)
- PLWORK=0.
- ZTESTM=1.
- IF(OFLUX) THEN
-    CALL PRINT_MSG(NVERB_FATAL,'GEN','COMPUTE_BL89_ML','OFLUX option not coded for downward mixing length')
- ELSE
-   !$mnh_expand_array(JIJ=IIJB:IIJE)
-   ZVPT_DEP(IIJB:IIJE)=PVPT(IIJB:IIJE,KK) ! departure point is on mass level
-   !$mnh_end_expand_array(JIJ=IIJB:IIJE)
- ENDIF
-
- DO JKK=KK,IKB,-IKL
-    IF(ZTESTM > 0.) THEN
-      ZTESTM=0
-      DO JIJ=IIJB,IIJE
-        ZTEST0=0.5+SIGN(0.5,ZINTE(JIJ))
-         ZPOTE(JIJ) = ZTEST0*(-PG_O_THVREF(JIJ)      *      &
-            (ZHLVPT(JIJ,JKK) - ZVPT_DEP(JIJ)) &
-         + CSTURB%XRM17*PSHEAR(JIJ,JKK)*SQRT(ABS(PTKEM_DEP(JIJ))))* PDZZ2D(JIJ,JKK) 
-        ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE(JIJ))
-        ZTESTM=ZTESTM+ZTEST0
-        ZLWORK1(JIJ)=PDZZ2D(JIJ,JKK)
-        ZLWORK2(JIJ)=        ( + PG_O_THVREF(JIJ) *                     &
-            (  PVPT(JIJ,JKK) - ZVPT_DEP(JIJ) )                              &
-             -CSTURB%XRM17*PSHEAR(JIJ,JKK)*sqrt(abs(PTKEM_DEP(JIJ))) &
-          + SQRT (ABS(                                                       &
-            (CSTURB%XRM17*PSHEAR(JIJ,JKK)*sqrt(abs(PTKEM_DEP(JIJ))) - &
-             PG_O_THVREF(JIJ) * (PVPT(JIJ,JKK) - ZVPT_DEP(JIJ)) )**2  &
-            + 2. * ZINTE(JIJ) * PG_O_THVREF(JIJ)                        &
-                 * ZDELTVPT(JIJ,JKK) / PDZZ2D(JIJ,JKK) ))    ) /             &
-        ( PG_O_THVREF(JIJ) * ZDELTVPT(JIJ,JKK) / PDZZ2D(JIJ,JKK) ) 
-      !
-        PLWORK(JIJ)=PLWORK(JIJ)+ZTEST0*(ZTEST*ZLWORK1(JIJ)+  &
-                                    (1-ZTEST)*ZLWORK2(JIJ)) 
-        ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE(JIJ)
-      END DO 
+  !$mnh_expand_array(JIJ=IIJB:IIJE)
+  ZINTE(IIJB:IIJE)=PTKEM_DEP(IIJB:IIJE)
+  !$mnh_end_expand_array(JIJ=IIJB:IIJE)
+  PLWORK=0.
+  IF(OFLUX) THEN
+     CALL PRINT_MSG(NVERB_FATAL,'GEN','COMPUTE_BL89_ML','OFLUX option not coded for downward mixing length')
+  ELSE
+    !$mnh_expand_array(JIJ=IIJB:IIJE)
+    ZVPT_DEP(IIJB:IIJE)=PVPT(IIJB:IIJE,KK) ! departure point is on mass level
+    !$mnh_end_expand_array(JIJ=IIJB:IIJE)
+  ENDIF
+ 
+  DO JKK=KK,IKB,-IKL
+    DO JIJ=IIJB,IIJE
+      ZTEST0(JIJ)=0.5+SIGN(0.5,ZINTE(JIJ))
+       ZPOTE(JIJ) = ZTEST0(JIJ)*(-PG_O_THVREF(JIJ)      *      &
+          (ZHLVPT(JIJ,JKK) - ZVPT_DEP(JIJ)) &
+       + CSTURB%XRM17*PSHEAR(JIJ,JKK)*SQRT(ABS(PTKEM_DEP(JIJ))))* PDZZ2D(JIJ,JKK) 
+      ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE(JIJ))
+      ZLWORK1(JIJ)=PDZZ2D(JIJ,JKK)
+      ZLWORK2(JIJ)=        ( + PG_O_THVREF(JIJ) *                     &
+          (  PVPT(JIJ,JKK) - ZVPT_DEP(JIJ) )                              &
+           -CSTURB%XRM17*PSHEAR(JIJ,JKK)*sqrt(abs(PTKEM_DEP(JIJ))) &
+        + SQRT (ABS(                                                       &
+          (CSTURB%XRM17*PSHEAR(JIJ,JKK)*sqrt(abs(PTKEM_DEP(JIJ))) - &
+           PG_O_THVREF(JIJ) * (PVPT(JIJ,JKK) - ZVPT_DEP(JIJ)) )**2  &
+          + 2. * ZINTE(JIJ) * PG_O_THVREF(JIJ)                        &
+               * ZDELTVPT(JIJ,JKK) / PDZZ2D(JIJ,JKK) ))    ) /             &
+      ( PG_O_THVREF(JIJ) * ZDELTVPT(JIJ,JKK) / PDZZ2D(JIJ,JKK) ) 
+    !
+      PLWORK(JIJ)=PLWORK(JIJ)+ZTEST0(JIJ)*(ZTEST*ZLWORK1(JIJ)+  &
+                                  (1-ZTEST)*ZLWORK2(JIJ)) 
+      ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE(JIJ)
+    END DO
+    IF(SUM(ZTEST0(IIJB:IIJE)) < 0.5) THEN
+      EXIT 
     ENDIF
   END DO 
 ENDIF
