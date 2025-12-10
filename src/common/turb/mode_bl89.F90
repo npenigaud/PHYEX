@@ -245,11 +245,10 @@ DO JK=IKTB,IKTE
 !            ------------------------------------------
   ZINTE(IIJB:IIJE)=PTKEM(IIJB:IIJE,JK)
   ZLWORK=0.
-!$acc loop seq
-  DO JKK=JK,IKB,-IKL
-    !!!$acc loop independent
+    !$acc loop independent
     !DO CONCURRENT(JIJ = IIBJ:IIJE)
-    DO JIJ=IIJB,IIJE
+  DO JIJ=IIJB,IIJE
+    DO JKK=JK,IKB,-IKL
       ZTEST0(JIJ)=0.5+SIGN(0.5,ZINTE(JIJ))
       !--------- SHEAR + STABILITY -----------
       ZPOTE = ZTEST0(JIJ)* &
@@ -270,10 +269,10 @@ DO JK=IKTB,IKTE
         (ZG_O_THVREF(JIJ,JK) * ZDELTVPT(JIJ,JKK) / PDZZ(JIJ,JKK))
       ZLWORK(JIJ,JK)=ZLWORK(JIJ,JK)+ZTEST0(JIJ)*(ZTEST*ZLWORK1+(1-ZTEST)*ZLWORK2)
       ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE
+      IF (ZTEST0(JIJ)<0.5) THEN
+       EXIT
+      ENDIF
     END DO
-    IF (SUM(ZTEST0(IIJB:IIJE))<0.5) THEN
-      EXIT
-    ENDIF
   END DO
 !-------------------------------------------------------------------------------
 !
@@ -293,11 +292,10 @@ DO JK=IKTB,IKTE
   ZINTE(IIJB:IIJE)=PTKEM(IIJB:IIJE,JK)
   ZLWORKUP(IIJB:IIJE,JK)=0.
 !
-!$acc loop seq
-  DO JKK=JK+IKL,IKE,IKL
-    !!!$acc loop independent
-    !DO CONCURRENT(JIJ = IIBJ:IIJE)
-    DO JIJ=IIJB,IIJE
+  !$acc loop independent
+  !DO CONCURRENT(JIJ = IIBJ:IIJE)
+  DO JIJ=IIJB,IIJE
+    DO JKK=JK+IKL,IKE,IKL
       ZTEST0(JIJ)=0.5+SIGN(0.5,ZINTE(JIJ))
       !--------- SHEAR + STABILITY -----------
       ZPOTE = ZTEST0(JIJ)* &
@@ -317,10 +315,10 @@ DO JK=IKTB,IKTE
           (ZG_O_THVREF(JIJ,JK) * ZDELTVPT(JIJ,JKK) / PDZZ(JIJ,JKK))
       ZLWORKUP(JIJ,JK)=ZLWORKUP(JIJ,JK)+ZTEST0(JIJ)*(ZTEST*ZLWORK1+(1-ZTEST)*ZLWORK2)
       ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE
+      IF (ZTEST0(JIJ)<0.5) THEN
+        EXIT
+      ENDIF
     END DO
-    IF (SUM(ZTEST0(IIJB:IIJE))<0.5) THEN
-      EXIT
-    ENDIF
   END DO
 END DO
 !

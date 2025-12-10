@@ -164,8 +164,9 @@ IF (OUPORDN.EQV..TRUE.) THEN
     !$mnh_end_expand_array(JIJ=IIJB:IIJE)
   ENDIF
  
-  DO JKK=KK+IKL,IKE,IKL
-    DO JIJ=IIJB,IIJE
+  DO JIJ=IIJB,IIJE
+    DO JKK=KK+IKL,IKE,IKL
+
       ZTEST0(JIJ)=0.5+SIGN(0.5,ZINTE(JIJ))
       ZPOTE(JIJ) = ZTEST0(JIJ)*(PG_O_THVREF(JIJ)      *      &
           (ZHLVPT(JIJ,JKK) - ZVPT_DEP(JIJ))   &
@@ -186,11 +187,12 @@ IF (OUPORDN.EQV..TRUE.) THEN
       PLWORK(JIJ)=PLWORK(JIJ)+ZTEST0(JIJ)*(ZTEST*ZLWORK1(JIJ)+  &
                                   (1-ZTEST)*ZLWORK2(JIJ))
       ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE(JIJ)
+      IF (ZTEST0(JIJ)<0.5) THEN
+        EXIT
+      ENDIF
     END DO
-    IF (SUM(ZTEST0(IIJB:IIJE))<0.5) THEN
-      EXIT
-    ENDIF
   END DO
+
 ENDIF
 !!
 !*       2.    CALCULATION OF THE DOWNWARD MIXING LENGTH
@@ -210,8 +212,9 @@ IF (OUPORDN.EQV..FALSE.) THEN
     !$mnh_end_expand_array(JIJ=IIJB:IIJE)
   ENDIF
  
-  DO JKK=KK,IKB,-IKL
-    DO JIJ=IIJB,IIJE
+  DO JIJ=IIJB,IIJE
+    DO JKK=KK,IKB,-IKL
+
       ZTEST0(JIJ)=0.5+SIGN(0.5,ZINTE(JIJ))
        ZPOTE(JIJ) = ZTEST0(JIJ)*(-PG_O_THVREF(JIJ)      *      &
           (ZHLVPT(JIJ,JKK) - ZVPT_DEP(JIJ)) &
@@ -231,10 +234,10 @@ IF (OUPORDN.EQV..FALSE.) THEN
       PLWORK(JIJ)=PLWORK(JIJ)+ZTEST0(JIJ)*(ZTEST*ZLWORK1(JIJ)+  &
                                   (1-ZTEST)*ZLWORK2(JIJ)) 
       ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE(JIJ)
+      IF(ZTEST0(JIJ) < 0.5) THEN
+        EXIT 
+      ENDIF
     END DO
-    IF(SUM(ZTEST0(IIJB:IIJE)) < 0.5) THEN
-      EXIT 
-    ENDIF
   END DO 
 ENDIF
   
