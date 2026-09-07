@@ -15,6 +15,7 @@ CONTAINS
                 PFRAC_UP)
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy
 
 !     #################################################################
 !
@@ -110,7 +111,6 @@ INTEGER                              :: JK, JIJ            ! loop counter
 INTEGER :: IIJB,IIJE ! physical horizontal domain indices
 INTEGER :: IKT,IKB,IKE,IKL
 REAL(KIND=JPHOOK) :: ZHOOK_HANDLE
-
 !----------------------------------------------------------------------------
 !
 !*      1.PRELIMINARIES
@@ -241,7 +241,6 @@ IF (PARAMMF%LMIXTKE) THEN
     ENDDO
   END DO
 ENDIF 
-
 IF (LHOOK) CALL DR_HOOK('MF_TURB_EXPL',1,ZHOOK_HANDLE)
 END SUBROUTINE MF_TURB_EXPL
 END MODULE MODE_MF_TURB_EXPL

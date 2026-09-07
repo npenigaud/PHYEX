@@ -13,6 +13,7 @@ CONTAINS
                                         &PRC_MF, PRI_MF, PCF_MF, PWEIGHT_MF_CLOUD)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks
 
 !     #################################################################
 !!

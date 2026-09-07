@@ -9,6 +9,7 @@ CONTAINS
                                      PUMF, PUER, PUDR, PUTHL, PUTHV, PURW,           &
                                      PURC, PURI, PCAPE, KCTL, KETL,GTRIG1 )
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
     USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 

@@ -10,6 +10,7 @@ CONTAINS
                                       PTHL, PRT                      )
 
 !$ACDC singlecolumn
+!$ACDC manyblocks --parallel-iterator-list=JRR
 
 !     #################################################################
 !

@@ -7,6 +7,7 @@ CONTAINS
                                   PT, PEW, PRC, PRI, PLV, PLS, PCPH   )
 
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
       USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 !     #############################################################################

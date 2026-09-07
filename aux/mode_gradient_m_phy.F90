@@ -1,6 +1,7 @@
 MODULE MODE_GRADIENT_M_PHY
 
 !$ACDC singlecolumn 
+!$ACDC manyblocks
 
 IMPLICIT NONE
 CONTAINS
@@ -65,11 +66,11 @@ IMPLICIT NONE
 !
 TYPE(DIMPHYEX_t),       INTENT(IN)   :: D
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(IN)  :: PDZZ                   !d*zz
+REAL, DIMENSION(D%NIJT,D%NKT), INTENT(IN)  :: PDZZ                   !d*zz
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(IN)                :: PY       ! variable at mass
+REAL, DIMENSION(D%NIJT,D%NKT), INTENT(IN)                :: PY       ! variable at mass
                                                               ! localization
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(OUT) :: PGZ_M_W  ! result at flux
+REAL, DIMENSION(D%NIJT,D%NKT), INTENT(OUT) :: PGZ_M_W  ! result at flux
                                                               ! side
 !
 INTEGER :: IKT,IKTB,IKTE,IIB,IJB,IIE,IJE,IKA,IKU,IKL
@@ -95,16 +96,16 @@ IKL=D%NKL
 DO JK=IKTB, IKTE
   DO JJ=IJB, IJE
     DO JI=IIB, IIE
-      PGZ_M_W(JI, JJ, JK) =  (PY(JI, JJ, JK)-PY(JI, JJ, JK - IKL)) &
-                                 / PDZZ(JI, JJ, JK)
+      PGZ_M_W(JI+IKT*( JJ-1), JK) =  (PY(JI+IKT*( JJ-1), JK)-PY(JI+IKT* (JJ-1), JK - IKL)) &
+                                 / PDZZ(JI+IKT*( JJ-1), JK)
     END DO
   END DO
 END DO
 DO JJ=IJB, IJE
   DO JI=IIB, IIE
-    PGZ_M_W(JI, JJ, IKU)=  (PY(JI, JJ, IKU)-PY(JI, JJ, IKU-IKL))  &
-                               / PDZZ(JI, JJ, IKU)
-    PGZ_M_W(JI, JJ, IKA)= PGZ_M_W(JI, JJ, IKU) ! -999.
+    PGZ_M_W(JI+IKT*(JJ-1), IKU)=  (PY(JI+IKT*(JJ-1), IKU)-PY(JI+IKT*(JJ-1), IKU-IKL))  &
+                               / PDZZ(JI+IKT*(JJ-1), IKU)
+    PGZ_M_W(JI+IKT*(JJ-1), IKA)= PGZ_M_W(JI+IKT*(JJ-1), IKU) ! -999.
   END DO
 END DO
 
@@ -181,14 +182,14 @@ IMPLICIT NONE
 !*       0.1   declarations of arguments and result
 !
 TYPE(DIMPHYEX_t),       INTENT(IN)   :: D
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the mass point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDXX    ! metric coefficient dxx
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZX    ! metric coefficient dzx
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the mass point
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDXX    ! metric coefficient dxx
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZX    ! metric coefficient dzx
 LOGICAL, INTENT(IN) :: OFLAT
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(OUT) :: PGX_M_M ! result mass point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT) :: ZWORK1, ZWORK2, ZWORK3, ZWORK4, ZWORK5, ZWORK6, ZMXF_PDXX
+REAL, DIMENSION(D%NIJT,D%NKT), INTENT(OUT) :: PGX_M_M ! result mass point
+REAL, DIMENSION(D%NIJT,D%NKT) :: ZWORK1, ZWORK2, ZWORK3, ZWORK4, ZWORK5, ZWORK6, ZMXF_PDXX
 !
 INTEGER :: IIB,IJB,IIE,IJE,IKT
 INTEGER :: JI,JJ,JK
@@ -222,8 +223,8 @@ IF (.NOT. OFLAT) THEN
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        ZWORK5(JI, JJ, JK) = ZWORK3(JI, JJ, JK) * ZWORK4(JI, JJ, JK) &
-                                          / PDZZ(JI, JJ, JK)
+        ZWORK5(JI+IKT*(JJ-1), JK) = ZWORK3(JI+IKT*(JJ-1), JK) * ZWORK4(JI+IKT*(JJ-1), JK) &
+                                          / PDZZ(JI+IKT*(JJ-1), JK)
       END DO
     END DO
   END DO
@@ -233,8 +234,8 @@ IF (.NOT. OFLAT) THEN
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        PGX_M_M(JI, JJ, JK)= (ZWORK2(JI, JJ, JK) - ZWORK6(JI, JJ, JK)) &
-                                          / ZMXF_PDXX(JI, JJ, JK)
+        PGX_M_M(JI+IKT*(JJ-1), JK)= (ZWORK2(JI+IKT*(JJ-1), JK) - ZWORK6(JI+IKT*(JJ-1), JK)) &
+                                          / ZMXF_PDXX(JI+IKT*(JJ-1), JK)
       END DO
     END DO
   END DO
@@ -244,7 +245,7 @@ ELSE
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        PGX_M_M(JI, JJ, JK)= ZWORK2(JI, JJ, JK) / ZMXF_PDXX(JI, JJ, JK) 
+        PGX_M_M(JI+IKT*(JJ-1), JK)= ZWORK2(JI+IKT*(JJ-1), JK) / ZMXF_PDXX(JI+IKT*(JJ-1), JK) 
       END DO
     END DO
   END DO
@@ -322,14 +323,14 @@ IMPLICIT NONE
 !*       0.1   declarations of arguments and result
 !
 TYPE(DIMPHYEX_t),        INTENT(IN)  :: D
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the mass point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDYY    ! metric coefficient dyy
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZY    ! metric coefficient dzy
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the mass point
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDYY    ! metric coefficient dyy
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZY    ! metric coefficient dzy
 LOGICAL, INTENT(IN) :: OFLAT
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),INTENT(OUT) :: PGY_M_M ! result mass point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT) :: ZWORK1, ZWORK2, ZWORK3, ZWORK4, ZWORK5, ZMYF_PDYY
+REAL, DIMENSION(D%NIJT,D%NKT),INTENT(OUT) :: PGY_M_M ! result mass point
+REAL, DIMENSION(D%NIJT,D%NKT) :: ZWORK1, ZWORK2, ZWORK3, ZWORK4, ZWORK5, ZMYF_PDYY
 !
 INTEGER :: IIB,IJB,IIE,IJE,IKT
 INTEGER :: JI,JJ,JK
@@ -362,8 +363,8 @@ IF (.NOT. OFLAT) THEN
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        ZWORK5(JI, JJ, JK) = ZWORK4(JI, JJ, JK) * ZWORK3(JI, JJ, JK) &
-                                         / PDZZ(JI, JJ, JK)
+        ZWORK5(JI+IKT*(JJ-1), JK) = ZWORK4(JI+IKT*(JJ-1), JK) * ZWORK3(JI+IKT*(JJ-1), JK) &
+                                         / PDZZ(JI+IKT*(JJ-1), JK)
       END DO
     END DO
   END DO
@@ -373,8 +374,8 @@ IF (.NOT. OFLAT) THEN
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        PGY_M_M(JI, JJ, JK)= (ZWORK2(JI, JJ, JK)-ZWORK4(JI, JJ, JK)) &
-                                          /ZMYF_PDYY(JI, JJ, JK)
+        PGY_M_M(JI+IKT*(JJ-1), JK)= (ZWORK2(JI+IKT*(JJ-1), JK)-ZWORK4(JI+IKT*(JJ-1), JK)) &
+                                          /ZMYF_PDYY(JI+IKT*(JJ-1), JK)
       END DO
     END DO
   END DO
@@ -384,7 +385,7 @@ ELSE
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        PGY_M_M(JI, JJ, JK) = ZWORK2(JI, JJ, JK)/ZMYF_PDYY(JI, JJ, JK)
+        PGY_M_M(JI+IKT*(JJ-1), JK) = ZWORK2(JI+IKT*(JJ-1), JK)/ZMYF_PDYY(JI+IKT*(JJ-1), JK)
       END DO
     END DO
   END DO
@@ -610,7 +611,7 @@ REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(IN)                :: PY       ! vari
 REAL, DIMENSION(D%NIT,D%NJT,D%NKT),INTENT(OUT) :: PGY_M_V  ! result at flux
                                                               ! side
 !REAL, DIMENSION(D%NIT*D%NJT*D%NKT) :: ZGY_M_V
-!REAL, DIMENSION(D%NIT,D%NJT,D%NKT):: ZY, ZDYY,ZDZZ,ZDZY
+!REAL, DIMENSION(D%NIJT,D%NKT):: ZY, ZDYY,ZDZZ,ZDZY
 INTEGER  IJU,IKU,JJ,JK,IKL, IKA
 !
 !-------------------------------------------------------------------------------

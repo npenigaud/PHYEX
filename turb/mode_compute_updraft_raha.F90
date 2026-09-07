@@ -25,6 +25,7 @@ CONTAINS
                                  PDEPTH     )
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy
 
 !     #################################################################
 !!
@@ -648,7 +649,6 @@ DO JK=1, IKT
     END IF
   END DO
 END DO
-
 IF (LHOOK) CALL DR_HOOK('COMPUTE_UPDRAF_RAHA',1,ZHOOK_HANDLE)
 !
 CONTAINS

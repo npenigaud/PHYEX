@@ -8,6 +8,7 @@ CONTAINS
                                          PTIMEC, PDXDY, PMIXF, PLMASS, PWSUB,&
                                          KFTSTEPS )
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy 
 
       USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 !     ########################################################################

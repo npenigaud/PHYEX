@@ -13,6 +13,7 @@ SUBROUTINE ICE4_RSRIMCG_OLD(CST, PARAMI, ICEP, ICED, D, LDSOFT, LDCOMPUTE, &
                            &PRSRIMCG_MR)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks 
 
 !!
 !!**  PURPOSE

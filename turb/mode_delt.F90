@@ -6,6 +6,7 @@
 MODULE MODE_DELT
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy
 
 IMPLICIT NONE
 CONTAINS

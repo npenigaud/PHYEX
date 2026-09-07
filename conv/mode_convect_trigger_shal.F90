@@ -9,6 +9,7 @@ CONTAINS
                                         PTHVELCL, KLCL, KDPL, KPBL, OTRIG)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
       USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 !     ########################################################################

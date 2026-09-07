@@ -18,6 +18,7 @@ CONTAINS
                 PFLXZSVMF,PFLXZTKEMF,PFRAC_UP                         )
 
 !$ACDC singlecolumn 
+!$ACDC manyblocks
 
 !     #################################################################
 !
