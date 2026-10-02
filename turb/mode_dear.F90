@@ -5,7 +5,8 @@
 !-----------------------------------------------------------------
 MODULE MODE_DEAR
 
-!$ACDC singlecolumn --dummy
+!$ACDC singlecolumn --dummy 
+!$ACDC manyblocks --dummy
 
 IMPLICIT NONE
 CONTAINS
@@ -83,6 +84,7 @@ CONTAINS
     !
     !   initialize the mixing length with the mesh grid
     IF (LHOOK) CALL DR_HOOK('TURB:DEAR', 0, ZHOOK_HANDLE2)
+
     IKT = D%NKT
     IKTB = D%NKTB
     IKTE = D%NKTE
@@ -93,14 +95,13 @@ CONTAINS
     IKL = D%NKL
     IIJE = D%NIJE
     IIJB = D%NIJB
-    IF (TURBN%CTURBDIM /= '1DIM') THEN
-      CALL MXF_PHY(D, PDXX, PWORK1)
-      IF (.not.O2D) THEN
-        CALL MYF_PHY(D, PDYY, PWORK2)
-      END IF
-    END IF
+!!    IF (TURBN%CTURBDIM /= '1DIM') THEN
+!!      CALL MXF_PHY(D, PDXX, PWORK1)
+!!      IF (.not.O2D) THEN
+!!        CALL MYF_PHY(D, PDYY, PWORK2)
+!!      END IF
+!!    END IF
     ! 1D turbulence scheme
-
 DO JK=IKTB, IKTE
       DO JIJ=IIJB, IIJE
         PLM(JIJ, JK) = PZZ(JIJ, IKL + JK) - PZZ(JIJ, JK)
@@ -256,7 +257,6 @@ DO JIJ=IIJB, IIJE
       PLM(JIJ, IKU) = PLM(JIJ, IKU - IKL)
 END DO
     !
-
     IF (LHOOK) CALL DR_HOOK('TURB:DEAR', 1, ZHOOK_HANDLE2)
 END SUBROUTINE DEAR
 END MODULE MODE_DEAR

@@ -10,6 +10,7 @@ CONTAINS
                                     &PTH, PLVFACT, PLSFACT)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks  --parallel-iterator-list=JV
 
         !SUBROUTINE ICE4_CORRECT_NEGATIVITIES(D, ICED, KRR, OELEC, PR, &
 !                                    &PTH, PLVFACT, PLSFACT, &

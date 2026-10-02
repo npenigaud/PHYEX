@@ -27,7 +27,7 @@ INTERFACE
                 BUCONF, TBUDGETS, KBUDGETS                            )
 
 !$ACDC singlecolumn
-
+!$ACDC manyblocks
 !     #################################################################
 !!
 USE MODD_BUDGET,          ONLY: TBUDGETCONF_t, TBUDGETDATA_PTR

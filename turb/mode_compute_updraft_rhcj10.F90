@@ -27,6 +27,7 @@ SUBROUTINE COMPUTE_UPDRAFT_RHCJ10(D,CST,NEBN,PARAMMF,TURBN,CSTURB,&
                                  PDEPTH     )
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy
 
 !     #################################################################
 !!
@@ -627,7 +628,6 @@ DO JK=1,IKT
     ENDIF
   ENDDO
 ENDDO
-
 IF (LHOOK) CALL DR_HOOK('COMPUTE_UPDRAFT_RHCJ10',1,ZHOOK_HANDLE)
 !
 CONTAINS

@@ -23,6 +23,7 @@
                                    PRVHENI, PZZZZ )
 
 !$ACDC singlecolumn --nocreate-interface
+!$ACDC manyblocks --nocreate-interface --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR
 
 !     #############################################################################
 !

@@ -5,6 +5,7 @@ CONTAINS
       SUBROUTINE CONVECT_MIXING_FUNCT( D,  &
                                        PMIXC, KMF, PER, PDR )
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
       USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 !     #######################################################

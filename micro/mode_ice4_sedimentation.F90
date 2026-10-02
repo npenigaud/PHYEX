@@ -18,6 +18,7 @@ SUBROUTINE ICE4_SEDIMENTATION(D, CST, ICEP, ICED, PARAMI, ELECP, ELECD, BUCONF, 
                              &PQHT, PQHS)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR --parallel-iterator-list=JV
 
 !!
 !!**  PURPOSE

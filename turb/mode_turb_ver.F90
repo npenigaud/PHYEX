@@ -30,7 +30,7 @@ SUBROUTINE TURB_VER(D,CST,CSTURB,TURBN,NEBN,TLES,                   &
                       PSSUFL,PSSVFL                                 )
 
 !$ACDC singlecolumn 
-
+!$ACDC manyblocks --not-present-types=TLES_T,TFILEDATA
 !     ###############################################################
 !
 !

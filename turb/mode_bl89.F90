@@ -1,10 +1,11 @@
-!MNH_LIC Copyright 1994-2025 CNRS, Meteo-France and Universite Paul Sabatier
+!MNH_LIC Copyright 1994-2024 CNRS, Meteo-France and Universite Paul Sabatier
 !MNH_LIC This is part of the Meso-NH software governed by the CeCILL-C licence
 !MNH_LIC version 1. See LICENSE, CeCILL-C_V1-en.txt and CeCILL-C_V1-fr.txt
 !MNH_LIC for details. version 1.
 MODULE MODE_BL89
 
 !$ACDC singlecolumn
+!$ACDC manyblocks --parallel-iterator-list=JKK
 
 IMPLICIT NONE
 CONTAINS
@@ -115,7 +116,8 @@ INTEGER :: JK,JKK     ! loop counters
 INTEGER :: JRR        ! moist loop counter
 REAL    :: ZRVORD     ! Rv/Rd
 REAL    :: ZPOTE,ZLWORK1,ZLWORK2
-REAL    :: ZTEST,ZTEST0,ZTESTM ! test for vectorization
+REAL    :: ZTEST ! test for vectorization
+REAL, DIMENSION(D%NIJT) :: ZTEST0
 !-------------------------------------------------------------------------------
 !
 REAL(KIND=JPHOOK) :: ZHOOK_HANDLE
@@ -248,7 +250,6 @@ ZTMP(:)=0.
 !            --------------------
 !
 DO JK=IKTB,IKTE
-!Remark create(ZTESTM) to force the NVIDIA compiler 23.5 to manage correctly ZTESTM (implicit reduction)
 
 !
 !-------------------------------------------------------------------------------
@@ -257,36 +258,34 @@ DO JK=IKTB,IKTE
 !            ------------------------------------------
   ZINTE(IIJB:IIJE)=PTKEM(IIJB:IIJE,JK)
   ZLWORK=0.
-  ZTESTM=1.
-
+!$acc loop seq
   DO JKK=JK,IKB,-IKL
-    IF(ZTESTM > 0.) THEN
-      ZTESTM=0.
-      !!!$acc loop independent
-      !DO CONCURRENT(JIJ = IIBJ:IIJE)
-      DO JIJ=IIJB,IIJE
-        ZTEST0=0.5+SIGN(0.5,ZINTE(JIJ))
-        !--------- SHEAR + STABILITY -----------
-        ZPOTE = ZTEST0* &
-                (-ZG_O_THVREF(JIJ,JK)*(ZHLVPT(JIJ,JKK)-ZVPT(JIJ,JK)) &
-                + CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK) &
-                )*PDZZ(JIJ,JKK)
+    !!!$acc loop independent
+    !DO CONCURRENT(JIJ = IIBJ:IIJE)
+    DO JIJ=IIJB,IIJE
+      ZTEST0(JIJ)=0.5+SIGN(0.5,ZINTE(JIJ))
+      !--------- SHEAR + STABILITY -----------
+      ZPOTE = ZTEST0(JIJ)* &
+              (-ZG_O_THVREF(JIJ,JK)*(ZHLVPT(JIJ,JKK)-ZVPT(JIJ,JK)) &
+              + CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK) &
+              )*PDZZ(JIJ,JKK)
 
-        ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE)
-        ZTESTM=ZTESTM+ZTEST0
-        ZLWORK1=PDZZ(JIJ,JKK)
+      ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE)
+      ZLWORK1=PDZZ(JIJ,JKK)
 
-        !--------- SHEAR + STABILITY ----------- 
-        ZLWORK2 = (ZG_O_THVREF(JIJ,JK) *(ZVPT(JIJ,JKK) - ZVPT(JIJ,JK))  & 
-          -CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK) &
-          + sqrt(abs( (CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK) &
-          + ( -ZG_O_THVREF(JIJ,JK) * (ZVPT(JIJ,JKK) - ZVPT(JIJ,JK)) ))**2.0 + &
-          2. * ZINTE(JIJ) * &
-          (ZG_O_THVREF(JIJ,JK) * ZDELTVPT(JIJ,JKK)/ PDZZ(JIJ,JKK))))) / &
-          (ZG_O_THVREF(JIJ,JK) * ZDELTVPT(JIJ,JKK) / PDZZ(JIJ,JKK))
-        ZLWORK(JIJ,JK)=ZLWORK(JIJ,JK)+ZTEST0*(ZTEST*ZLWORK1+(1-ZTEST)*ZLWORK2)
-        ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE
-      END DO
+      !--------- SHEAR + STABILITY ----------- 
+      ZLWORK2 = (ZG_O_THVREF(JIJ,JK) *(ZVPT(JIJ,JKK) - ZVPT(JIJ,JK))  & 
+        -CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK) &
+        + sqrt(abs( (CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK) &
+        + ( -ZG_O_THVREF(JIJ,JK) * (ZVPT(JIJ,JKK) - ZVPT(JIJ,JK)) ))**2.0 + &
+        2. * ZINTE(JIJ) * &
+        (ZG_O_THVREF(JIJ,JK) * ZDELTVPT(JIJ,JKK)/ PDZZ(JIJ,JKK))))) / &
+        (ZG_O_THVREF(JIJ,JK) * ZDELTVPT(JIJ,JKK) / PDZZ(JIJ,JKK))
+      ZLWORK(JIJ,JK)=ZLWORK(JIJ,JK)+ZTEST0(JIJ)*(ZTEST*ZLWORK1+(1-ZTEST)*ZLWORK2)
+      ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE
+    END DO
+    IF (SUM(ZTEST0(IIJB:IIJE))<0.5) THEN
+      EXIT
     ENDIF
   END DO
 !-------------------------------------------------------------------------------
@@ -306,36 +305,34 @@ DO JK=IKTB,IKTE
 !
   ZINTE(IIJB:IIJE)=PTKEM(IIJB:IIJE,JK)
   ZLWORKUP(IIJB:IIJE,JK)=0.
-  ZTESTM=1.
 !
 
   DO JKK=JK+IKL,IKE,IKL
-    IF(ZTESTM > 0.) THEN
-      ZTESTM=0.
-      !!!$acc loop independent
-      !DO CONCURRENT(JIJ = IIBJ:IIJE)
-      DO JIJ=IIJB,IIJE
-        ZTEST0=0.5+SIGN(0.5,ZINTE(JIJ))
-        !--------- SHEAR + STABILITY -----------
-        ZPOTE = ZTEST0* &
-                (ZG_O_THVREF(JIJ,JK)*(ZHLVPT(JIJ,JKK)-ZVPT(JIJ,JK)) &
-                +CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK) &
-                )*PDZZ(JIJ,JKK)
-        ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE)
-        ZTESTM=ZTESTM+ZTEST0
-        ZLWORK1=PDZZ(JIJ,JKK)
-        !--------- SHEAR + STABILITY ----------- 
-        ZLWORK2= ( - ZG_O_THVREF(JIJ,JK) *(ZVPT(JIJ,JKK-IKL) - ZVPT(JIJ,JK) )  &
-                   - CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK)  &
-          + SQRT (ABS(                                                       &
-          (CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK)   &
-            + ( ZG_O_THVREF(JIJ,JK) * (ZVPT(JIJ,JKK-IKL) - ZVPT(JIJ,JK))) )**2    &
-            + 2. * ZINTE(JIJ) * &
-            (ZG_O_THVREF(JIJ,JK)* ZDELTVPT(JIJ,JKK)/PDZZ(JIJ,JKK))))) / &
-            (ZG_O_THVREF(JIJ,JK) * ZDELTVPT(JIJ,JKK) / PDZZ(JIJ,JKK))
-        ZLWORKUP(JIJ,JK)=ZLWORKUP(JIJ,JK)+ZTEST0*(ZTEST*ZLWORK1+(1-ZTEST)*ZLWORK2)
-        ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE
-      END DO
+    !!!$acc loop independent
+    !DO CONCURRENT(JIJ = IIBJ:IIJE)
+    DO JIJ=IIJB,IIJE
+      ZTEST0(JIJ)=0.5+SIGN(0.5,ZINTE(JIJ))
+      !--------- SHEAR + STABILITY -----------
+      ZPOTE = ZTEST0(JIJ)* &
+              (ZG_O_THVREF(JIJ,JK)*(ZHLVPT(JIJ,JKK)-ZVPT(JIJ,JK)) &
+              +CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK) &
+              )*PDZZ(JIJ,JKK)
+      ZTEST =0.5+SIGN(0.5,ZINTE(JIJ)-ZPOTE)
+      ZLWORK1=PDZZ(JIJ,JKK)
+      !--------- SHEAR + STABILITY ----------- 
+      ZLWORK2= ( - ZG_O_THVREF(JIJ,JK) *(ZVPT(JIJ,JKK-IKL) - ZVPT(JIJ,JK) )  &
+                 - CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK)  &
+        + SQRT (ABS(                                                       &
+        (CSTURB%XRM17*PSHEAR(JIJ,JKK)*ZSQRT_TKE(JIJ,JK)   &
+          + ( ZG_O_THVREF(JIJ,JK) * (ZVPT(JIJ,JKK-IKL) - ZVPT(JIJ,JK))) )**2    &
+          + 2. * ZINTE(JIJ) * &
+          (ZG_O_THVREF(JIJ,JK)* ZDELTVPT(JIJ,JKK)/PDZZ(JIJ,JKK))))) / &
+          (ZG_O_THVREF(JIJ,JK) * ZDELTVPT(JIJ,JKK) / PDZZ(JIJ,JKK))
+      ZLWORKUP(JIJ,JK)=ZLWORKUP(JIJ,JK)+ZTEST0(JIJ)*(ZTEST*ZLWORK1+(1-ZTEST)*ZLWORK2)
+      ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE
+    END DO
+    IF (SUM(ZTEST0(IIJB:IIJE))<0.5) THEN
+      EXIT
     ENDIF
   END DO
 END DO

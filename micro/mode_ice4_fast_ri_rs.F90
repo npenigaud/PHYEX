@@ -9,6 +9,7 @@ SUBROUTINE ICE4_FAST_RI_RS(CST, PARAMI, ICEP, ICED, D, LDSOFT, LDCOMPUTE, &
                        &PRILARS, PRVDEPI)
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy
 
 !!
 !!**  PURPOSE

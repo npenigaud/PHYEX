@@ -4,7 +4,7 @@
 !
 
 !$ACDC singlecolumn
-
+!$ACDC manyblocks
 IMPLICIT NONE
 INTERFACE
 !

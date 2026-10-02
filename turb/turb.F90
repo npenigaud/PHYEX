@@ -35,7 +35,9 @@
               & PCURRENT_TKE_DISS, PSSTFL, PSSTFL_C, PSSRFL_C,        &
               & PSSUFL_C, PSSVFL_C,PSSUFL,PSSVFL                      )
 
-!$ACDC singlecolumn --nocreate-interface
+!$ACDC singlecolumn --nocreate-interface 
+!$ACDC manyblocks --nocreate-interface --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR,TLES_T,TFILEDATA --parallel-iterator-list=JRR
+
 
 !     #################################################################
 !

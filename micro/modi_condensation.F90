@@ -16,6 +16,7 @@ INTERFACE
                            &PICE_CLD_WGT)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks 
 
 !
 USE MODD_DIMPHYEX,   ONLY: DIMPHYEX_t

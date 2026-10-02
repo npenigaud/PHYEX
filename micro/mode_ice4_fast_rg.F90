@@ -17,6 +17,7 @@ SUBROUTINE ICE4_FAST_RG(CST, PARAMI, ICEP, ICED, D, LDSOFT, LDCOMPUTE, KRR, &
                        &PRG_TEND)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks 
 
 !!
 !!**  PURPOSE

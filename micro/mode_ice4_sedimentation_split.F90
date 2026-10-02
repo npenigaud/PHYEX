@@ -1,4 +1,4 @@
-!MNH_LIC Copyright 1994-2025 CNRS, Meteo-France and Universite Paul Sabatier
+!MNH_LIC Copyright 1994-2025 CNRS, Meteo-France and Universite Paul SabatierCDC
 !MNH_LIC This is part of the Meso-NH software governed by the CeCILL-C licence
 !MNH_LIC version 1. See LICENSE, CeCILL-C_V1-en.txt and CeCILL-C_V1-fr.txt
 !MNH_LIC for details. version 1.
@@ -19,6 +19,7 @@ SUBROUTINE ICE4_SEDIMENTATION_SPLIT(D, CST, ICEP, ICED, PARAMI, ELECP, ELECD, &
                                    &PQHT, PQHS)
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy 
 
 !!
 !!**  PURPOSE
