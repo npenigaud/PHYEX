@@ -14,6 +14,7 @@ SUBROUTINE ICE4_FAST_RI(ICEP, ICED, D, LDSOFT, LDCOMPUTE, &
                        &PRCBERI)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks 
 
 !!
 !!**  PURPOSE

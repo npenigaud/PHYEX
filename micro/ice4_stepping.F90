@@ -12,6 +12,7 @@ SUBROUTINE ICE4_STEPPING(D, CST, PARAMI, ICEP, ICED, BUCONF, PTSTEP, &
                         &PBUDGETS, PLATHAM_IAGGS)
 
 !$ACDC singlecolumn --nocreate-interface
+!$ACDC manyblocks --nocreate-interface --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR --ignore-array-variables=PBUDGETS --parallel-iterator-list=JV
 
 !     ######################################################################
 !
@@ -245,7 +246,6 @@ DO JIJ=D%NIJB, D%NIJE
     ZTIME(JIJ)=PTSTEP ! Nothing to do on this point, it has already reached the end of the timestep
   ENDIF
 ENDDO
-
 
 DO WHILE(ANY(ZTIME(D%NIJB:D%NIJE )<PTSTEP)) ! Loop to *really* compute tendencies
 

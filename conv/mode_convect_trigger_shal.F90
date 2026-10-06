@@ -12,6 +12,7 @@ CONTAINS
                                         PTHVELCL, KLCL, KDPL, KPBL, OTRIG)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
 !     ########################################################################
 !

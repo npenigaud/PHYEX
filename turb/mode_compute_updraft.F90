@@ -26,6 +26,7 @@ CONTAINS
                                  PDEPTH, PDX, PDY     )
 
 !$ACDC singlecolumn
+!$ACDC manyblocks --parallel-iterator-list=JSV
 
 !     #################################################################
 !!

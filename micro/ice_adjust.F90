@@ -21,6 +21,7 @@
                             &PHLC_HRC_MF, PHLC_HCF_MF, PHLI_HRI_MF, PHLI_HCF_MF)
 
 !$ACDC singlecolumn --nocreate-interface
+!$ACDC manyblocks --nocreate-interface --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR 
 
 !     #########################################################################
 !

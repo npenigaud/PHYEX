@@ -10,6 +10,7 @@ CONTAINS
                                   PT, PEW, PRC, PRI, PLV, PLS, PCPH   )
 
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
 !     #############################################################################
 !

@@ -10,6 +10,7 @@
                                   PSRVLCL, PSWLCL, PSZLCL, PSTHVELCL, OTRIG1)
 
 !$ACDC singlecolumn --nocreate-interface
+!$ACDC manyblocks --nocreate-interface  
 
     USE YOMHOOK , ONLY : LHOOK, JPHOOK, DR_HOOK
 !   ###############################################################################

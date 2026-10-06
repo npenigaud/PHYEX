@@ -15,6 +15,7 @@ SUBROUTINE ICE4_SEDIMENTATION_STAT(D, CST, ICEP, ICED, PARAMI, &
                                   &PINPRH, PFPR)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks --parallel-iterator-list=JRR
 
 !!
 !!**  PURPOSE
@@ -121,17 +122,19 @@ LLSEA_AND_TOWN=PRESENT(PSEA).AND.PRESENT(PTOWN)
 !
 !*       2.    compute the fluxes
 !
-! Start shift mechanism:
-ISHIFT=0
-CALL SHIFT
 
 ! Initialize vertical loop
+IKPLUS=0
 DO JRR=IRC,KRR
   ZSED(:,IKPLUS,JRR) = 0.
 ENDDO
 
 ! calculation sedimentation flux
 DO JK = IKE , IKB, -1*IKL
+
+  !!replaces the shift mechanism to facilitate GPU port
+  IKPLUS = MODULO(IKE-JK,2)
+  IK = 1 - IKPLUS
 
   DO JIJ = IIJB, IIJE
     ZTSORHODZ(JIJ) =PTSTEP/(PRHODREF(JIJ,JK)*PDZZ(JIJ,JK))
@@ -206,9 +209,6 @@ DO JK = IKE , IKB, -1*IKL
       ENDIF
     ENDDO
   ENDIF
-
-  ! shift mechanism : current level now takes the place of previous one
-  CALL SHIFT
 
 ENDDO ! JK
 

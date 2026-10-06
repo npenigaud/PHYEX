@@ -1,6 +1,7 @@
 MODULE MODE_GRADIENT_U_PHY
 
 !$ACDC singlecolumn
+!$ACDC manyblocks
 
 IMPLICIT NONE
 CONTAINS
@@ -66,13 +67,13 @@ IMPLICIT NONE
 !
 TYPE(DIMPHYEX_t),       INTENT(IN)   :: D
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the U point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the U point
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(OUT) :: PGZ_U_UW ! result UW point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT) :: PA_WORK, PDZZ_WORK
+REAL, DIMENSION(D%NIJT,D%NKT), INTENT(OUT) :: PGZ_U_UW ! result UW point
+REAL, DIMENSION(D%NIJT,D%NKT) :: PA_WORK, PDZZ_WORK
 !
-INTEGER :: JI,JJ,JK, IIB, IIE, IJB, IJE,IKT
+INTEGER :: JIJ,JK,IIJB,IIJE,IKT
 
 !
 !*       0.2   declaration of local variables
@@ -84,10 +85,8 @@ INTEGER :: JI,JJ,JK, IIB, IIE, IJB, IJE,IKT
 !*       1.    DEFINITION of GZ_U_UW
 !              ---------------------
 !
-IIE=D%NIEC
-IIB=D%NIBC
-IJE=D%NJEC
-IJB=D%NJBC
+IIJE=D%NIJE
+IIJB=D%NIJB
 IKT=D%NKT
 !
 CALL DZM_PHY(D,PA,PA_WORK)
@@ -95,11 +94,9 @@ CALL MXM_PHY(D,PDZZ,PDZZ_WORK)
 !
 
 DO JK=1, IKT
-  DO JJ=IJB, IJE
-    DO JI=IIB, IIE
-      PGZ_U_UW(JI, JJ, JK)= PA_WORK(JI, JJ, JK) &
-                                                     / PDZZ_WORK(JI, JJ, JK)
-    END DO
+  DO JIJ=IIJB, IIJE
+      PGZ_U_UW(JIJ, JK)= PA_WORK(JIJ, JK) &
+                                                     / PDZZ_WORK(JIJ, JK)
   END DO
 END DO
 
@@ -177,16 +174,16 @@ IMPLICIT NONE
 TYPE(DIMPHYEX_t),       INTENT(IN)   :: D
 !
 LOGICAL, INTENT(IN) :: OFLAT
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the U point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDXX    ! metric coefficient dxx
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZX    ! metric coefficient dzx
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the U point
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDXX    ! metric coefficient dxx
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZX    ! metric coefficient dzx
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(OUT) :: PGX_U_M ! result mass point
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(OUT) :: PGX_U_M ! result mass point
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT)  :: ZWORK1, ZWORK2, ZWORK3, ZWORK4
-INTEGER :: IIB,IJB,IIE,IJE,IKT
-INTEGER :: JI,JJ,JK
+REAL, DIMENSION(D%NIJT,D%NKT)  :: ZWORK1, ZWORK2, ZWORK3, ZWORK4
+INTEGER :: IIJB,IIJE,IKT
+INTEGER :: JIJ,JK
 !
 !*       0.2   declaration of local variables
 !
@@ -200,10 +197,8 @@ INTEGER :: JI,JJ,JK
 REAL(KIND=JPHOOK) :: ZHOOK_HANDLE
 IF (LHOOK) CALL DR_HOOK('GX_U_M',0,ZHOOK_HANDLE)
 !
-IIE=D%NIEC
-IIB=D%NIBC
-IJE=D%NJEC
-IJB=D%NJBC
+IIJE=D%NIJE
+IIJB=D%NIJB
 IKT=D%NKT
 !
 CALL DXF_PHY(D,PA,ZWORK1)
@@ -213,41 +208,33 @@ IF (.NOT. OFLAT) THEN
   CALL DZM_PHY(D,PA,ZWORK3)
   
   DO JK=1, IKT
-    DO JJ=IJB, IJE
-      DO JI=IIB, IIE
-        ZWORK3(JI, JJ, JK) = ZWORK3(JI, JJ, JK) * PDZX(JI, JJ, JK)
-      END DO
+    DO JIJ=IIJB, IIJE
+      ZWORK3(JIJ, JK) = ZWORK3(JIJ, JK) * PDZX(JIJ, JK)
     END DO
   END DO
   
   CALL MXF_PHY(D,ZWORK3,ZWORK4)
   
   DO JK=1, IKT
-    DO JJ=IJB, IJE
-      DO JI=IIB, IIE
-        ZWORK4(JI, JJ, JK) = ZWORK4(JI, JJ, JK) / PDZZ(JI, JJ, JK)
-      END DO
+    DO JIJ=IIJB, IIJE
+      ZWORK4(JIJ, JK) = ZWORK4(JIJ, JK) / PDZZ(JIJ, JK)
     END DO
   END DO
   
   CALL MZF_PHY(D,ZWORK4,ZWORK3)
   
   DO JK=1, IKT
-    DO JJ=IJB, IJE
-      DO JI=IIB, IIE
-        PGX_U_M(JI, JJ, JK) = ( ZWORK1(JI, JJ, JK) - ZWORK3(JI, JJ, JK)) &
-                                           / ZWORK2(JI, JJ, JK)
-      END DO
+    DO JIJ=IIJB, IIJE
+        PGX_U_M(JIJ, JK) = ( ZWORK1(JIJ, JK) - ZWORK3(JIJ, JK)) &
+                                           / ZWORK2(JIJ, JK)
     END DO
   END DO
   
 ELSE
   
   DO JK=1, IKT
-    DO JJ=IJB, IJE
-      DO JI=IIB, IIE
-        PGX_U_M(JI, JJ, JK)= ZWORK1(JI, JJ, JK) / ZWORK2(JI, JJ, JK)
-      END DO
+    DO JIJ=IIJB, IIJE
+      PGX_U_M(JIJ, JK)= ZWORK1(JIJ, JK) / ZWORK2(JIJ, JK)
     END DO
   END DO
   

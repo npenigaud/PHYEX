@@ -13,6 +13,7 @@ CONTAINS
                                       PUMF, PUER, PUDR, PUTHL, PURW,              &
                                       PURC, PURI, PCAPE, PTIMEC, KFTSTEPS         )
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
 !    ##############################################################################
 !

@@ -1,6 +1,7 @@
 MODULE MODE_GRADIENT_M_PHY
 
 !$ACDC singlecolumn 
+!$ACDC manyblocks
 
 IMPLICIT NONE
 CONTAINS

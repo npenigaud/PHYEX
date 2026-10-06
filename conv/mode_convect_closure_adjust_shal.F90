@@ -9,7 +9,7 @@ CONTAINS
                                              PUMF, PZUMF, PUER, PZUER, PUDR, PZUDR  )
 
 !$ACDC singlecolumn
-
+!$ACDC manyblocks  
 !    ################################################################################
 !
 !!**** Uses closure adjustment factor to adjust mass flux and to modify

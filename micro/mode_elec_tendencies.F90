@@ -37,7 +37,6 @@ CONTAINS
                                   PRHMLTR, PRDRYHG,                                           & !|     for
                                   PRHT, PCHT, PQHT, PQHS)                                 !--    hail
 
-!$ACDC singlecolumn --dummy
 
 !     ##########################################################################################
 !

@@ -8,6 +8,7 @@ CONTAINS
       SUBROUTINE CONVECT_MIXING_FUNCT( D,  &
                                        PMIXC, KMF, PER, PDR )
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
 !     #######################################################
 !

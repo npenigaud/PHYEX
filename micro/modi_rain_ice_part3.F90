@@ -22,6 +22,7 @@ INTERFACE
                                    ZBUDGETS )
 
 !$ACDC singlecolumn
+!$ACDC manyblocks --ignore-array-variables=ZBUDGETS
 
 !
 USE MODD_BUDGET,         ONLY: TBUDGETDATA_PTR, TBUDGETCONF_t

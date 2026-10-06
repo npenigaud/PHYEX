@@ -1,6 +1,7 @@
 MODULE MODE_SOURCES_NEG_CORRECT
 
 !$ACDC singlecolumn
+!$ACDC manyblocks
 
 IMPLICIT NONE
 CONTAINS

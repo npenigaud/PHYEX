@@ -5,8 +5,6 @@
 !    #######################  
      MODULE MODE_ROTATE_WIND
 
-!$ACDC singlecolumn --dummy
-
 !    #######################
 IMPLICIT NONE
 CONTAINS

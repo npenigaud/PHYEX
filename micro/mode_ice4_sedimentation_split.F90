@@ -19,6 +19,7 @@ SUBROUTINE ICE4_SEDIMENTATION_SPLIT(D, CST, ICEP, ICED, PARAMI, ELECP, ELECD, &
                                    &PQHT, PQHS)
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy 
 
 !!
 !!**  PURPOSE

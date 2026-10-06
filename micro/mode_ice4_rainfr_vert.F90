@@ -9,6 +9,7 @@ CONTAINS
 SUBROUTINE ICE4_RAINFR_VERT(D, ICED, PPRFR, PRR, PRS, PRG, PRH)
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy
 
 !!
 !!**  PURPOSE

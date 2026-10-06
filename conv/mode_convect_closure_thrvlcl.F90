@@ -11,6 +11,7 @@ CONTAINS
                                           KLCL, KDPL, KPBL )
 
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
 !     #########################################################################
 !

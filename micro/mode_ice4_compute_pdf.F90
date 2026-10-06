@@ -12,6 +12,7 @@ SUBROUTINE ICE4_COMPUTE_PDF(CST, ICEP, ICED, D, HSUBG_AUCV_RC, HSUBG_AUCV_RI, HS
                             PHLI_HCF, PHLI_LCF, PHLI_HRI, PHLI_LRI, PRF)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks 
 
 !!
 !!**  PURPOSE

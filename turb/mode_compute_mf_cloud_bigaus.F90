@@ -17,6 +17,7 @@ CONTAINS
                                   PHLC_HRC, PHLC_HCF, PHLI_HRI, PHLI_HCF, PWEIGHT_MF_CLOUD)
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy
 
 !     #################################################################
 !!

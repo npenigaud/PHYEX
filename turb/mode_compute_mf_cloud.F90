@@ -24,6 +24,7 @@ CONTAINS
                                   PWEIGHT_MF_CLOUD)
 
 !$ACDC singlecolumn 
+!$ACDC manyblocks
 
 !     #################################################################
 !!

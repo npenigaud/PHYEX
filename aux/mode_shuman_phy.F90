@@ -1,6 +1,7 @@
 MODULE MODE_SHUMAN_PHY
 
 !$ACDC singlecolumn 
+!$ACDC manyblocks
 
 IMPLICIT NONE
 CONTAINS
