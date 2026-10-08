@@ -74,15 +74,13 @@ REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
 REAL, DIMENSION(D%NIJT,D%NKT), INTENT(OUT) :: PGZ_V_VW ! result UW point
 REAL, DIMENSION(D%NIJT,D%NKT) :: PA_WORK, PDZZ_WORK
 !
-INTEGER :: JI,JJ,JK
-INTEGER :: IIB,IJB,IIE,IJE,IKT
+INTEGER :: JIJ,JK
+INTEGER :: IIJB,IIJE,IKT
 !
 !*       0.2   declaration of local variables
 !
-IIE=D%NIEC
-IIB=D%NIBC
-IJE=D%NJEC
-IJB=D%NJBC
+IIJE=D%NIJE
+IIJB=D%NIJB
 IKT=D%NKT
 !
 !----------------------------------------------------------------------------
@@ -95,11 +93,8 @@ CALL MYM_PHY(D,PDZZ,PDZZ_WORK)
 !
 
 DO JK=1, IKT
-  DO JJ=IJB, IJE
-    DO JI=IIB, IIE
-      PGZ_V_VW(JI+IKT*(JJ-1), JK)= PA_WORK(JI+IKT*(JJ-1), JK) &
-                                                     / PDZZ_WORK(JI+IKT*(JJ-1), JK)
-    END DO
+  DO JIJ=IIJB, IIJE
+    PGZ_V_VW(JIJ, JK)= PA_WORK(JIJ, JK)/PDZZ_WORK(JIJ, JK)
   END DO
 END DO
 
@@ -182,18 +177,16 @@ REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZY    ! metric coefficient dzy
 REAL, DIMENSION(D%NIJT,D%NKT), INTENT(OUT)  :: PGY_V_M ! result mass point
 !
 REAL, DIMENSION(D%NIJT,D%NKT)  :: ZWORK1, ZWORK2, ZWORK3, ZWORK4
-INTEGER :: IIB,IJB,IIE,IJE,IKT
-INTEGER :: JI,JJ,JK
+INTEGER :: IIJB,IIJE,IKT
+INTEGER :: JIJ,JK
 !
 !*       0.2   declaration of local variables
 !
 REAL(KIND=JPHOOK) :: ZHOOK_HANDLE
 IF (LHOOK) CALL DR_HOOK('GY_V_M',0,ZHOOK_HANDLE)
 !
-IIE=D%NIEC
-IIB=D%NIBC
-IJE=D%NJEC
-IJB=D%NJBC
+IIJE=D%NIJE
+IIJB=D%NIJB
 IKT=D%NKT
 !
 !----------------------------------------------------------------------------
@@ -208,41 +201,33 @@ IF (.NOT. OFLAT) THEN
   CALL DZM_PHY(D,PA,ZWORK3)
   
   DO JK=1, IKT
-    DO JJ=IJB, IJE
-      DO JI=IIB, IIE
-        ZWORK3(JI+IKT*(JJ-1), JK) = ZWORK3(JI+IKT*(JJ-1), JK) * PDZY(JI+IKT*(JJ-1), JK)
-      END DO
+    DO JIJ=IIJB, IIJE
+      ZWORK3(JIJ, JK) = ZWORK3(JIJ, JK) * PDZY(JIJ, JK)
     END DO
   END DO
   
   CALL MYF_PHY(D,ZWORK3,ZWORK4)
   
   DO JK=1, IKT
-    DO JJ=IJB, IJE
-      DO JI=IIB, IIE
-        ZWORK4(JI+IKT*(JJ-1), JK) = ZWORK4(JI+IKT*(JJ-1), JK) / PDZZ(JI+IKT*(JJ-1), JK)
-      END DO
+    DO JIJ=IIJB, IIJE
+      ZWORK4(JIJ, JK) = ZWORK4(JIJ, JK) / PDZZ(JIJ, JK)
     END DO
   END DO
   
   CALL MZF_PHY(D,ZWORK4,ZWORK3)
   
   DO JK=1, IKT
-    DO JJ=IJB, IJE
-      DO JI=IIB, IIE
-        PGY_V_M(JI+IKT*(JJ-1), JK) = ( ZWORK1(JI+IKT*(JJ-1), JK) - ZWORK3(JI+IKT*(JJ-1), JK)) &
-                                           / ZWORK2(JI+IKT*(JJ-1), JK)
-      END DO
+    DO JIJ=IIJB, IIJE
+      PGY_V_M(JIJ, JK) = ( ZWORK1(JIJ, JK) - ZWORK3(JIJ, JK)) &
+                                           / ZWORK2(JIJ, JK)
     END DO
   END DO
   
 ELSE
   
   DO JK=1, IKT
-    DO JJ=IJB, IJE
-      DO JI=IIB, IIE
-        PGY_V_M(JI+IKT*(JJ-1), JK)= ZWORK1(JI+IKT*(JJ-1), JK) / ZWORK2(JI+IKT*(JJ-1), JK)
-      END DO
+    DO JIJ=IIJB, IIJE
+      PGY_V_M(JIJ, JK)= ZWORK1(JIJ, JK) / ZWORK2(JIJ, JK)
     END DO
   END DO
   

@@ -192,7 +192,6 @@ IF (OUPORDN.EQV..TRUE.) THEN
                                   (1-ZTEST)*ZLWORK2(JIJ))
       ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE(JIJ)
     END DO
-!    IF (SUM(ZTEST0(IIJB:IIJE))<0.5) THEN
     IF (.NOT. ANY(ZTEST0(IIJB:IIJE)>0.5)) THEN
       EXIT
     ENDIF
@@ -238,7 +237,6 @@ IF (OUPORDN.EQV..FALSE.) THEN
                                   (1-ZTEST)*ZLWORK2(JIJ)) 
       ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE(JIJ)
     END DO
-!    IF(SUM(ZTEST0(IIJB:IIJE)) < 0.5) THEN
     IF (.NOT. ANY(ZTEST0(IIJB:IIJE)>0.5)) THEN
       EXIT 
     ENDIF

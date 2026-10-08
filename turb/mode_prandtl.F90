@@ -206,14 +206,8 @@ REAL, DIMENSION(D%NIJT,D%NKT,KRR), INTENT(IN) ::  PRM      ! Mixing ratios at  t
                                                   ! mixing ratio
 REAL, DIMENSION(D%NIJT,D%NKT,KSV), INTENT(IN) ::  PSVM     ! Scalars at t-1      
 REAL, DIMENSION(MERGE(D%NIJT,0,OCOMPUTE_SRC),&
-                D%NKT),  INTENT(IN)   ::  PSRCM
+                MERGE(D%NKT,0,OCOMPUTE_SRC)),  INTENT(IN)   ::  PSRCM
 
-!!REAL, DIMENSION(MERGE(D%NIT*D%NJT,0,OCOMPUTE_SRC),&
-!!                D%NKT),  INTENT(IN)   ::  PSRCM
-
-!!REAL, DIMENSION(MERGE(D%NIT,0,OCOMPUTE_SRC)*&
-!!                MERGE(D%NJT,0,OCOMPUTE_SRC),&
-!!                MERGE(D%NKT,0,OCOMPUTE_SRC)),  INTENT(IN)   ::  PSRCM
                                   ! s'r'c/2Sigma_s2 at t-1 multiplied by Lambda_3
 !
 !

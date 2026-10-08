@@ -997,6 +997,7 @@ ENDIF
 !
 !
 IF (TURBN%LROTATE_WIND) THEN
+!$ACDC SKIP {
   CALL ROTATE_WIND(D,PUT,PVT,PWT,                       &
                      PDIRCOSXW, PDIRCOSYW, PDIRCOSZW,   &
                      PCOSSLOPE,PSINSLOPE,               &
@@ -1004,6 +1005,7 @@ IF (TURBN%LROTATE_WIND) THEN
                      ZUSLOPE,ZVSLOPE                    )
   !
   CALL UPDATE_ROTATE_WIND(D,ZUSLOPE,ZVSLOPE,HLBCX,HLBCY)
+!$ACDC }
 ELSE
 
   ZUSLOPE(IIJB:IIJE)=PUT(IIJB:IIJE,IKA)

@@ -5,8 +5,6 @@
 !    #######################  
      MODULE MODE_ROTATE_WIND
 
-!$ACDC singlecolumn --dummy
-!$ACDC manyblocks --dummy
 
 !    #######################
 IMPLICIT NONE
@@ -91,28 +89,28 @@ IMPLICIT NONE
 !*      0.1  declarations of arguments
 !
 TYPE(DIMPHYEX_t),       INTENT(IN) :: D
-REAL, DIMENSION(D%NIJT,D%NKT), INTENT(IN)   ::  PU,PV,PW        ! cartesian components
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(IN)   ::  PU,PV,PW        ! cartesian components
                                  ! of the wind
-REAL, DIMENSION(D%NIJT),   INTENT(IN)   ::  PDIRCOSXW, PDIRCOSYW, PDIRCOSZW
+REAL, DIMENSION(D%NIT,D%NJT),   INTENT(IN)   ::  PDIRCOSXW, PDIRCOSYW, PDIRCOSZW
 ! Director Cosinus along x, y and z directions at surface w-point
-REAL, DIMENSION(D%NIJT),   INTENT(IN)   ::  PCOSSLOPE       ! cosinus of the angle 
+REAL, DIMENSION(D%NIT,D%NJT),   INTENT(IN)   ::  PCOSSLOPE       ! cosinus of the angle 
                                  ! between i and the slope vector
-REAL, DIMENSION(D%NIJT),   INTENT(IN)   ::  PSINSLOPE       ! sinus of the angle 
+REAL, DIMENSION(D%NIT,D%NJT),   INTENT(IN)   ::  PSINSLOPE       ! sinus of the angle 
                                  ! between i and the slope vector
-REAL, DIMENSION(D%NIJT,D%NKT), INTENT(IN)   ::  PDXX, PDYY, PDZZ
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(IN)   ::  PDXX, PDYY, PDZZ
                                  ! Metric coefficients
-REAL, DIMENSION(D%NIJT),   INTENT(OUT)  ::  PUSLOPE         ! wind component along 
+REAL, DIMENSION(D%NIT,D%NJT),   INTENT(OUT)  ::  PUSLOPE         ! wind component along 
                                  ! the maximum slope direction
-REAL, DIMENSION(D%NIJT),   INTENT(OUT)  ::  PVSLOPE         ! wind component along
+REAL, DIMENSION(D%NIT,D%NJT),   INTENT(OUT)  ::  PVSLOPE         ! wind component along
                                  !  the direction normal to the maximum slope one
 !
 !-------------------------------------------------------------------------------
 !
 !       0.2  declaration of local variables
 !
-INTEGER, DIMENSION(D%NIJT) :: ILOC,JLOC
+INTEGER, DIMENSION(D%NIT,D%NJT) :: ILOC,JLOC
               ! shift index to find the 4 nearest points in x and y directions
-REAL,    DIMENSION(D%NIJT) :: ZCOEFF,ZCOEFM,     &
+REAL,    DIMENSION(D%NIT,D%NJT) :: ZCOEFF,ZCOEFM,     &
               ! interpolation weigths for flux and mass locations
                                                            ZUINT,ZVINT,ZWINT, &
               ! intermediate values of the cartesian components after x interp.
@@ -144,74 +142,74 @@ IKB = D%NKB
 
 
 
-!!provisoire pour changement interface!!!!DO JJ=1, IJU
-!!provisoire pour changement interface!!!!  DO JI=1, IIU
-!!provisoire pour changement interface!!!!    PUSLOPE(JI, JJ)=0.
-!!provisoire pour changement interface!!!!    PVSLOPE(JI, JJ)=0.
-!!provisoire pour changement interface!!!!    !
-!!provisoire pour changement interface!!!!    ZWGROUND(JI, JJ) = PW(JI, JJ, IKB)
-!!provisoire pour changement interface!!!!    !
-!!provisoire pour changement interface!!!!    !*      2.    INTERPOLATE THE CARTESIAN COMPONENTS
-!!provisoire pour changement interface!!!!    !             ------------------------------------
-!!provisoire pour changement interface!!!!    !
-!!provisoire pour changement interface!!!!    ILOC(JI, JJ)=NINT(SIGN(1.,-PCOSSLOPE(JI, JJ)))
-!!provisoire pour changement interface!!!!    JLOC(JI, JJ)=NINT(SIGN(1.,-PSINSLOPE(JI, JJ)))
-!!provisoire pour changement interface!!!!  END DO
-!!provisoire pour changement interface!!!!END DO
-!!provisoire pour changement interface!!!!!
-!!provisoire pour changement interface!!!!! interpolation in x direction
-!!provisoire pour changement interface!!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!DO JJ=1,IJU
-!!provisoire pour changement interface!!!!  DO JI=IIB,IIE
-!!provisoire pour changement interface!!!!    ZCOEFF(JI,JJ) =                                                  &
-!!provisoire pour changement interface!!!!      (0.5*PDXX(JI,JJ,IKB) + 0.5*PDZZ(JI,JJ,IKB)*PDIRCOSXW(JI,JJ) )  & 
-!!provisoire pour changement interface!!!!      * 2. / (PDXX(JI,JJ,IKB)+PDXX(JI+1,JJ,IKB))
-!!provisoire pour changement interface!!!!    ZUINT(JI,JJ) = ZCOEFF(JI,JJ)      * PU(JI+1,JJ,IKB)  +           &
-!!provisoire pour changement interface!!!!                   (1.-ZCOEFF(JI,JJ)) * PU(JI,JJ,IKB)
-!!provisoire pour changement interface!!!!    !
-!!provisoire pour changement interface!!!!    ZCOEFM(JI,JJ) = 1. - 0.5 * PDZZ(JI,JJ,IKB) * ABS(PDIRCOSXW(JI,JJ))      & 
-!!provisoire pour changement interface!!!!                             / PDXX(JI+(ILOC(JI,JJ)+1)/2,JJ,IKB)
-!!provisoire pour changement interface!!!!    ZVINT(JI,JJ) = ZCOEFM(JI,JJ)      * PV(JI,JJ,IKB)              +        &
-!!provisoire pour changement interface!!!!                   (1.-ZCOEFM(JI,JJ)) * PV(JI+ILOC(JI,JJ),JJ,IKB)
-!!provisoire pour changement interface!!!!    !
-!!provisoire pour changement interface!!!!    ZWINT(JI,JJ) = ZCOEFM(JI,JJ)  * (PW(JI,JJ,IKB+1)+ZWGROUND(JI,JJ)) * 0.5    &
-!!provisoire pour changement interface!!!!              + (1.-ZCOEFM(JI,JJ))                                             &
-!!provisoire pour changement interface!!!!               *(PW(JI+ILOC(JI,JJ),JJ,IKB+1)+ZWGROUND(JI+ILOC(JI,JJ),JJ)) * 0.5
-!!provisoire pour changement interface!!!!  END DO
-!!provisoire pour changement interface!!!!END DO
-!!provisoire pour changement interface!!!!!
-!!provisoire pour changement interface!!!!! interpolation in y direction
-!!provisoire pour changement interface!!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!DO JJ=IJB,IJE
-!!provisoire pour changement interface!!!!  DO JI=IIB,IIE
-!!provisoire pour changement interface!!!!    ZCOEFF(JI,JJ) =                                                     &
-!!provisoire pour changement interface!!!!      (0.5*PDYY(JI,JJ,IKB) + 0.5*PDZZ(JI,JJ,IKB)*PDIRCOSYW(JI,JJ) )     & 
-!!provisoire pour changement interface!!!!      * 2. / (PDYY(JI,JJ,IKB)+PDYY(JI+1,JJ,IKB))
-!!provisoire pour changement interface!!!!    ZVFIN(JI,JJ) = ZCOEFF(JI,JJ)      * ZVINT(JI,JJ+1)  +               &
-!!provisoire pour changement interface!!!!                   (1.-ZCOEFF(JI,JJ)) * ZVINT(JI,JJ)
-!!provisoire pour changement interface!!!!    !
-!!provisoire pour changement interface!!!!    ZCOEFM(JI,JJ) = 1. - 0.5 * PDZZ(JI,JJ,IKB) * ABS(PDIRCOSYW(JI,JJ))   & 
-!!provisoire pour changement interface!!!!                             / PDYY(JI,JJ+(JLOC(JI,JJ)+1)/2,IKB)
-!!provisoire pour changement interface!!!!    ZUFIN(JI,JJ) = ZCOEFM(JI,JJ)      * ZUINT(JI,JJ)                +    &
-!!provisoire pour changement interface!!!!                   (1.-ZCOEFM(JI,JJ)) * ZUINT(JI,JJ+JLOC(JI,JJ))
-!!provisoire pour changement interface!!!!    ZWFIN(JI,JJ) = ZCOEFM(JI,JJ)      * ZWINT(JI,JJ)                +    &
-!!provisoire pour changement interface!!!!                   (1.-ZCOEFM(JI,JJ)) * ZWINT(JI,JJ+JLOC(JI,JJ))
-!!provisoire pour changement interface!!!!!
-!!provisoire pour changement interface!!!!!*      3.    ROTATE THE WIND
-!!provisoire pour changement interface!!!!!             ---------------
-!!provisoire pour changement interface!!!!!
-!!provisoire pour changement interface!!!!!
-!!provisoire pour changement interface!!!!    PUSLOPE(JI,JJ) = PCOSSLOPE(JI,JJ) * PDIRCOSZW(JI,JJ) * ZUFIN(JI,JJ) +   &
-!!provisoire pour changement interface!!!!                     PSINSLOPE(JI,JJ) * PDIRCOSZW(JI,JJ) * ZVFIN(JI,JJ) +   &
-!!provisoire pour changement interface!!!!                            SQRT(1.-PDIRCOSZW(JI,JJ)**2) * ZWFIN(JI,JJ)
-!!provisoire pour changement interface!!!!    !              
-!!provisoire pour changement interface!!!!    PVSLOPE(JI,JJ) =-PSINSLOPE(JI,JJ)                    * ZUFIN(JI,JJ) +   &
-!!provisoire pour changement interface!!!!                     PCOSSLOPE(JI,JJ)                    * ZVFIN(JI,JJ)
-!!provisoire pour changement interface!!!!    !
-!!provisoire pour changement interface!!!!  END DO
-!!provisoire pour changement interface!!!!END DO
+DO JJ=1, IJU
+  DO JI=1, IIU
+    PUSLOPE(JI, JJ)=0.
+    PVSLOPE(JI, JJ)=0.
+    !
+    ZWGROUND(JI, JJ) = PW(JI, JJ, IKB)
+    !
+    !*      2.    INTERPOLATE THE CARTESIAN COMPONENTS
+    !             ------------------------------------
+    !
+    ILOC(JI, JJ)=NINT(SIGN(1.,-PCOSSLOPE(JI, JJ)))
+    JLOC(JI, JJ)=NINT(SIGN(1.,-PSINSLOPE(JI, JJ)))
+  END DO
+END DO
+!
+! interpolation in x direction
+!
+
+DO JJ=1,IJU
+  DO JI=IIB,IIE
+    ZCOEFF(JI,JJ) =                                                  &
+      (0.5*PDXX(JI,JJ,IKB) + 0.5*PDZZ(JI,JJ,IKB)*PDIRCOSXW(JI,JJ) )  & 
+      * 2. / (PDXX(JI,JJ,IKB)+PDXX(JI+1,JJ,IKB))
+    ZUINT(JI,JJ) = ZCOEFF(JI,JJ)      * PU(JI+1,JJ,IKB)  +           &
+                   (1.-ZCOEFF(JI,JJ)) * PU(JI,JJ,IKB)
+    !
+    ZCOEFM(JI,JJ) = 1. - 0.5 * PDZZ(JI,JJ,IKB) * ABS(PDIRCOSXW(JI,JJ))      & 
+                             / PDXX(JI+(ILOC(JI,JJ)+1)/2,JJ,IKB)
+    ZVINT(JI,JJ) = ZCOEFM(JI,JJ)      * PV(JI,JJ,IKB)              +        &
+                   (1.-ZCOEFM(JI,JJ)) * PV(JI+ILOC(JI,JJ),JJ,IKB)
+    !
+    ZWINT(JI,JJ) = ZCOEFM(JI,JJ)  * (PW(JI,JJ,IKB+1)+ZWGROUND(JI,JJ)) * 0.5    &
+              + (1.-ZCOEFM(JI,JJ))                                             &
+               *(PW(JI+ILOC(JI,JJ),JJ,IKB+1)+ZWGROUND(JI+ILOC(JI,JJ),JJ)) * 0.5
+  END DO
+END DO
+!
+! interpolation in y direction
+!
+
+DO JJ=IJB,IJE
+  DO JI=IIB,IIE
+    ZCOEFF(JI,JJ) =                                                     &
+      (0.5*PDYY(JI,JJ,IKB) + 0.5*PDZZ(JI,JJ,IKB)*PDIRCOSYW(JI,JJ) )     & 
+      * 2. / (PDYY(JI,JJ,IKB)+PDYY(JI+1,JJ,IKB))
+    ZVFIN(JI,JJ) = ZCOEFF(JI,JJ)      * ZVINT(JI,JJ+1)  +               &
+                   (1.-ZCOEFF(JI,JJ)) * ZVINT(JI,JJ)
+    !
+    ZCOEFM(JI,JJ) = 1. - 0.5 * PDZZ(JI,JJ,IKB) * ABS(PDIRCOSYW(JI,JJ))   & 
+                             / PDYY(JI,JJ+(JLOC(JI,JJ)+1)/2,IKB)
+    ZUFIN(JI,JJ) = ZCOEFM(JI,JJ)      * ZUINT(JI,JJ)                +    &
+                   (1.-ZCOEFM(JI,JJ)) * ZUINT(JI,JJ+JLOC(JI,JJ))
+    ZWFIN(JI,JJ) = ZCOEFM(JI,JJ)      * ZWINT(JI,JJ)                +    &
+                   (1.-ZCOEFM(JI,JJ)) * ZWINT(JI,JJ+JLOC(JI,JJ))
+!
+!*      3.    ROTATE THE WIND
+!             ---------------
+!
+!
+    PUSLOPE(JI,JJ) = PCOSSLOPE(JI,JJ) * PDIRCOSZW(JI,JJ) * ZUFIN(JI,JJ) +   &
+                     PSINSLOPE(JI,JJ) * PDIRCOSZW(JI,JJ) * ZVFIN(JI,JJ) +   &
+                            SQRT(1.-PDIRCOSZW(JI,JJ)**2) * ZWFIN(JI,JJ)
+    !              
+    PVSLOPE(JI,JJ) =-PSINSLOPE(JI,JJ)                    * ZUFIN(JI,JJ) +   &
+                     PCOSSLOPE(JI,JJ)                    * ZVFIN(JI,JJ)
+    !
+  END DO
+END DO
 !
 
 !
@@ -254,7 +252,7 @@ IMPLICIT NONE
 !
 TYPE(DIMPHYEX_t),       INTENT(IN) :: D
 CHARACTER(LEN=4),DIMENSION(2),INTENT(IN):: HLBCX, HLBCY  ! X- and Y-direc LBC
-REAL, DIMENSION(D%NIJT), INTENT(INOUT) :: PUSLOPE,PVSLOPE
+REAL, DIMENSION(D%NIT,D%NJT), INTENT(INOUT) :: PUSLOPE,PVSLOPE
 !
 TYPE(LIST_ll), POINTER :: TZFIELDS_ll  ! list of fields to exchange
 INTEGER                :: IINFO_ll       ! return code of parallel routine
@@ -273,45 +271,45 @@ IIE = D%NIE
 IJE = D%NJE
 !         2 Update halo if necessary
 !
-!!provisoire pour changement interface!!!!!!!$IF (NHALO == 1) THEN
-!!provisoire pour changement interface!!!!!#ifndef MNH_OPENACC
-!!provisoire pour changement interface!!!!!  CALL ADD2DFIELD_ll( TZFIELDS_ll, PUSLOPE, 'UPDATE_ROTATE_WIND::PUSLOPE' )
-!!provisoire pour changement interface!!!!!  CALL ADD2DFIELD_ll( TZFIELDS_ll, PVSLOPE, 'UPDATE_ROTATE_WIND::PVSLOPE' )
-!!provisoire pour changement interface!!!!!  CALL UPDATE_HALO_ll(TZFIELDS_ll,IINFO_ll)
-!!provisoire pour changement interface!!!!!  CALL CLEANLIST_ll(TZFIELDS_ll)
-!!provisoire pour changement interface!!!!!#else
-!!provisoire pour changement interface!!!!!!
-!!provisoire pour changement interface!!!!!!  /!\ warning conner needed -> GET_HALO...C
-!!provisoire pour changement interface!!!!!!
-!!provisoire pour changement interface!!!!!CALL GET_2D_HALO_DDC( PUSLOPE, HNAME='UPDATE_ROTATE_WIND::PUSLOPE' )
-!!provisoire pour changement interface!!!!!CALL GET_2D_HALO_DDC( PVSLOPE, HNAME='UPDATE_ROTATE_WIND::PVSLOPE' )
-!!provisoire pour changement interface!!!!!#endif
-!!provisoire pour changement interface!!!!!!!$ENDIF
-!!provisoire pour changement interface!!!!!!
-!!provisoire pour changement interface!!!!!!        3 Boundary conditions for non cyclic case
-!!provisoire pour changement interface!!!!!!
-!!provisoire pour changement interface!!!!!gwest  = HLBCX(1) /= "CYCL" .AND. LWEST_ll()
-!!provisoire pour changement interface!!!!!geast  = HLBCX(2) /= "CYCL" .AND. LEAST_ll()
-!!provisoire pour changement interface!!!!!gsouth = HLBCY(1) /= "CYCL" .AND. LSOUTH_ll()
-!!provisoire pour changement interface!!!!!gnorth = HLBCY(2) /= "CYCL" .AND. LNORTH_ll()
-!!provisoire pour changement interface!!!!!
-!!provisoire pour changement interface!!!!!
-!!provisoire pour changement interface!!!!!IF ( gwest ) THEN
-!!provisoire pour changement interface!!!!!  PUSLOPE(IIB-1,:)=PUSLOPE(IIB,:)
-!!provisoire pour changement interface!!!!!  PVSLOPE(IIB-1,:)=PVSLOPE(IIB,:)
-!!provisoire pour changement interface!!!!!END IF
-!!provisoire pour changement interface!!!!!IF ( geast ) THEN
-!!provisoire pour changement interface!!!!!  PUSLOPE(IIE+1,:)=PUSLOPE(IIE,:)
-!!provisoire pour changement interface!!!!!  PVSLOPE(IIE+1,:)=PVSLOPE(IIE,:)
-!!provisoire pour changement interface!!!!!END IF
-!!provisoire pour changement interface!!!!!IF ( gsouth ) THEN
-!!provisoire pour changement interface!!!!!  PUSLOPE(:,IJB-1)=PUSLOPE(:,IJB)
-!!provisoire pour changement interface!!!!!  PVSLOPE(:,IJB-1)=PVSLOPE(:,IJB)
-!!provisoire pour changement interface!!!!!END IF
-!!provisoire pour changement interface!!!!!IF( gnorth ) THEN
-!!provisoire pour changement interface!!!!!  PUSLOPE(:,IJE+1)=PUSLOPE(:,IJE)
-!!provisoire pour changement interface!!!!!  PVSLOPE(:,IJE+1)=PVSLOPE(:,IJE)
-!!provisoire pour changement interface!!!!!END IF
+!!$IF (NHALO == 1) THEN
+#ifndef MNH_OPENACC
+  CALL ADD2DFIELD_ll( TZFIELDS_ll, PUSLOPE, 'UPDATE_ROTATE_WIND::PUSLOPE' )
+  CALL ADD2DFIELD_ll( TZFIELDS_ll, PVSLOPE, 'UPDATE_ROTATE_WIND::PVSLOPE' )
+  CALL UPDATE_HALO_ll(TZFIELDS_ll,IINFO_ll)
+  CALL CLEANLIST_ll(TZFIELDS_ll)
+#else
+!
+!  /!\ warning conner needed -> GET_HALO...C
+!
+CALL GET_2D_HALO_DDC( PUSLOPE, HNAME='UPDATE_ROTATE_WIND::PUSLOPE' )
+CALL GET_2D_HALO_DDC( PVSLOPE, HNAME='UPDATE_ROTATE_WIND::PVSLOPE' )
+#endif
+!!$ENDIF
+!
+!        3 Boundary conditions for non cyclic case
+!
+gwest  = HLBCX(1) /= "CYCL" .AND. LWEST_ll()
+geast  = HLBCX(2) /= "CYCL" .AND. LEAST_ll()
+gsouth = HLBCY(1) /= "CYCL" .AND. LSOUTH_ll()
+gnorth = HLBCY(2) /= "CYCL" .AND. LNORTH_ll()
+
+
+IF ( gwest ) THEN
+  PUSLOPE(IIB-1,:)=PUSLOPE(IIB,:)
+  PVSLOPE(IIB-1,:)=PVSLOPE(IIB,:)
+END IF
+IF ( geast ) THEN
+  PUSLOPE(IIE+1,:)=PUSLOPE(IIE,:)
+  PVSLOPE(IIE+1,:)=PVSLOPE(IIE,:)
+END IF
+IF ( gsouth ) THEN
+  PUSLOPE(:,IJB-1)=PUSLOPE(:,IJB)
+  PVSLOPE(:,IJB-1)=PVSLOPE(:,IJB)
+END IF
+IF( gnorth ) THEN
+  PUSLOPE(:,IJE+1)=PUSLOPE(:,IJE)
+  PVSLOPE(:,IJE+1)=PVSLOPE(:,IJE)
+END IF
 !
 END SUBROUTINE UPDATE_ROTATE_WIND
 END MODULE MODE_ROTATE_WIND

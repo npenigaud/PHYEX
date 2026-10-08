@@ -150,36 +150,36 @@ INTEGER,                              INTENT(IN)    :: KRR     ! Number of moist
 LOGICAL, DIMENSION(D%NIJT,D%NKT), INTENT(IN)   :: ODMICRO ! mask to limit computation
 CHARACTER (LEN=4),      INTENT(IN)   ::  HCLOUD       ! Kind of microphysical scheme
 !
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRHODREF! Reference density
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRHODJ  ! Dry density * Jacobian
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PZT     ! Temperature (K)
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PCIT    ! Pristine ice n.c. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRHODREF! Reference density
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRHODJ  ! Dry density * Jacobian
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PZT     ! Temperature (K)
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PCIT    ! Pristine ice n.c. at t
 !
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRVT    ! Water vapor m.r. at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRCT    ! Cloud water m.r. at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRRT    ! Rain water m.r. at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRIT    ! Pristine ice m.r. at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRST    ! Snow/aggregate m.r. at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRGT    ! Graupel/hail m.r. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRVT    ! Water vapor m.r. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRCT    ! Cloud water m.r. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRRT    ! Rain water m.r. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRIT    ! Pristine ice m.r. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRST    ! Snow/aggregate m.r. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRGT    ! Graupel/hail m.r. at t
 !
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PQPIT   ! Positive ion (Nb/kg) at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PQNIT   ! Negative ion (Nb/kg) at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PQCT    ! Cloud water charge at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PQRT    ! Raindrops charge at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PQIT    ! Pristine ice charge at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PQST    ! Snow/aggregates charge at t
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PQGT    ! Graupel charge at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PQPIT   ! Positive ion (Nb/kg) at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PQNIT   ! Negative ion (Nb/kg) at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PQCT    ! Cloud water charge at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PQRT    ! Raindrops charge at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PQIT    ! Pristine ice charge at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PQST    ! Snow/aggregates charge at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PQGT    ! Graupel charge at t
 !
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(INOUT) :: PQPIS   ! Positive ion (Nb/kg) source
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(INOUT) :: PQNIS   ! Negative ion (Nb/kg) source
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(INOUT) :: PQCS    ! Cloud water charge source
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(INOUT) :: PQRS    ! Raindrops charge source
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(INOUT) :: PQIS    ! Pristine ice charge source
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(INOUT) :: PQSS    ! Snow/aggregates charge source
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(INOUT) :: PQGS    ! Graupel charge source
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(INOUT) :: PQPIS   ! Positive ion (Nb/kg) source
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(INOUT) :: PQNIS   ! Negative ion (Nb/kg) source
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(INOUT) :: PQCS    ! Cloud water charge source
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(INOUT) :: PQRS    ! Raindrops charge source
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(INOUT) :: PQIS    ! Pristine ice charge source
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(INOUT) :: PQSS    ! Snow/aggregates charge source
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(INOUT) :: PQGS    ! Graupel charge source
 !
 ! microphysics rates common to ICE3 and LIMA
-REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRVHENI, &  ! heterogeneous nucleation mixing ratio change (HIND for LIMA)
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRVHENI, &  ! heterogeneous nucleation mixing ratio change (HIND for LIMA)
                                                        PRCHONI, &  ! Homogeneous nucleation
                                                        PRRHONG, &  ! Spontaneous freezing mixing ratio change
                                                        PRVDEPS, &  ! Deposition on r_s,
@@ -199,10 +199,10 @@ REAL, DIMENSION(D%NIJT,D%NKT),   INTENT(IN)    :: PRVHENI, &  ! heterogeneous nu
                                                        PRCDRYG, PRIDRYG, PRRDRYG, PRSDRYG, &  ! Graupel dry growth
                                                        PRGMLTR     ! Melting of the graupel
 ! microphysics rates specific to ICE3 (knmoments==1)
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRCMLTSR,&  ! Cld droplet collection onto aggregates by pos. temp.
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRCMLTSR,&  ! Cld droplet collection onto aggregates by pos. temp.
                                                                PRICFRR     ! Rain contact freezing (part of ice crystals converted to rain)
 ! microphysics rates specific to LIMA (knmoments==2)
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRVHENC, &  ! Cld droplet formation
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRVHENC, &  ! Cld droplet formation
                                                                PRCHINC, &  ! Heterogeneous nucleation of coated IFN
                                                                PRVHONH, &  ! Nucleation of haze
                                                                PRRCVRC, &  ! Conversion of small drops into droplets
@@ -213,21 +213,21 @@ REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRVHENC, &  ! Cld drop
                                                                PRIRDSF, &  ! Raindrop shattering by freezing
                                                                PRCCORR2, PRRCORR2, PRICORR2 ! Correction inside LIMA splitting
 ! microphysics rates related to hail (krr == 7, lhail = .t.)
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRWETGH, &  ! Conversion of graupel into hail
-                                                               PRCWETH, PRIWETH, PRSWETH, PRGWETH, PRRWETH, & ! Dry growth of hail
-                                                               PRCDRYH, PRIDRYH, PRSDRYH, PRRDRYH, PRGDRYH, & ! Wet growth of hail
-                                                               PRHMLTR, &                                     ! Melting of hail  
-                                                               PRDRYHG     ! Conversion of hail into graupel
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRWETGH, &  ! Conversion of graupel into hail
+                                                                    PRCWETH, PRIWETH, PRSWETH, PRGWETH, PRRWETH, & ! Dry growth of hail
+                                                                    PRCDRYH, PRIDRYH, PRSDRYH, PRRDRYH, PRGDRYH, & ! Wet growth of hail
+                                                                    PRHMLTR, &                                     ! Melting of hail  
+                                                                    PRDRYHG     ! Conversion of hail into graupel
 !
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCCT   ! Cloud droplets conc. at t
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCRT   ! Raindrops conc. at t
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCST   ! Snow conc. at t
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCGT   ! Graupel conc. at t
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCHT   ! Hail conc. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCCT   ! Cloud droplets conc. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCRT   ! Raindrops conc. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCST   ! Snow conc. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCGT   ! Graupel conc. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCHT   ! Hail conc. at t
 !
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRHT   ! Hail m.r. at t
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(IN)    :: PQHT   ! Hail charge at t
-REAL, DIMENSION(D%NIJT,D%NKT), OPTIONAL, INTENT(INOUT) :: PQHS   ! Hail charge source
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRHT   ! Hail m.r. at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PQHT   ! Hail charge at t
+REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(INOUT) :: PQHS   ! Hail charge source
 REAL, INTENT(IN)                :: PTHVREFZIKB ! Reference thv at IKB for electricity
 !
 !
@@ -431,1839 +431,1839 @@ END IF
 ZRHO00 = CST%XP00 / (CST%XRD * PTHVREFZIKB)
 ZCOR00 = ZRHO00**ZCEXVT
 !
-!!provisoire pour changement interface!!!IF (LINDUCTIVE) ALLOCATE (ZEFIELDW(KMICRO))
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      1.3   packing
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!  optimization by looking for locations where
-!!provisoire pour changement interface!!!!  the microphysical fields are larger than a minimal value only !!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!IF (KMICRO >= 0) THEN
-!!provisoire pour changement interface!!!  IMICRO = COUNTJV(ODMICRO(:,:,:), II1(:), II2(:), II3(:))
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ! some microphysical tendencies are optional: the corresponding 1D arrays must be allocated
-!!provisoire pour changement interface!!!  IF (HCLOUD(1:3) == 'ICE') THEN  ! ICE3 scheme
-!!provisoire pour changement interface!!!    ALLOCATE(ZRCMLTSR(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRICFRR(IMICRO))
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!  IF (HCLOUD == 'LIMA') THEN  ! LIMA scheme
-!!provisoire pour changement interface!!!    ALLOCATE(ZRVHENC(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRCHINC(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRVHONH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRRCVRC(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRICNVI(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRVDEPI(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRSHMSI(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRGHMGI(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRICIBU(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRIRDSF(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRCCORR2(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRRCORR2(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRICORR2(IMICRO))
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!  IF (KRR == 7) THEN ! hail activated
-!!provisoire pour changement interface!!!    ALLOCATE(ZRWETGH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRCWETH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRIWETH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRSWETH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRGWETH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRRWETH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRCDRYH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRRDRYH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRIDRYH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRSDRYH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRGDRYH(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRHMLTR(IMICRO))
-!!provisoire pour changement interface!!!    ALLOCATE(ZRDRYHG(IMICRO))
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  DO JL = 1, IMICRO
-!!provisoire pour changement interface!!!    ZZT(JL)      = PZT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZRHODREF(JL) = PRHODREF(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZRHOCOR(JL)  = (ZRHO00 / ZRHODREF(JL))**ZCEXVT
-!!provisoire pour changement interface!!!    ZRHODJ(JL)   = PRHODJ(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZCIT(JL)     = PCIT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    IF (IMOM_C == 2) ZCCT(JL) = PCCT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    IF (IMOM_R == 2) ZCRT(JL) = PCRT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    IF (IMOM_S == 2) ZCST(JL) = PCST(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    IF (IMOM_G == 2) ZCGT(JL) = PCGT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    IF (IMOM_H == 2) ZCHT(JL) = PCHT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    IF (IMOM_C == 1) ZCCT(JL) = 0.
-!!provisoire pour changement interface!!!    IF (IMOM_R == 1) ZCRT(JL) = 0.
-!!provisoire pour changement interface!!!    IF (IMOM_S == 1) ZCST(JL) = 0.
-!!provisoire pour changement interface!!!    IF (IMOM_G == 1) ZCGT(JL) = 0.
-!!provisoire pour changement interface!!!    IF (IMOM_H == 1) ZCHT(JL) = 0.
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZRVT(JL)  = PRVT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZRCT(JL)  = PRCT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZRRT(JL)  = PRRT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZRIT(JL)  = PRIT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZRST(JL)  = PRST(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZRGT(JL)  = PRGT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    IF (KRR == 7) ZRHT(JL) = PRHT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQPIT(JL) = PQPIT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZQNIT(JL) = PQNIT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZQCT(JL)  = PQCT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZQRT(JL)  = PQRT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZQIT(JL)  = PQIT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZQST(JL)  = PQST(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    ZQGT(JL)  = PQGT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    IF (KRR == 7) ZQHT(JL) = PQHT(II1(JL),II2(JL),II3(JL))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQPIS(JL) = PQPIS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZQNIS(JL) = PQNIS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZQCS(JL)  = PQCS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZQRS(JL)  = PQRS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZQIS(JL)  = PQIS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZQSS(JL)  = PQSS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZQGS(JL)  = PQGS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    IF (KRR == 7) ZQHS(JL) = PQHS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    IF (LINDUCTIVE) ZEFIELDW(JL) = XEFIELDW(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! microphysical tendencies
-!!provisoire pour changement interface!!!    ZRVHENI(JL) = PRVHENI(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRRHONG(JL) = PRRHONG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRIMLTC(JL) = PRIMLTC(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRCHONI(JL) = PRCHONI(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRVDEPS(JL) = PRVDEPS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRIAGGS(JL) = PRIAGGS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRIAUTS(JL) = PRIAUTS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRVDEPG(JL) = PRVDEPG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRCAUTR(JL) = PRCAUTR(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRCACCR(JL) = PRCACCR(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRREVAV(JL) = PRREVAV(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRCRIMSS(JL) = PRCRIMSS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRCRIMSG(JL) = PRCRIMSG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRSRIMCG(JL) = PRSRIMCG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRRACCSS(JL) = PRRACCSS(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRRACCSG(JL) = PRRACCSG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRSACCRG(JL) = PRSACCRG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRSMLTG(JL) = PRSMLTG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRICFRRG(JL) = PRICFRRG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRRCFRIG(JL) = PRRCFRIG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRCWETG(JL) = PRCWETG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRIWETG(JL) = PRIWETG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRRWETG(JL) = PRRWETG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRSWETG(JL) = PRSWETG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRCDRYG(JL) = PRCDRYG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRIDRYG(JL) = PRIDRYG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRRDRYG(JL) = PRRDRYG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRSDRYG(JL) = PRSDRYG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRGMLTR(JL) = PRGMLTR(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    ZRCBERI(JL) = PRCBERI(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    IF (HCLOUD(1:3) == 'ICE') THEN
-!!provisoire pour changement interface!!!      ZRCMLTSR(JL) = PRCMLTSR(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRICFRR(JL)  = PRICFRR(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    END IF
-!!provisoire pour changement interface!!!    IF (HCLOUD == 'LIMA') THEN
-!!provisoire pour changement interface!!!      ZCST(JL)    = PCST(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZCGT(JL)    = PCGT(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRVHENC(JL) = PRVHENC(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRCHINC(JL) = PRCHINC(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRVHONH(JL) = PRVHONH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRRCVRC(JL) = PRRCVRC(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRICNVI(JL) = PRICNVI(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRVDEPI(JL) = PRVDEPI(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRSHMSI(JL) = PRSHMSI(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRGHMGI(JL) = PRGHMGI(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRICIBU(JL) = PRICIBU(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRIRDSF(JL) = PRIRDSF(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRCCORR2(JL) = PRCCORR2(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRRCORR2(JL) = PRRCORR2(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRICORR2(JL) = PRICORR2(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    END IF
-!!provisoire pour changement interface!!!    IF (KRR == 7) THEN
-!!provisoire pour changement interface!!!      ZCHT(JL)    = PCHT(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRWETGH(JL) = PRWETGH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRCWETH(JL) = PRCWETH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRIWETH(JL) = PRIWETH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRSWETH(JL) = PRSWETH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRGWETH(JL) = PRGWETH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRRWETH(JL) = PRRWETH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRCDRYH(JL) = PRCDRYH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRRDRYH(JL) = PRRDRYH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRIDRYH(JL) = PRIDRYH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRSDRYH(JL) = PRSDRYH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRGDRYH(JL) = PRGDRYH(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRHMLTR(JL) = PRHMLTR(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!      ZRDRYHG(JL) = PRDRYHG(II1(JL), II2(JL), II3(JL))
-!!provisoire pour changement interface!!!    END IF
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ZRHOCOR(:) = (ZRHO00 / ZRHODREF(:))**ZCEXVT
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      1.4   allocations for the non-inductive parameterizations
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (CNI_CHARGING == 'GARDI') THEN
-!!provisoire pour changement interface!!!    ALLOCATE( ZDELTALWC(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZFT(KMICRO) )
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (CNI_CHARGING == 'SAUN1' .OR. CNI_CHARGING == 'SAUN2' .OR. &
-!!provisoire pour changement interface!!!      CNI_CHARGING == 'TAKAH' .OR.                              &
-!!provisoire pour changement interface!!!      CNI_CHARGING == 'BSMP1' .OR. CNI_CHARGING == 'BSMP2' .OR. &
-!!provisoire pour changement interface!!!      CNI_CHARGING == 'TEEWC' .OR. CNI_CHARGING == 'TERAR') THEN
-!!provisoire pour changement interface!!!    ALLOCATE( ZEW(KMICRO) )
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (CNI_CHARGING == 'SAUN1' .OR. CNI_CHARGING == 'SAUN2' .OR. &
-!!provisoire pour changement interface!!!      CNI_CHARGING == 'TAKAH' .OR. CNI_CHARGING == 'TEEWC') THEN
-!!provisoire pour changement interface!!!    ALLOCATE( ZDQ(KMICRO) )
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (CNI_CHARGING == 'SAUN1' .OR. CNI_CHARGING == 'SAUN2' .OR. &
-!!provisoire pour changement interface!!!      CNI_CHARGING == 'TEEWC' )  THEN
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNSK(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNIM(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNIN(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNSM(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNSN(KMICRO) )
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (CNI_CHARGING == 'SAUN1' .OR. CNI_CHARGING == 'SAUN2' .OR. &
-!!provisoire pour changement interface!!!      CNI_CHARGING == 'SAP98' .OR.                              &
-!!provisoire pour changement interface!!!      CNI_CHARGING == 'BSMP1' .OR. CNI_CHARGING == 'BSMP2' .OR. &
-!!provisoire pour changement interface!!!      CNI_CHARGING == 'TEEWC' .OR. CNI_CHARGING == 'TERAR') THEN
-!!provisoire pour changement interface!!!    ALLOCATE( ZFQIAGGS(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZFQIDRYGBS(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZLBQSDRYGB1S(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZLBQSDRYGB2S(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZLBQSDRYGB3S(KMICRO) )
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (CNI_CHARGING == 'SAP98' .OR. CNI_CHARGING == 'TERAR' .OR. &
-!!provisoire pour changement interface!!!      CNI_CHARGING == 'BSMP1' .OR. CNI_CHARGING == 'BSMP2') THEN
-!!provisoire pour changement interface!!!    ALLOCATE( ZRAR(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZDQ_IS(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZDQ_IG(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZDQ_SG(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNIM_IS(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNIN_IS(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNIM_IG(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNIN_IG(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNSK_SG(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNSM_SG(KMICRO) )
-!!provisoire pour changement interface!!!    ALLOCATE( ZSAUNSN_SG(KMICRO) )
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      1.5   select parameters between ICEx and LIMA
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ALLOCATE(ZRTMIN(KRR))
-!!provisoire pour changement interface!!!  IF (HCLOUD(1:3) == 'ICE') THEN
-!!provisoire pour changement interface!!!! in ini_rain_ice, xrtmin is initialized with dimension 6 (hail not activated) or 7 (hail activated)
-!!provisoire pour changement interface!!!    ZRTMIN(1:KRR) = XRTMIN_I(1:KRR)
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZALPHAI = XALPHAI_I
-!!provisoire pour changement interface!!!    ZNUI = XNUI_I
-!!provisoire pour changement interface!!!    ZAI = XAI_I
-!!provisoire pour changement interface!!!    ZBI = XBI_I
-!!provisoire pour changement interface!!!    ZDS = XDS_I
-!!provisoire pour changement interface!!!    ZDG = XDG_I
-!!provisoire pour changement interface!!!    ZCXS = XCXS_I
-!!provisoire pour changement interface!!!    ZCXG = XCXG_I
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZCOLIS   = XCOLIS_I
-!!provisoire pour changement interface!!!    ZCOLEXIS = XCOLEXIS_I
-!!provisoire pour changement interface!!!    ZCOLIG   = XCOLIG_I
-!!provisoire pour changement interface!!!    ZCOLEXIG = XCOLEXIG_I
-!!provisoire pour changement interface!!!    ZCOLSG   = XCOLSG_I
-!!provisoire pour changement interface!!!    ZCOLEXSG = XCOLEXSG_I
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    IGAMINC = NGAMINC_I
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    IACCLBDAR = NACCLBDAR_I
-!!provisoire pour changement interface!!!    IACCLBDAS = NACCLBDAS_I
-!!provisoire pour changement interface!!!    ZACCINTP1S = XACCINTP1S_I
-!!provisoire pour changement interface!!!    ZACCINTP2S = XACCINTP2S_I
-!!provisoire pour changement interface!!!    ZACCINTP1R = XACCINTP1R_I
-!!provisoire pour changement interface!!!    ZACCINTP2R = XACCINTP2R_I
-!!provisoire pour changement interface!!!    ! 
-!!provisoire pour changement interface!!!    IDRYLBDAR = NDRYLBDAR_I
-!!provisoire pour changement interface!!!    IDRYLBDAS = NDRYLBDAS_I
-!!provisoire pour changement interface!!!    IDRYLBDAG = NDRYLBDAG_I
-!!provisoire pour changement interface!!!    ZDRYINTP1R = XDRYINTP1R_I
-!!provisoire pour changement interface!!!    ZDRYINTP2R = XDRYINTP2R_I
-!!provisoire pour changement interface!!!    ZDRYINTP1S = XDRYINTP1S_I
-!!provisoire pour changement interface!!!    ZDRYINTP2S = XDRYINTP2S_I
-!!provisoire pour changement interface!!!    ZDRYINTP1G = XDRYINTP1G_I
-!!provisoire pour changement interface!!!    ZDRYINTP2G = XDRYINTP2G_I
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZRIMINTP1 = XRIMINTP1_I
-!!provisoire pour changement interface!!!    ZRIMINTP2 = XRIMINTP2_I
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!  ELSE IF (HCLOUD == 'LIMA') THEN
-!!provisoire pour changement interface!!!! in ini_lima, xrtmin is initialized with dimension 7
-!!provisoire pour changement interface!!!    ZRTMIN(1:KRR) = XRTMIN_L(1:KRR)
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZALPHAI = XALPHAI_L
-!!provisoire pour changement interface!!!    ZNUI = XNUI_L
-!!provisoire pour changement interface!!!    ZAI = XAI_L
-!!provisoire pour changement interface!!!    ZBI = XBI_L
-!!provisoire pour changement interface!!!    ZDS = XDS_L
-!!provisoire pour changement interface!!!    ZDG = XDG_L
-!!provisoire pour changement interface!!!    ZCXS = XCXS_L
-!!provisoire pour changement interface!!!    ZCXG = XCXG_L
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZCOLIS   = 0.25  ! variable not defined in LIMA, the value of ICEx is used 
-!!provisoire pour changement interface!!!    ZCOLEXIS = XCOLEXIS_L
-!!provisoire pour changement interface!!!    ZCOLIG   = XCOLIG_L
-!!provisoire pour changement interface!!!    ZCOLEXIG = XCOLEXIG_L
-!!provisoire pour changement interface!!!    ZCOLSG   = XCOLSG_L
-!!provisoire pour changement interface!!!    ZCOLEXSG = XCOLEXSG_L
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    IGAMINC = NGAMINC_L
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    IACCLBDAR = NACCLBDAR_L
-!!provisoire pour changement interface!!!    IACCLBDAS = NACCLBDAS_L
-!!provisoire pour changement interface!!!    ZACCINTP1S = XACCINTP1S_L
-!!provisoire pour changement interface!!!    ZACCINTP2S = XACCINTP2S_L
-!!provisoire pour changement interface!!!    ZACCINTP1R = XACCINTP1R_L
-!!provisoire pour changement interface!!!    ZACCINTP2R = XACCINTP2R_L
-!!provisoire pour changement interface!!!    ! 
-!!provisoire pour changement interface!!!    IDRYLBDAR = NDRYLBDAR_L
-!!provisoire pour changement interface!!!    IDRYLBDAS = NDRYLBDAS_L
-!!provisoire pour changement interface!!!    IDRYLBDAG = NDRYLBDAG_L
-!!provisoire pour changement interface!!!    ZDRYINTP1R = XDRYINTP1R_L
-!!provisoire pour changement interface!!!    ZDRYINTP2R = XDRYINTP2R_L
-!!provisoire pour changement interface!!!    ZDRYINTP1S = XDRYINTP1S_L
-!!provisoire pour changement interface!!!    ZDRYINTP2S = XDRYINTP2S_L
-!!provisoire pour changement interface!!!    ZDRYINTP1G = XDRYINTP1G_L
-!!provisoire pour changement interface!!!    ZDRYINTP2G = XDRYINTP2G_L
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZRIMINTP1 = XRIMINTP1_L
-!!provisoire pour changement interface!!!    ZRIMINTP2 = XRIMINTP2_L
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      1.6   update the slope parameter of the distribution
-!!provisoire pour changement interface!!!!*            and compute N_x if necessary
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (HCLOUD(1:3) == 'ICE') ZCCT(:) = 0.
-!!provisoire pour changement interface!!!  CALL COMPUTE_LAMBDA(2, IMOM_C, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(2), ZRCT, ZCCT, ZLBDAC)
-!!provisoire pour changement interface!!!  CALL COMPUTE_LAMBDA(3, IMOM_R, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(3), ZRRT, ZCRT, ZLBDAR)
-!!provisoire pour changement interface!!!  CALL COMPUTE_LAMBDA(4, IMOM_I, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(4), ZRIT, ZCIT, ZLBDAI)
-!!provisoire pour changement interface!!!  CALL COMPUTE_LAMBDA(5, IMOM_S, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(5), ZRST, ZCST, ZLBDAS)
-!!provisoire pour changement interface!!!  CALL COMPUTE_LAMBDA(6, IMOM_G, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(6), ZRGT, ZCGT, ZLBDAG)
-!!provisoire pour changement interface!!!  IF (KRR == 7) CALL COMPUTE_LAMBDA(7, IMOM_H, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(7), ZRHT, ZCHT, ZLBDAH)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      1.7   update the parameter e in the charge-diameter relationship
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!! Compute e_x at time t
-!!provisoire pour changement interface!!!  IF (HCLOUD == 'LIMA') THEN
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(2, IMOM_C, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(2), ZRCT, ZQCT, ZECT, PLBDX=ZLBDAC, PCX=ZCCT)
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(3, IMOM_R, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(3), ZRRT, ZQRT, ZERT, PLBDX=ZLBDAR, PCX=ZCRT)
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(4, IMOM_I, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(4), ZRIT, ZQIT, ZEIT, PLBDX=ZLBDAI, PCX=ZCIT)
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(5, IMOM_S, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(5), ZRST, ZQST, ZEST, PLBDX=ZLBDAS, PCX=ZCST)
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(6, IMOM_G, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(6), ZRGT, ZQGT, ZEGT, PLBDX=ZLBDAG, PCX=ZCGT)
-!!provisoire pour changement interface!!!    IF (KRR == 7) CALL ELEC_COMPUTE_EX(7, IMOM_H, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(7), ZRHT, ZQHT, ZEHT, PLBDX=ZLBDAH, PCX=ZCHT)
-!!provisoire pour changement interface!!!  ELSE IF (HCLOUD(1:3) == 'ICE') THEN
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(2, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(2), ZRCT, ZQCT, ZECT)
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(3, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(3), ZRRT, ZQRT, ZERT, PLBDX=ZLBDAR)
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(4, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(4), ZRIT, ZQIT, ZEIT, PCX=ZCIT)
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(5, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(5), ZRST, ZQST, ZEST, PLBDX=ZLBDAS)
-!!provisoire pour changement interface!!!    CALL ELEC_COMPUTE_EX(6, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(6), ZRGT, ZQGT, ZEGT, PLBDX=ZLBDAG)
-!!provisoire pour changement interface!!!    IF (KRR == 7) CALL ELEC_COMPUTE_EX(7, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(7), ZRHT, ZQHT, ZEHT, PLBDX=ZLBDAH)
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      1.8   initialization for the non-inductive charging process
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  SELECT CASE (CNI_CHARGING)
-!!provisoire pour changement interface!!!    ! Initialization for the parameterization of Gardiner et al. (1995)
-!!provisoire pour changement interface!!!    CASE ('GARDI')
-!!provisoire pour changement interface!!!      CALL ELEC_INIT_NOIND_GARDI()
-!!provisoire pour changement interface!!!      ! Save the effective water content
-!!provisoire pour changement interface!!!      DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!        XEW(II1(JL),II2(JL),II3(JL)) = ZDELTALWC(JL) ! 
-!!provisoire pour changement interface!!!      END DO      
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! Initialization for the parameterizations of Saunders et al. (1991)
-!!provisoire pour changement interface!!!    ! with and without anomalies, and Tsenova and Mitzeva (2009)
-!!provisoire pour changement interface!!!    CASE ('SAUN1', 'SAUN2', 'TEEWC')
-!!provisoire pour changement interface!!!      CALL ELEC_INIT_NOIND_EWC()
-!!provisoire pour changement interface!!!      ! Save the effective water content
-!!provisoire pour changement interface!!!      DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!        XEW(II1(JL),II2(JL),II3(JL)) = ZEW(JL) ! g/m3
-!!provisoire pour changement interface!!!      END DO
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! Initialization for the parameterizations of Saunders and Peck (1998), 
-!!provisoire pour changement interface!!!    ! Brooks et al. (1997) and Tsenova and Mitzeva (2011)
-!!provisoire pour changement interface!!!    CASE ('SAP98', 'BSMP1', 'BSMP2', 'TERAR')
-!!provisoire pour changement interface!!!      CALL ELEC_INIT_NOIND_RAR()
-!!provisoire pour changement interface!!!      ! Save the rime accretion rate (not recorded properly: 3 different RAR are computed !!!)
-!!provisoire pour changement interface!!!      DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!        XEW(II1(JL),II2(JL),II3(JL)) = ZRAR(JL) ! g/m3
-!!provisoire pour changement interface!!!      END DO
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! Initialization for the parameterization of Takahashi (1978)
-!!provisoire pour changement interface!!!    CASE ('TAKAH')
-!!provisoire pour changement interface!!!      CALL ELEC_INIT_NOIND_TAKAH()
-!!provisoire pour changement interface!!!      ! Save the effective water content
-!!provisoire pour changement interface!!!      DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!        XEW(II1(JL),II2(JL),II3(JL)) = ZEW(JL) ! g/m3
-!!provisoire pour changement interface!!!      END DO
-!!provisoire pour changement interface!!!  END SELECT
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.    COMPUTE THE SLOW COLD PROCESS SOURCES
-!!provisoire pour changement interface!!!!             -------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.1   heterogeneous nucleation
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!! --> rien n'est fait pour l'elec pour le moment
-!!provisoire pour changement interface!!!! ICE3/4 : rvheni/rvhind
-!!provisoire pour changement interface!!!! LIMA : rvhenc, rchinc, rvhonh
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.2   spontaneous freezing (rhong)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%INIT_PHY(D, 'SFR', &
-!!provisoire pour changement interface!!!                            Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%INIT_PHY(D, 'SFR', &
-!!provisoire pour changement interface!!!                            Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!  
-!!provisoire pour changement interface!!!  ZWQ(:) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRRHONG(:) > 0. .AND. &
-!!provisoire pour changement interface!!!         ZRRT(:) > XRTMIN_ELEC(3) .AND. ABS(ZQRT(:)) > XQTMIN(3))
-!!provisoire pour changement interface!!!    ZWQ(:) = ZQRS(:)
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQGS(:) = ZQGS(:) + ZQRS(:)
-!!provisoire pour changement interface!!!    ZQRS(:) = 0.
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%END_PHY(D, 'SFR', &
-!!provisoire pour changement interface!!!                           Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%END_PHY(D, 'SFR', &
-!!provisoire pour changement interface!!!                           Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.3   cloud ice melting (rimltc)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%INIT_PHY(D, 'IMLT', &
-!!provisoire pour changement interface!!!                            Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%INIT_PHY(D, 'IMLT', &
-!!provisoire pour changement interface!!!                            Unpack( zqis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  WHERE (ZRIMLTC(:) > 0.)
-!!provisoire pour changement interface!!!    ZQCS(:) = ZQCS(:) + ZQIS(:)
-!!provisoire pour changement interface!!!    ZQIS(:) = 0.
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%END_PHY(D, 'IMLT', &
-!!provisoire pour changement interface!!!                           Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%END_PHY(D, 'IMLT', &
-!!provisoire pour changement interface!!!                           Unpack( zqis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.4   riming-conversion of the large sized aggregates into graupel ???
-!!provisoire pour changement interface!!!! ancienne param => on calcule plutot cette tendance un peu plus loin ?
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.5   homogeneous nucleation (rchoni)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!! CB : traitement different entre ice3 et lima --> a modifier eventuellement
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ(:) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRCHONI(:) > 0. .AND.           &
-!!provisoire pour changement interface!!!         ZRCT(:) > XRTMIN_ELEC(2) .AND.  &
-!!provisoire pour changement interface!!!         ABS(ZQCT(:)) > XQTMIN(2) .AND. ABS(ZECT(:)) > ELECP%XECMIN)
-!!provisoire pour changement interface!!!    ZWQ(:) = XQHON * ZECT(:) * ZRCHONI(:)
-!!provisoire pour changement interface!!!    ZWQ(:) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQCS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQIS(:) = ZQIS(:) + ZWQ(:)
-!!provisoire pour changement interface!!!    ZQCS(:) = ZQCS(:) - ZWQ(:)
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'HON', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'HON', &
-!!provisoire pour changement interface!!!                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.6   deposition on snow/aggregates (rvdeps)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'DEPS', &
-!!provisoire pour changement interface!!!                            Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field =  0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'DEPS', &
-!!provisoire pour changement interface!!!                            Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field =  0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ(:) = 0.
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ! Only the sublimation of snow/aggregates is considered (negative part of PRVDEPS)
-!!provisoire pour changement interface!!!  WHERE (ZRVDEPS(:) < 0. .AND. & 
-!!provisoire pour changement interface!!!         ZRST(:) > XRTMIN_ELEC(5) .AND. ABS(ZQST(:)) > XQTMIN(5))
-!!provisoire pour changement interface!!!    ZWQ(:) = XCOEF_RQ_S * ZQST(:) * ZRVDEPS(:) / ZRST(:)
-!!provisoire pour changement interface!!!    ZWQ(:) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ(:)) ),ZQSS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQSS(:)  = ZQSS(:)  - ZWQ(:)
-!!provisoire pour changement interface!!!    ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!    ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'DEPS', &
-!!provisoire pour changement interface!!!                           Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field =  0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'DEPS', &
-!!provisoire pour changement interface!!!                           Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field =  0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'DEPS', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:),  mask = odmicro(:, :, :), field =  0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.7   aggregation on snow/aggregates (riaggs)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  CALL COMPUTE_CHARGE_TRANSFER (ZRIAGGS, ZRIT, ZQIT, PTSTEP, &
-!!provisoire pour changement interface!!!                                XRTMIN_ELEC(4), XQTMIN(4), XCOEF_RQ_I, &
-!!provisoire pour changement interface!!!                                ZWQ, ZQIS, ZQSS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'AGGS', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:), mask = odmicro(:, :, :), field =  0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'AGGS', &
-!!provisoire pour changement interface!!!                           Unpack(  zwq(:), mask = odmicro(:, :, :), field =  0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.8   non-inductive charging during ice - snow collisions
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  CALL ELEC_IAGGS_B()
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'NIIS', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq_ni(:), mask = odmicro(:, :, :), field =  0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'NIIS', &
-!!provisoire pour changement interface!!!                           Unpack(  zwq_ni(:), mask = odmicro(:, :, :), field =  0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!! Save the NI charging rate
-!!provisoire pour changement interface!!!  DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!    XNI_IAGGS(II1(JL),II2(JL),II3(JL)) = ZWQ_NI(JL) * ZRHODREF(JL) ! C/m3/s
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.9   autoconversion of r_i for r_s production (riauts/ricnvs)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  CALL COMPUTE_CHARGE_TRANSFER (ZRIAUTS, ZRIT, ZQIT, PTSTEP, &
-!!provisoire pour changement interface!!!                                XRTMIN_ELEC(4), XQTMIN(4), XCOEF_RQ_I, &
-!!provisoire pour changement interface!!!                                ZWQ, ZQIS, ZQSS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'AUTS', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'AUTS', &
-!!provisoire pour changement interface!!!                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.10  snow --> ice conversion (rscnvi)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (HCLOUD == 'LIMA') THEN
-!!provisoire pour changement interface!!!    CALL COMPUTE_CHARGE_TRANSFER (ZRICNVI, ZRST, ZQST, PTSTEP, &
-!!provisoire pour changement interface!!!                                  XRTMIN_ELEC(5), XQTMIN(5), XCOEF_RQ_S, &
-!!provisoire pour changement interface!!!                                  ZWQ, ZQSS, ZQIS)          
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'CNVI', &
-!!provisoire pour changement interface!!!                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'CNVI', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.11  water vapor deposition on ice crystals (rvdepi)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'SUBI', &
-!!provisoire pour changement interface!!!                              Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'SUBI', &
-!!provisoire pour changement interface!!!                              Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZWQ(:) = 0.
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! Only the sublimation of ice crystals is considered (negative part of PRVDEPI)
-!!provisoire pour changement interface!!!    WHERE (ZRVDEPI(:) < 0. .AND. &
-!!provisoire pour changement interface!!!           ZRIT(:) > XRTMIN_ELEC(4) .AND. ABS(ZQIT(:)) > XQTMIN(4))
-!!provisoire pour changement interface!!!      ZWQ(:) = XCOEF_RQ_I * ZQIT(:) * ZRVDEPI(:) / ZRIT(:)
-!!provisoire pour changement interface!!!      ZWQ(:) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQIS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQIS(:)  = ZQIS(:)  - ZWQ(:)
-!!provisoire pour changement interface!!!      ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!      ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'SUBI', &
-!!provisoire pour changement interface!!!                             Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'SUBI', &
-!!provisoire pour changement interface!!!                             Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )           
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'SUBI', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if    
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      2.12  water vapor deposition on graupel (rvdepg)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'DEPG', &
-!!provisoire pour changement interface!!!                            Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'DEPG', &
-!!provisoire pour changement interface!!!                            Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ(:) = 0.
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ! Only the sublimation of graupel is considered (negative part of PRVDEPG)
-!!provisoire pour changement interface!!!  WHERE (ZRVDEPG(:) < 0. .AND. &
-!!provisoire pour changement interface!!!         ZRGT(:) > XRTMIN_ELEC(6) .AND. ABS(ZQGT(:)) > XQTMIN(6))
-!!provisoire pour changement interface!!!    ZWQ(:) = XCOEF_RQ_G * ZQGT(:) * ZRVDEPG(:) / ZRGT(:)
-!!provisoire pour changement interface!!!    ZWQ(:) = SIGN( MIN( ABS(ZQGT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQGS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQGS(:)  = ZQGS(:)  - ZWQ(:) 
-!!provisoire pour changement interface!!!    ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!    ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'DEPG', &
-!!provisoire pour changement interface!!!                           Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'DEPG', &
-!!provisoire pour changement interface!!!                           Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'DEPG', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      3.    COMPUTE THE WARM PROCESS SOURCES
-!!provisoire pour changement interface!!!!             --------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      3.1   autoconversion of r_c for r_r production (rcautr)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  CALL COMPUTE_CHARGE_TRANSFER (ZRCAUTR, ZRCT, ZQCT, PTSTEP,           &
-!!provisoire pour changement interface!!!                                XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
-!!provisoire pour changement interface!!!                                ZWQ, ZQCS, ZQRS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'AUTO', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'AUTO', &
-!!provisoire pour changement interface!!!                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      3.2   accretion of r_c for r_r production (rcaccr)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  CALL COMPUTE_CHARGE_TRANSFER (ZRCACCR, ZRCT, ZQCT, PTSTEP,           &
-!!provisoire pour changement interface!!!                                XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
-!!provisoire pour changement interface!!!                                ZWQ, ZQCS, ZQRS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'ACCR', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'ACCR', &
-!!provisoire pour changement interface!!!                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      3.3   evaporation of raindrops (rrevav)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'REVA', &
-!!provisoire pour changement interface!!!                            Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'REVA', &
-!!provisoire pour changement interface!!!                            Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ(:) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRREVAV(:) > 0. .AND. &
-!!provisoire pour changement interface!!!         ZRRT(:) > XRTMIN_ELEC(3) .AND. ABS(ZQRT(:)) > XQTMIN(3))
-!!provisoire pour changement interface!!!    ZWQ(:) = XCOEF_RQ_R * ZQRT(:) * ZRREVAV(:) / ZRRT(:)
-!!provisoire pour changement interface!!!    ZWQ(:) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQRS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQRS(:)  = ZQRS(:)  - ZWQ(:)
-!!provisoire pour changement interface!!!    ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!    ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'REVA', &
-!!provisoire pour changement interface!!!                           Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'REVA', &
-!!provisoire pour changement interface!!!                           Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'REVA', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      3.4   conversion of drops to droplets (rrcvrc)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (HCLOUD == 'LIMA') THEN
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%INIT_PHY(D, 'R2C1', &
-!!provisoire pour changement interface!!!                              Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%INIT_PHY(D, 'R2C1', &
-!!provisoire pour changement interface!!!                              Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    CALL COMPUTE_CHARGE_TRANSFER (ZRRCVRC, ZRRT, ZQRT, PTSTEP,           &
-!!provisoire pour changement interface!!!                                  XRTMIN_ELEC(3), XQTMIN(3), XCOEF_RQ_R, &
-!!provisoire pour changement interface!!!                                  ZWQ, ZQRS, ZQCS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%END_PHY(D, 'R2C1', &
-!!provisoire pour changement interface!!!                             Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%END_PHY(D, 'R2C1', &
-!!provisoire pour changement interface!!!                             Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.    COMPUTE THE FAST COLD PROCESS SOURCES FOR r_s
-!!provisoire pour changement interface!!!!             ---------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.1   cloud droplet riming of the aggregates
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%INIT_PHY(D, 'RIM', &
-!!provisoire pour changement interface!!!                           Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%INIT_PHY(D, 'RIM', &
-!!provisoire pour changement interface!!!                           Unpack( zqss(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%INIT_PHY(D, 'RIM', &
-!!provisoire pour changement interface!!!                           Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.1.1 riming of the small sized aggregates (rcrimss)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  CALL COMPUTE_CHARGE_TRANSFER (ZRCRIMSS, ZRCT, ZQCT, PTSTEP,          &
-!!provisoire pour changement interface!!!                                XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
-!!provisoire pour changement interface!!!                                ZWQ, ZQCS, ZQSS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.1.2 riming conversion of the large sized aggregates into graupel (rcrimsg)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ(:) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRCRIMSG(:) > 0. .AND.                                        &
-!!provisoire pour changement interface!!!         ZRCT(:) > XRTMIN_ELEC(2) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
-!!provisoire pour changement interface!!!         ABS(ZQCT(:)) > XQTMIN(2))
-!!provisoire pour changement interface!!!    ZWQ(:) = XCOEF_RQ_C * ZQCT(:) * ZRCRIMSG(:) / ZRCT(:)      ! QCRIMSG
-!!provisoire pour changement interface!!!    ZWQ(:) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQCS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQGS(:) = ZQGS(:) + ZWQ(:)
-!!provisoire pour changement interface!!!    ZQCS(:) = ZQCS(:) - ZWQ(:)
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.1.3 riming conversion of the large sized aggregates into graupel (rsrimcg)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  GMASK(:) = .FALSE.
-!!provisoire pour changement interface!!!  IGMASK = 0
-!!provisoire pour changement interface!!!  DO JL = 1, SIZE(GMASK)
-!!provisoire pour changement interface!!!    IF (ZRSRIMCG(JL) > 0. .AND. ZZT(JL) < CST%XTT .AND. &
-!!provisoire pour changement interface!!!        ZRCT(JL) > XRTMIN_ELEC(2) .AND. ZRST(JL) > XRTMIN_ELEC(5) .AND. &
-!!provisoire pour changement interface!!!        ZLBDAS(JL) > 0.) THEN  !++cb-- 12/07/23 condition ajoutee pour eviter log(0)
-!!provisoire pour changement interface!!!      IGMASK = IGMASK + 1
-!!provisoire pour changement interface!!!      I1(IGMASK) = JL
-!!provisoire pour changement interface!!!      GMASK(JL) = .TRUE.
-!!provisoire pour changement interface!!!    ELSE
-!!provisoire pour changement interface!!!      GMASK(JL) = .FALSE.
-!!provisoire pour changement interface!!!    END IF
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ALLOCATE(ZVEC1(IGMASK))
-!!provisoire pour changement interface!!!  ALLOCATE(ZVEC2(IGMASK))
-!!provisoire pour changement interface!!!  ALLOCATE(IVEC2(IGMASK))
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ! select the ZLBDAS
-!!provisoire pour changement interface!!!  DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!    ZVEC1(JL) = ZLBDAS(I1(JL))
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!  ! find the next lower indice for the ZLBDAS in the geometrical set of Lbda_s 
-!!provisoire pour changement interface!!!  ! used to tabulate some moments of the incomplete gamma function
-!!provisoire pour changement interface!!!  ZVEC2(1:IGMASK) = MAX( 1.00001, MIN( REAL(IGAMINC)-0.00001,           &
-!!provisoire pour changement interface!!!                        ZRIMINTP1 * LOG( ZVEC1(1:IGMASK) ) + ZRIMINTP2 ) )
-!!provisoire pour changement interface!!!  IVEC2(1:IGMASK) = INT( ZVEC2(1:IGMASK) )
-!!provisoire pour changement interface!!!  ZVEC2(1:IGMASK) = ZVEC2(1:IGMASK) - REAL( IVEC2(1:IGMASK) )
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ! perform the linear interpolation of the normalized "XFS"-moment of
-!!provisoire pour changement interface!!!  ! the incomplete gamma function
-!!provisoire pour changement interface!!!  ZVEC1(1:IGMASK) =  XGAMINC_RIM3( IVEC2(1:IGMASK)+1 ) *  ZVEC2(1:IGMASK)      &
-!!provisoire pour changement interface!!!                   - XGAMINC_RIM3( IVEC2(1:IGMASK)   ) * (ZVEC2(1:IGMASK) - 1.0)
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ZWQ(:) = 0.
-!!provisoire pour changement interface!!!  DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!    ZWQ(I1(JL)) = ZVEC1(JL)
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  DEALLOCATE(ZVEC1)
-!!provisoire pour changement interface!!!  DEALLOCATE(ZVEC2)
-!!provisoire pour changement interface!!!  DEALLOCATE(IVEC2)
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ! riming-conversion of the large sized aggregates into graupeln (rsrimcg)
-!!provisoire pour changement interface!!!  WHERE (ZRSRIMCG(:) > 0. .AND.                                        &
-!!provisoire pour changement interface!!!         ZRCT(:) > XRTMIN_ELEC(2) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
-!!provisoire pour changement interface!!!         ABS(ZQCT(:)) > XQTMIN(2) .AND. ABS(ZEST(:)) > XESMIN)
-!!provisoire pour changement interface!!!    ZWQ(:) = XQSRIMCG * ZEST(:) * ZCST(:) *          &    ! QSRIMCG
-!!provisoire pour changement interface!!!             ZLBDAS(:)**XEXQSRIMCG * (1. - ZWQ(:)) / &
-!!provisoire pour changement interface!!!             (PTSTEP * ZRHODREF(:))
-!!provisoire pour changement interface!!!    ZWQ(:) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ(:)) ),ZQSS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQGS(:) = ZQGS(:) + ZWQ(:)
-!!provisoire pour changement interface!!!    ZQSS(:) = ZQSS(:) - ZWQ(:)
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%END_PHY(D, 'RIM', &
-!!provisoire pour changement interface!!!                           Unpack( zqcs(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%END_PHY(D, 'RIM', &
-!!provisoire pour changement interface!!!                           Unpack( zqss(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%END_PHY(D, 'RIM', &
-!!provisoire pour changement interface!!!                           Unpack( zqgs(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.2   Hallett-Mossop ice multiplication process due to snow riming (rhmsi)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (HCLOUD == 'LIMA') THEN
-!!provisoire pour changement interface!!!    CALL COMPUTE_CHARGE_TRANSFER (ZRSHMSI, ZRST, ZQST, PTSTEP,          &
-!!provisoire pour changement interface!!!                                  XRTMIN_ELEC(4), XQTMIN(4), XCOEF_RQ_S, &
-!!provisoire pour changement interface!!!                                  ZWQ, ZQSS, ZQIS)       
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'HMS', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'HMS', &
-!!provisoire pour changement interface!!!                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.3   Raindrop accretion onto the aggregates
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IGMASK = 0
-!!provisoire pour changement interface!!!  DO JL = 1, SIZE(GMASK)
-!!provisoire pour changement interface!!!    IF (ZRRT(JL) > ZRTMIN(3) .AND. ZLBDAR(JL) > 0. .AND. &
-!!provisoire pour changement interface!!!        ZRST(JL) > ZRTMIN(5) .AND. ZLBDAS(JL) > 0.) THEN
-!!provisoire pour changement interface!!!      IGMASK = IGMASK + 1
-!!provisoire pour changement interface!!!      I1(IGMASK) = JL
-!!provisoire pour changement interface!!!      GMASK(JL) = .TRUE.
-!!provisoire pour changement interface!!!    ELSE
-!!provisoire pour changement interface!!!      GMASK(JL) = .FALSE.
-!!provisoire pour changement interface!!!    END IF
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  IF (IGMASK > 0) THEN
-!!provisoire pour changement interface!!!    ALLOCATE(ZVEC1(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVEC2(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(IVEC1(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(IVEC2(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVECQ1(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVECQ2(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVECQ3(IGMASK))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! select the (ZLBDAS,ZLBDAR) couplet
-!!provisoire pour changement interface!!!    DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!      ZVEC1(JL) = ZLBDAS(I1(JL))
-!!provisoire pour changement interface!!!      ZVEC2(JL) = ZLBDAR(I1(JL))
-!!provisoire pour changement interface!!!    END DO
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! find the next lower indice for the ZLBDAS and for the ZLBDAR in the geometrical 
-!!provisoire pour changement interface!!!    ! set of (Lbda_s,Lbda_r) couplet use to tabulate the kernels
-!!provisoire pour changement interface!!!    ZVEC1(1:IGMASK) = MAX( 1.00001, MIN( REAL(IACCLBDAS)-0.00001,           &
-!!provisoire pour changement interface!!!                          ZACCINTP1S * LOG( ZVEC1(1:IGMASK) ) + ZACCINTP2S ) )
-!!provisoire pour changement interface!!!    IVEC1(1:IGMASK) = INT( ZVEC1(1:IGMASK) )
-!!provisoire pour changement interface!!!    ZVEC1(1:IGMASK) = ZVEC1(1:IGMASK) - REAL( IVEC1(1:IGMASK) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZVEC2(1:IGMASK) = MAX( 1.00001, MIN( REAL(IACCLBDAR)-0.00001,           &
-!!provisoire pour changement interface!!!                          ZACCINTP1R * LOG( ZVEC2(1:IGMASK) ) + ZACCINTP2R ) )
-!!provisoire pour changement interface!!!    IVEC2(1:IGMASK) = INT( ZVEC2(1:IGMASK) )
-!!provisoire pour changement interface!!!    ZVEC2(1:IGMASK) = ZVEC2(1:IGMASK) - REAL( IVEC2(1:IGMASK) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! perform the bilinear interpolation of the normalized kernels
-!!provisoire pour changement interface!!!    ZVECQ1(:) = BI_LIN_INTP_V(XKER_Q_RACCSS, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
-!!provisoire pour changement interface!!!    ZVECQ2(:) = BI_LIN_INTP_V(XKER_Q_RACCS,  IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
-!!provisoire pour changement interface!!!    ZVECQ3(:) = BI_LIN_INTP_V(XKER_Q_SACCRG, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
-!!provisoire pour changement interface!!!    ZWQ1(:) = 0.
-!!provisoire pour changement interface!!!    ZWQ2(:) = 0.
-!!provisoire pour changement interface!!!    ZWQ3(:) = 0.
-!!provisoire pour changement interface!!!    DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!      ZWQ1(I1(JL)) = ZVECQ1(JL)
-!!provisoire pour changement interface!!!      ZWQ2(I1(JL)) = ZVECQ2(JL)
-!!provisoire pour changement interface!!!      ZWQ3(I1(JL)) = ZVECQ3(JL)
-!!provisoire pour changement interface!!!    END DO
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVEC1)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVEC2)
-!!provisoire pour changement interface!!!    DEALLOCATE(IVEC1)
-!!provisoire pour changement interface!!!    DEALLOCATE(IVEC2)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVECQ1)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVECQ2)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVECQ3)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.3.1 raindrop accretion onto the small sized aggregates (rraccss)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    ZWQ4(:)   = 0.
-!!provisoire pour changement interface!!!    ZWQ5(:,:) = 0.
-!!provisoire pour changement interface!!!    WHERE (ZRRACCSS(:) > 0. .AND. &
-!!provisoire pour changement interface!!!           ZRRT(:) > XRTMIN_ELEC(3) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
-!!provisoire pour changement interface!!!           ZCRT(:) > 0.             .AND. ZCST(:) > 0.             .AND. &
-!!provisoire pour changement interface!!!           ZLBDAR(:) > 0.           .AND. ZLBDAS(:) > 0.           .AND. &
-!!provisoire pour changement interface!!!           ABS(ZERT(:)) > ELECP%XERMIN)  ! and zzt(:) < xtt ?
-!!provisoire pour changement interface!!!      ZWQ4(:) = XFQRACCS * ZERT(:) * ZRHOCOR(:) / (ZCOR00 * ZRHODREF(:)) * &
-!!provisoire pour changement interface!!!                ZCRT(:) * ZCST(:)                                        * &
-!!provisoire pour changement interface!!!               (XLBQRACCS1 * ZLBDAR(:)**(-2.0 - XFR)                     + &
-!!provisoire pour changement interface!!!                XLBQRACCS2 * ZLBDAR(:)**(-1.0 - XFR) * ZLBDAS(:)**(-1.0) + &
-!!provisoire pour changement interface!!!                XLBQRACCS3 * ZLBDAR(:)**(-XFR)       * ZLBDAS(:)**(-2.0))
-!!provisoire pour changement interface!!!      ZWQ5(:,1) = ZWQ4(:) * ZWQ1(:)                       ! QRACCSS
-!!provisoire pour changement interface!!!      ZWQ5(:,1) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,1)) ),ZQRS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQRS(:) = ZQRS(:) - ZWQ5(:,1)
-!!provisoire pour changement interface!!!      ZQSS(:) = ZQSS(:) + ZWQ5(:,1)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.3.2 raindrop accretion-conversion of the large sized aggregates into graupel 
-!!provisoire pour changement interface!!!!*            (rsaccrg & rraccsg)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    ZWQ5(:,2) = ZWQ2(:) * ZWQ4(:) ! QRACCS
-!!provisoire pour changement interface!!!    WHERE (ZRRACCSG(:) > 0. .AND. &
-!!provisoire pour changement interface!!!           ZRRT(:) > XRTMIN_ELEC(3) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
-!!provisoire pour changement interface!!!           ZLBDAR(:) > 0.           .AND. ZLBDAS(:) > 0.)
-!!provisoire pour changement interface!!!      ZWQ5(:,3) = ZWQ5(:,2) - ZWQ5(:,1)         ! QRACCSG
-!!provisoire pour changement interface!!!      ZWQ5(:,3) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,3)) ),ZQRS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQRS(:) = ZQRS(:) - ZWQ5(:,3)
-!!provisoire pour changement interface!!!      ZQGS(:) = ZQGS(:) + ZWQ5(:,3)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    WHERE (ZRSACCRG(:) > 0. .AND.                                        &
-!!provisoire pour changement interface!!!           ZRRT(:) > XRTMIN_ELEC(3) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
-!!provisoire pour changement interface!!!           ZCRT(:) > 0.             .AND. ZCST(:) > 0.             .AND. &
-!!provisoire pour changement interface!!!           ZLBDAR(:) > 0.           .AND. ZLBDAS(:) > 0.           .AND. &
-!!provisoire pour changement interface!!!           ABS(ZEST(:)) > XESMIN)
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = ZWQ3(:) * XFQRACCS * ZEST(:) *                               &
-!!provisoire pour changement interface!!!                  ZRHOCOR(:) / (ZCOR00 * ZRHODREF(:)) *                        &
-!!provisoire pour changement interface!!!                  ZCRT(:) * ZCST(:) *                                          &
-!!provisoire pour changement interface!!!                 (XLBQSACCRG1 * ZLBDAS(:)**(-2.0 - XFS) +                      &
-!!provisoire pour changement interface!!!                  XLBQSACCRG2 * ZLBDAS(:)**(-1.0 - XFS) * ZLBDAR(:)**(-1.0) +  &
-!!provisoire pour changement interface!!!                  XLBQSACCRG3 * ZLBDAS(:)**(-XFS)       * ZLBDAR(:)**(-2.0)) ! QSACCR
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,4)) ),ZQSS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQSS(:) = ZQSS(:) - ZWQ5(:,4)
-!!provisoire pour changement interface!!!      ZQGS(:) = ZQGS(:) + ZWQ5(:,4)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'ACC', &
-!!provisoire pour changement interface!!!                             Unpack( (-zwq5(:,1) - zwq5(:,3)) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'ACC', &
-!!provisoire pour changement interface!!!                             Unpack( ( zwq5(:,1) - zwq5(:,4)) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'ACC', &
-!!provisoire pour changement interface!!!                             Unpack( ( zwq5(:,3) + zwq5(:,4)) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if    
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!  END IF  ! end if igmask>0
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.4   conversion-melting of the aggregates (rsmltg)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  CALL COMPUTE_CHARGE_TRANSFER (ZRSMLTG, ZRST, ZQST, PTSTEP,           &
-!!provisoire pour changement interface!!!                                XRTMIN_ELEC(5), XQTMIN(5), XCOEF_RQ_S, &
-!!provisoire pour changement interface!!!                                ZWQ, ZQSS, ZQGS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'CMEL', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'CMEL', &
-!!provisoire pour changement interface!!!                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      4.5   cloud droplet collection onto aggregates by positive temperature (rcmltsr)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (HCLOUD(1:3) == 'ICE') THEN
-!!provisoire pour changement interface!!!    CALL COMPUTE_CHARGE_TRANSFER (ZRCMLTSR, ZRCT, ZQCT, PTSTEP,           &
-!!provisoire pour changement interface!!!                                  XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
-!!provisoire pour changement interface!!!                                  ZWQ, ZQCS, ZQRS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'CMEL', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'CMEL', &
-!!provisoire pour changement interface!!!                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.    COMPUTE THE FAST COLD PROCESS SOURCES FOR r_g
-!!provisoire pour changement interface!!!!             ---------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.1   rain contact freezing (ricfrrg, rrcfrig, ricfrr)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%INIT_PHY(D, 'CFRZ', &
-!!provisoire pour changement interface!!!                           Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%INIT_PHY(D, 'CFRZ', &
-!!provisoire pour changement interface!!!                           Unpack( zqis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%INIT_PHY(D, 'CFRZ', &
-!!provisoire pour changement interface!!!                           Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ZWQ(:) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRRCFRIG(:) > 0. .AND.                                        &
-!!provisoire pour changement interface!!!         ZRIT(:) > XRTMIN_ELEC(4) .AND. ZRRT(:) > XRTMIN_ELEC(3) .AND. &
-!!provisoire pour changement interface!!!         ZCRT(:) > 0.             .AND.                                &
-!!provisoire pour changement interface!!!         ABS(ZERT(:)) > ELECP%XERMIN    .AND. ABS(ZQRT(:)) > XQTMIN(3))
-!!provisoire pour changement interface!!!    ZWQ(:) = XQRCFRIG * ZLBDAR(:)**XEXQRCFRIG * ZCIT(:) * ZCRT(:) * &
-!!provisoire pour changement interface!!!             ZERT(:) * ZRHOCOR(:) / (ZCOR00 * ZRHODREF(:))  ! QRCFRIG
-!!provisoire pour changement interface!!!    ZWQ(:) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQRS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQGS(:) = ZQGS(:) + ZWQ(:)
-!!provisoire pour changement interface!!!    ZQRS(:) = ZQRS(:) - ZWQ(:)
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ZWQ(:) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRICFRRG(:) > 0. .AND.                                        &
-!!provisoire pour changement interface!!!         ZRIT(:) > XRTMIN_ELEC(4) .AND. ZRRT(:) > XRTMIN_ELEC(3) .AND. &
-!!provisoire pour changement interface!!!         ABS(ZQIT(:)) > XQTMIN(4))
-!!provisoire pour changement interface!!!    ZWQ(:) = XCOEF_RQ_I * ZQIT(:) * ZRICFRRG(:) / ZRIT(:)     ! QICFRRG
-!!provisoire pour changement interface!!!    ZWQ(:) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQIS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQGS(:) = ZQGS(:) + ZWQ(:)
-!!provisoire pour changement interface!!!    ZQIS(:) = ZQIS(:) - ZWQ(:)
-!!provisoire pour changement interface!!!  ENDWHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!++CB-- 16/06/2022 il manque le traitement de qricfrr
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%END_PHY(D, 'CFRZ', &
-!!provisoire pour changement interface!!!                           Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%END_PHY(D, 'CFRZ', &
-!!provisoire pour changement interface!!!                           Unpack( zqis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%END_PHY(D, 'CFRZ', &
-!!provisoire pour changement interface!!!                           Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.2   graupel dry growth (qcdryg, qrdryg, qidryg & qsdryg)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ5(:,:) = 0.
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.2.1 compute qcdryg
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  WHERE (ZRCDRYG(:) > 0. .AND.                                         &
-!!provisoire pour changement interface!!!         ZRCT(:) > XRTMIN_ELEC(2) .AND. ZRGT(:) > XRTMIN_ELEC(6) .AND. &
-!!provisoire pour changement interface!!!         ABS(ZQCT(:)) > XQTMIN(2)) 
-!!provisoire pour changement interface!!!    ZWQ5(:,1) = XCOEF_RQ_C * ZQCT(:) * ZRCDRYG(:) / ZRCT(:)
-!!provisoire pour changement interface!!!    ZWQ5(:,1) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ5(:,1)) ),ZQCS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQCS(:) = ZQCS(:) - ZWQ5(:,1)
-!!provisoire pour changement interface!!!    ZQGS(:) = ZQGS(:) + ZWQ5(:,1)
-!!provisoire pour changement interface!!!  ENDWHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.2.2 compute qidryg = qidryg_coal + qidryg_boun
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  WHERE (ZRIDRYG(:) > 0. .AND.                                         &
-!!provisoire pour changement interface!!!         ZRIT(:) > XRTMIN_ELEC(4) .AND. ZRGT(:) > XRTMIN_ELEC(6) .AND. &
-!!provisoire pour changement interface!!!         ABS(ZQIT(:)) > XQTMIN(4))
-!!provisoire pour changement interface!!!    ZWQ5(:,2) = XCOEF_RQ_I * ZQIT(:) * ZRIDRYG(:) / ZRIT(:)         ! QIDRYG_coal
-!!provisoire pour changement interface!!!    ZWQ5(:,2) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ5(:,2)) ),ZQIS(:) )
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZQIS(:) = ZQIS(:) - ZWQ5(:,2)
-!!provisoire pour changement interface!!!    ZQGS(:) = ZQGS(:) + ZWQ5(:,2)
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.2.3 compute non-inductive charging durig ice - graupel collisions
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ! charge separation during collision between ice and graupel
-!!provisoire pour changement interface!!!  CALL ELEC_IDRYG_B()  ! QIDRYG_boun
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'NIIG', &
-!!provisoire pour changement interface!!!                            Unpack( -zwq_ni(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'NIIG', &
-!!provisoire pour changement interface!!!                            Unpack(  zwq_ni(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ! Save the NI charging rate
-!!provisoire pour changement interface!!!  DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!    XNI_IDRYG(II1(JL),II2(JL),II3(JL)) = ZWQ_NI(JL) * ZRHODREF(JL) ! C/m3/s
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.2.4 compute qsdryg
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IGMASK = 0
-!!provisoire pour changement interface!!!  DO JL = 1, SIZE(GMASK)
-!!provisoire pour changement interface!!!    IF (ZRST(JL) > ZRTMIN(5) .AND. ZLBDAS(JL) > 0. .AND. &
-!!provisoire pour changement interface!!!        ZRGT(JL) > ZRTMIN(6) .AND. ZLBDAG(JL) > 0.) THEN
-!!provisoire pour changement interface!!!      IGMASK = IGMASK + 1
-!!provisoire pour changement interface!!!      I1(IGMASK) = JL
-!!provisoire pour changement interface!!!      GMASK(JL) = .TRUE.
-!!provisoire pour changement interface!!!    ELSE
-!!provisoire pour changement interface!!!      GMASK(JL) = .FALSE.
-!!provisoire pour changement interface!!!    END IF
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  IF (IGMASK > 0) THEN
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!    ALLOCATE(ZVEC1(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVEC2(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(IVEC1(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(IVEC2(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVECQ1(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVECQ2(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVECQ3(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVECQ4(IGMASK))
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ! select the (ZLBDAG,ZLBDAS) couplet
-!!provisoire pour changement interface!!!    DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!      ZVEC1(JL) = ZLBDAG(I1(JL))
-!!provisoire pour changement interface!!!      ZVEC2(JL) = ZLBDAS(I1(JL))
-!!provisoire pour changement interface!!!    END DO
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  ! find the next lower indice for the ZLBDAG and for the ZLBDAS in the geometrical set 
-!!provisoire pour changement interface!!!  ! of (Lbda_g,Lbda_s) couplet use to tabulate the SDRYG-kernel
-!!provisoire pour changement interface!!!    ZVEC1(1:IGMASK) = MAX(1.00001, MIN(REAL(IDRYLBDAG)-0.00001,  &
-!!provisoire pour changement interface!!!                          ZDRYINTP1G*LOG(ZVEC1(1:IGMASK))+ZDRYINTP2G))
-!!provisoire pour changement interface!!!    IVEC1(1:IGMASK) = INT(ZVEC1(1:IGMASK) )
-!!provisoire pour changement interface!!!    ZVEC1(1:IGMASK) = ZVEC1(1:IGMASK) - REAL(IVEC1(1:IGMASK))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZVEC2(1:IGMASK) = MAX(1.00001, MIN( REAL(IDRYLBDAS)-0.00001, &
-!!provisoire pour changement interface!!!                          ZDRYINTP1S*LOG(ZVEC2(1:IGMASK))+ZDRYINTP2S))
-!!provisoire pour changement interface!!!    IVEC2(1:IGMASK) = INT(ZVEC2(1:IGMASK))
-!!provisoire pour changement interface!!!    ZVEC2(1:IGMASK) = ZVEC2(1:IGMASK) - REAL(IVEC2(1:IGMASK))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! perform the bilinear interpolation of the normalized QSDRYG-kernels
-!!provisoire pour changement interface!!!    ! normalized Q-SDRYG-kernel 
-!!provisoire pour changement interface!!!    ZVECQ1(:) = BI_LIN_INTP_V(XKER_Q_SDRYG, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
-!!provisoire pour changement interface!!!    ZWQ5(:,3) = 0.  ! normalement pas utile
-!!provisoire pour changement interface!!!    DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!      ZWQ5(I1(JL),3) = ZVECQ1(JL)
-!!provisoire pour changement interface!!!    END DO    
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! normalized Q-???-kernel
-!!provisoire pour changement interface!!!    IF (CNI_CHARGING == 'TAKAH' .OR. CNI_CHARGING == 'SAUN1' .OR. &
-!!provisoire pour changement interface!!!        CNI_CHARGING == 'SAUN2' .OR. CNI_CHARGING == 'SAP98' .OR. &
-!!provisoire pour changement interface!!!        CNI_CHARGING == 'GARDI' .OR.                              &
-!!provisoire pour changement interface!!!        CNI_CHARGING == 'BSMP1' .OR. CNI_CHARGING == 'BSMP2' .OR. &
-!!provisoire pour changement interface!!!        CNI_CHARGING == 'TEEWC' .OR. CNI_CHARGING == 'TERAR') THEN
-!!provisoire pour changement interface!!!      ZVECQ2(:)  = BI_LIN_INTP_V(XKER_Q_LIMSG, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK) 
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = 0.  ! normalement pas utile
-!!provisoire pour changement interface!!!      DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!        ZWQ5(I1(JL),4) = ZVECQ2(JL)
-!!provisoire pour changement interface!!!      END DO
-!!provisoire pour changement interface!!!    END IF
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! normalized Q-SDRYG-bouncing kernel
-!!provisoire pour changement interface!!!    IF (CNI_CHARGING == 'TAKAH' .OR. CNI_CHARGING == 'HELFA' .OR. &
-!!provisoire pour changement interface!!!        CNI_CHARGING == 'GARDI') THEN
-!!provisoire pour changement interface!!!      ZVECQ3(:)  = BI_LIN_INTP_V(XKER_Q_SDRYGB,IVEC1,IVEC2,ZVEC1,ZVEC2,IGMASK)
-!!provisoire pour changement interface!!!      ZWQ5(:,5) = 0.  ! normalement pas utile
-!!provisoire pour changement interface!!!      DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!        ZWQ5(I1(JL),5) = ZVECQ3(JL)
-!!provisoire pour changement interface!!!      END DO
-!!provisoire pour changement interface!!!    ELSE
-!!provisoire pour changement interface!!!      ZVECQ3(:) = BI_LIN_INTP_V(XKER_Q_SDRYGB1,IVEC1,IVEC2,ZVEC1,ZVEC2,IGMASK)
-!!provisoire pour changement interface!!!      ZVECQ4(:) = BI_LIN_INTP_V(XKER_Q_SDRYGB2,IVEC1,IVEC2,ZVEC1,ZVEC2,IGMASK)
-!!provisoire pour changement interface!!!      ZWQ5(:,6:7) = 0.  ! normalement pas utile
-!!provisoire pour changement interface!!!      DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!        ZWQ5(I1(JL),6) = ZVECQ3(JL) ! Dvqsgmn if charge>0
-!!provisoire pour changement interface!!!        ZWQ5(I1(JL),7) = ZVECQ4(JL) ! Dvqsgmn if charge<0
-!!provisoire pour changement interface!!!      END DO
-!!provisoire pour changement interface!!!    ENDIF
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVEC1)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVEC2)
-!!provisoire pour changement interface!!!    DEALLOCATE(IVEC1)
-!!provisoire pour changement interface!!!    DEALLOCATE(IVEC2)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVECQ1)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVECQ2)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVECQ3)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVECQ4)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!++CB-- CALCULER E_SG ICI POUR EVITER DES CALCULS REDONDANTS
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! compute QSDRYG_coal
-!!provisoire pour changement interface!!!    WHERE (ZRSDRYG(:) > 0 .AND.                                & !GDRY(:) .AND. &
-!!provisoire pour changement interface!!!           ZRST(:) > XRTMIN_ELEC(5) .AND.                      &
-!!provisoire pour changement interface!!!           ZLBDAS(:) > 0.           .AND. ZLBDAG(:) > 0. .AND. &
-!!provisoire pour changement interface!!!           ABS(ZQST(:)) > XQTMIN(5) .AND. ABS(ZEST(:)) > XESMIN)
-!!provisoire pour changement interface!!!      ZWQ5(:,3) = ZWQ5(:,3) * XFQSDRYG *                                   &
-!!provisoire pour changement interface!!!                  ZCOLSG * EXP(ZCOLEXSG * (ZZT(:) - CST%XTT)) *                &
-!!provisoire pour changement interface!!!                  ZEST(:) * ZRHOCOR(:) / (ZCOR00 * ZRHODREF(:)) *          & 
-!!provisoire pour changement interface!!!                  ZCGT(:) * ZCST(:) *                                      &
-!!provisoire pour changement interface!!!                 (XLBQSDRYG1 * ZLBDAS(:)**(-2.0-XFS) +                     &
-!!provisoire pour changement interface!!!                  XLBQSDRYG2 * ZLBDAS(:)**(-1.0-XFS) * ZLBDAG(:)**(-1.0) + &
-!!provisoire pour changement interface!!!                  XLBQSDRYG3 * ZLBDAS(:)**(-XFS)     * ZLBDAG(:)**(-2.0)) ! QSDRYG_coal
-!!provisoire pour changement interface!!!      ZWQ5(:,3) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,3)) ),ZQSS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQSS(:) = ZQSS(:) - ZWQ5(:,3)
-!!provisoire pour changement interface!!!      ZQGS(:) = ZQGS(:) + ZWQ5(:,3)
-!!provisoire pour changement interface!!!    ELSEWHERE
-!!provisoire pour changement interface!!!      ZWQ5(:,3) = 0.
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.2.5 compute non-inductive charging during snow - graupel collisions
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    ! compute QSDRYG_boun
-!!provisoire pour changement interface!!!    CALL ELEC_SDRYG_B()
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'NISG', &
-!!provisoire pour changement interface!!!                              Unpack( -zwq_ni(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'NISG', &
-!!provisoire pour changement interface!!!                              Unpack(  zwq_ni(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! Save the NI charging rate
-!!provisoire pour changement interface!!!    DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!      XNI_SDRYG(II1(JL),II2(JL),II3(JL)) = ZWQ_NI(JL) * ZRHODREF(JL) ! C/m3/s
-!!provisoire pour changement interface!!!    END DO
-!!provisoire pour changement interface!!!  END IF  ! end if igmask>0
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.2.6 compute qrdryg
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IGMASK = 0
-!!provisoire pour changement interface!!!  GMASK(:) = .FALSE.
-!!provisoire pour changement interface!!!  DO JL = 1, SIZE(GMASK)
-!!provisoire pour changement interface!!!    IF (ZRRT(JL) > ZRTMIN(3) .AND. ZLBDAR(JL) > 0. .AND. &
-!!provisoire pour changement interface!!!        ZRGT(JL) > ZRTMIN(6) .AND. ZLBDAG(JL) > 0.) THEN
-!!provisoire pour changement interface!!!      IGMASK = IGMASK + 1
-!!provisoire pour changement interface!!!      I1(IGMASK) = JL
-!!provisoire pour changement interface!!!      GMASK(JL) = .TRUE.
-!!provisoire pour changement interface!!!    ELSE
-!!provisoire pour changement interface!!!      GMASK(JL) = .FALSE.
-!!provisoire pour changement interface!!!    END IF
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!  !
-!!provisoire pour changement interface!!!  IF (IGMASK > 0) THEN
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ALLOCATE(ZVEC1(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVEC2(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(IVEC1(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(IVEC2(IGMASK))
-!!provisoire pour changement interface!!!    ALLOCATE(ZVECQ1(IGMASK))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! select the (ZLBDAG,ZLBDAR) couplet
-!!provisoire pour changement interface!!!    DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!      ZVEC1(JL) = ZLBDAG(I1(JL))
-!!provisoire pour changement interface!!!      ZVEC2(JL) = ZLBDAR(I1(JL))
-!!provisoire pour changement interface!!!    END DO
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! find the next lower indice for the ZLBDAG and for the ZLBDAR in the geometrical set 
-!!provisoire pour changement interface!!!    ! of (Lbda_g,Lbda_r) couplet use to tabulate the QDRYG-kernel
-!!provisoire pour changement interface!!!    ZVEC1(1:IGMASK) = MAX(1.00001, MIN( REAL(IDRYLBDAG)-0.00001,           &
-!!provisoire pour changement interface!!!                         ZDRYINTP1G*LOG(ZVEC1(1:IGMASK))+ZDRYINTP2G))
-!!provisoire pour changement interface!!!    IVEC1(1:IGMASK) = INT(ZVEC1(1:IGMASK))
-!!provisoire pour changement interface!!!    ZVEC1(1:IGMASK) = ZVEC1(1:IGMASK) - REAL(IVEC1(1:IGMASK))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZVEC2(1:IGMASK) = MAX(1.00001, MIN( REAL(IDRYLBDAR)-0.00001,           &
-!!provisoire pour changement interface!!!                          ZDRYINTP1R*LOG(ZVEC2(1:IGMASK))+ZDRYINTP2R))
-!!provisoire pour changement interface!!!    IVEC2(1:IGMASK) = INT(ZVEC2(1:IGMASK))
-!!provisoire pour changement interface!!!    ZVEC2(1:IGMASK) = ZVEC2(1:IGMASK) - REAL(IVEC2(1:IGMASK))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! perform the bilinear interpolation of the normalized RDRYG-kernel
-!!provisoire pour changement interface!!!    ZVECQ1(:) = BI_LIN_INTP_V(XKER_Q_RDRYG, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
-!!provisoire pour changement interface!!!    ZWQ5(:,4) = 0.
-!!provisoire pour changement interface!!!    DO JL = 1, IGMASK
-!!provisoire pour changement interface!!!      ZWQ5(I1(JL),4) = ZVECQ1(JL)
-!!provisoire pour changement interface!!!    END DO
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVEC1)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVEC2)
-!!provisoire pour changement interface!!!    DEALLOCATE(IVEC1)
-!!provisoire pour changement interface!!!    DEALLOCATE(IVEC2)
-!!provisoire pour changement interface!!!    DEALLOCATE(ZVECQ1)  
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! compute QRDRYG
-!!provisoire pour changement interface!!!    WHERE (ZRRDRYG(:) > 0. .AND.                                         &
-!!provisoire pour changement interface!!!           ZRRT(:) > XRTMIN_ELEC(3) .AND. ZRGT(:) > XRTMIN_ELEC(6) .AND. & 
-!!provisoire pour changement interface!!!           ZCRT(:) > 0.             .AND. ZCGT(:) > 0.             .AND. & 
-!!provisoire pour changement interface!!!           ZLBDAR(:) > 0.           .AND. ZLBDAG(:) > 0.           .AND. &
-!!provisoire pour changement interface!!!           ABS(ZERT(:)) > ELECP%XERMIN .AND. ABS(ZQRT(:)) > XQTMIN(3))
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = ZWQ5(:,4) * XFQRDRYG *                                       &
-!!provisoire pour changement interface!!!                  ZRHODREF(:)**(-ZCEXVT) *                                     &
-!!provisoire pour changement interface!!!                  ZERT(:) * ZCGT(:) * ZCRT(:) *                                &
-!!provisoire pour changement interface!!!                 (XLBQRDRYG1 * ZLBDAR(:)**(-2.0 - XFR) +                       &
-!!provisoire pour changement interface!!!                  XLBQRDRYG2 * ZLBDAR(:)**(-1.0 - XFR) * ZLBDAG(:)**(-1.0) +   &
-!!provisoire pour changement interface!!!                  XLBQRDRYG3 * ZLBDAR(:)**(-XFR)       * ZLBDAG(:)**(-2.0))
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,4)) ),ZQRS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQRS(:) = ZQRS(:) - ZWQ5(:,4)
-!!provisoire pour changement interface!!!      ZQGS(:) = ZQGS(:) + ZWQ5(:,4)
-!!provisoire pour changement interface!!!    ELSEWHERE
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = 0.
-!!provisoire pour changement interface!!!    ENDWHERE
-!!provisoire pour changement interface!!!!    ZRDRYG(:) = ZWQ5(:,1) + ZWQ5(:,2) + ZWQ5(:,3) + ZWQ5(:,4)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'DRYG', &
-!!provisoire pour changement interface!!!                              Unpack( -zwq5(:,1) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'DRYG', &
-!!provisoire pour changement interface!!!                              Unpack( -zwq5(:,4) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'DRYG', &
-!!provisoire pour changement interface!!!                              Unpack( -zwq5(:,2) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'DRYG', &
-!!provisoire pour changement interface!!!                              Unpack( -zwq5(:,3) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'DRYG', &
-!!provisoire pour changement interface!!!                              Unpack( (zwq5(:,1) + zwq5(:,2) + zwq5(:,3) + zwq5(:,4)) * zrhodj(:), &
-!!provisoire pour changement interface!!!                              mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  END IF  ! end if igmask>0
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.3   Hallett-Mossop ice multiplication process due to graupel riming (rhmgi)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (HCLOUD == 'LIMA') THEN
-!!provisoire pour changement interface!!!    CALL COMPUTE_CHARGE_TRANSFER (ZRGHMGI, ZRGT, ZQGT, PTSTEP,          &
-!!provisoire pour changement interface!!!                                  XRTMIN_ELEC(6), XQTMIN(6), XCOEF_RQ_G, &
-!!provisoire pour changement interface!!!                                  ZWQ, ZQGS, ZQIS)          
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'HMG', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'HMG', &
-!!provisoire pour changement interface!!!                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.4   graupel wet growth (rcwetg, rrwetg, riwetg & rswetg)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.4.1 compute qcwetg
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ5(:,5) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRCWETG(:) > 0. .AND. ZRCT(:) > XRTMIN_ELEC(2) .AND. ABS(ZQCT(:)) > XQTMIN(2) .AND. &
-!!provisoire pour changement interface!!!         ZRGT(:) > XRTMIN_ELEC(6))
-!!provisoire pour changement interface!!!    ZWQ5(:,5) = XCOEF_RQ_C * ZRCWETG(:) * ZQCT(:) / ZRCT(:)
-!!provisoire pour changement interface!!!    ZWQ5(:,5) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ5(:,5)) ),ZQCS(:) )
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.4.1 compute qiwetg
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ5(:,6) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRIWETG(:) > 0. .AND. ZRIT(:) > XRTMIN_ELEC(4) .AND. ABS(ZQIT(:)) > XQTMIN(4) .AND. &
-!!provisoire pour changement interface!!!         ZRGT(:) > XRTMIN_ELEC(6))
-!!provisoire pour changement interface!!!    ZWQ5(:,6) = XCOEF_RQ_I * ZRIWETG(:) * ZQIT(:) / ZRIT(:)
-!!provisoire pour changement interface!!!    ZWQ5(:,6) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ5(:,6)) ),ZQIS(:) )
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.4.2 compute qswetg
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ5(:,7) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRSWETG(:) > 0. .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. ABS(ZQST(:)) > XQTMIN(5) .AND. &
-!!provisoire pour changement interface!!!         ZRGT(:) > XRTMIN_ELEC(6))
-!!provisoire pour changement interface!!!    ZWQ5(:,7) = XCOEF_RQ_S * ZRSWETG(:) * ZQST(:) / ZRST(:)
-!!provisoire pour changement interface!!!    ZWQ5(:,7) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,7)) ),ZQSS(:) )
-!!provisoire pour changement interface!!!  END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.4.3 compute qrwetg
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  ZWQ5(:,8) = 0.
-!!provisoire pour changement interface!!!  WHERE (ZRRWETG(:) > 0. .AND. ZRRT(:) > XRTMIN_ELEC(3) .AND. ABS(ZQRT(:)) > XQTMIN(3) .AND. &
-!!provisoire pour changement interface!!!         ZRGT(:) > XRTMIN_ELEC(6))
-!!provisoire pour changement interface!!!    ZWQ5(:,8) = XCOEF_RQ_R * ZQRT(:) * ZRRWETG(:) / ZRRT(:)
-!!provisoire pour changement interface!!!    ZWQ5(:,8) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,8)) ),ZQRS(:) )
-!!provisoire pour changement interface!!!  ENDWHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.4.4 conversion of graupel into hail (rwetgh)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%INIT_PHY(D, 'WETG', &
-!!provisoire pour changement interface!!!                            Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (KRR == 7) THEN
-!!provisoire pour changement interface!!!    ZWQ5(:,9) = 0.
-!!provisoire pour changement interface!!!    WHERE (ZRWETGH(:) > 0. .AND. ZRGT(:) > XRTMIN_ELEC(6) .AND. ABS(ZQGT(:)) > XQTMIN(6))
-!!provisoire pour changement interface!!!      ZWQ5(:,9) = XCOEF_RQ_G * ZQGT(:) * ZRWETGH(:) / ZRGT(:)
-!!provisoire pour changement interface!!!      ZWQ5(:,9) = SIGN( MIN( ABS(ZQGT(:)/PTSTEP),ABS(ZWQ5(:,9)) ),ZQGS(:) )
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRCWETG(:) > 0. .OR. ZRRWETG(:) > 0. .OR. ZRIWETG(:) > 0. .OR. &
-!!provisoire pour changement interface!!!           ZRSWETG(:) > 0. .OR. ZRWETGH(:) > 0.)
-!!provisoire pour changement interface!!!      ZQCS(:) = ZQCS(:) - ZWQ5(:,5)
-!!provisoire pour changement interface!!!      ZQRS(:) = ZQRS(:) - ZWQ5(:,8)
-!!provisoire pour changement interface!!!      ZQIS(:) = ZQIS(:) - ZWQ5(:,6)
-!!provisoire pour changement interface!!!      ZQSS(:) = ZQSS(:) - ZWQ5(:,7)
-!!provisoire pour changement interface!!!      ZQGS(:) = ZQGS(:) + ZWQ5(:,5) + ZWQ5(:,8) + ZWQ5(:,6) + ZWQ5(:,7) - ZWQ5(:,9)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,9)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!  ELSE IF (KRR == 6) THEN
-!!provisoire pour changement interface!!!    WHERE (ZRCWETG(:) > 0. .OR. ZRRWETG(:) > 0. .OR. ZRIWETG(:) > 0. .OR. &
-!!provisoire pour changement interface!!!           ZRSWETG(:) > 0.)
-!!provisoire pour changement interface!!!      ZQCS(:) = ZQCS(:) - ZWQ5(:,5)
-!!provisoire pour changement interface!!!      ZQRS(:) = ZQRS(:) - ZWQ5(:,8)
-!!provisoire pour changement interface!!!      ZQIS(:) = ZQIS(:) - ZWQ5(:,6)
-!!provisoire pour changement interface!!!      ZQSS(:) = ZQSS(:) - ZWQ5(:,7)
-!!provisoire pour changement interface!!!      ZQGS(:) = ZQGS(:) + ZWQ5(:,5) + ZWQ5(:,8) + ZWQ5(:,6) + ZWQ5(:,7)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'WETG', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq5(:,5) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'WETG', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq5(:,8) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'WETG', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq5(:,6) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'WETG', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq5(:,7) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%END_PHY(D, 'WETG', &
-!!provisoire pour changement interface!!!                           Unpack(  zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    if ( krr == 7 ) &
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 6 )%PTR%ADD_PHY(D, 'WETG', &
-!!provisoire pour changement interface!!!                           Unpack( zwq5(:,9) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.5   compute charge separation by the inductive mechanism
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!! Computation of the charge transfer rate during inductive mechanism
-!!provisoire pour changement interface!!!! Only the bouncing droplet-graupel collision when the graupel is in the dry 
-!!provisoire pour changement interface!!!! growth mode is considered
-!!provisoire pour changement interface!!!! The electric field is limited to 100 kV/m
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (LINDUCTIVE) THEN
-!!provisoire pour changement interface!!!    ZWQ(:) = 0.
-!!provisoire pour changement interface!!!    GMASK(:) = ZRCDRYG(:) > 0. 
-!!provisoire pour changement interface!!!    IGMASK   = COUNT(GMASK(:))
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    IF (IGMASK > 0) THEN
-!!provisoire pour changement interface!!!      ZWQ(:) = 0.
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      WHERE (GMASK(:) .AND.                                      &
-!!provisoire pour changement interface!!!             ZEFIELDW(:) /= 0. .AND. ABS(ZEGT(:)) > ELECP%XEGMIN .AND. &
-!!provisoire pour changement interface!!!             ZLBDAG(:) > 0. .AND. ZCGT(:) > 0. .AND.             &
-!!provisoire pour changement interface!!!             ZRGT(:) > XRTMIN_ELEC(6) .AND. ZRCT(:) > XRTMIN_ELEC(2))
-!!provisoire pour changement interface!!!        ZWQ(:) = XIND1 * ZCGT(:) * ZRHOCOR(:) *                             &
-!!provisoire pour changement interface!!!                (XIND2 * SIGN(MIN(100.E3, ABS(ZEFIELDW(:))), ZEFIELDW(:)) * &
-!!provisoire pour changement interface!!!                 ZLBDAG(:) **(-2.-ZDG) -                                    &
-!!provisoire pour changement interface!!!                 XIND3 * ZEGT(:) * ZLBDAG(:)**(-XFG-ZDG))
-!!provisoire pour changement interface!!!        ZWQ(:) = ZWQ(:) / ZRHODREF(:)
-!!provisoire pour changement interface!!!        !
-!!provisoire pour changement interface!!!        ZQGS(:) = ZQGS(:) + ZWQ(:)
-!!provisoire pour changement interface!!!        ZQCS(:) = ZQCS(:) - ZWQ(:)
-!!provisoire pour changement interface!!!      END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!      if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!        CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'INCG', &
-!!provisoire pour changement interface!!!                               Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!        CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'INCG', &
-!!provisoire pour changement interface!!!                               Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      end if    
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ! Save the inductive charging rate
-!!provisoire pour changement interface!!!      DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!        XIND_RATE(II1(JL),II2(JL),II3(JL)) = ZWQ(JL) * ZRHODREF(JL) ! C/m3/s
-!!provisoire pour changement interface!!!      END DO
-!!provisoire pour changement interface!!!    END IF
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ! Save the inductive charging rate
-!!provisoire pour changement interface!!!    DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!      XIND_RATE(II1(JL),II2(JL),II3(JL)) = ZWQ(JL) * ZRHODREF(JL) ! C/m3/s
-!!provisoire pour changement interface!!!    END DO
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      5.6   melting of the graupel (rgmltr)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  CALL COMPUTE_CHARGE_TRANSFER (ZRGMLTR, ZRGT, ZQGT, PTSTEP, &
-!!provisoire pour changement interface!!!                                XRTMIN_ELEC(6), XQTMIN(6), XCOEF_RQ_G, &
-!!provisoire pour changement interface!!!                                ZWQ, ZQGS, ZQRS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'GMLT', &
-!!provisoire pour changement interface!!!                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'GMLT', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      6.    COMPUTE THE OPTIONAL SECONDARY ICE PRODUCTION
-!!provisoire pour changement interface!!!!             ---------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!! dans un premier temps, on considere que la charge echangee est proportionnelle
-!!provisoire pour changement interface!!!! a la masse echangee
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      6.1   collisional ice breakup (cibu)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (HCLOUD == 'LIMA' .AND. LCIBU) &
-!!provisoire pour changement interface!!!    CALL COMPUTE_CHARGE_TRANSFER (ZRICIBU, ZRST, ZQST, PTSTEP,           &
-!!provisoire pour changement interface!!!                                  XRTMIN_ELEC(5), XQTMIN(5), XCOEF_RQ_S, &
-!!provisoire pour changement interface!!!                                  ZWQ, ZQSS, ZQIS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      6.2   raindrop shattering freezing (rdsf)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (HCLOUD == 'LIMA' .AND. LRDSF) &
-!!provisoire pour changement interface!!!    CALL COMPUTE_CHARGE_TRANSFER (ZRIRDSF, ZRRT, ZQRT, PTSTEP,           &
-!!provisoire pour changement interface!!!                                  XRTMIN_ELEC(3), XQTMIN(3), XCOEF_RQ_R, &
-!!provisoire pour changement interface!!!                                  ZWQ, ZQRS, ZQIS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      7.    COMPUTE THE FAST COLD PROCESS SOURCES FOR r_h
-!!provisoire pour changement interface!!!!             ---------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (KRR == 7) THEN
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      7.1   wet growth of hail (qcweth, qrweth, qiweth, qsweth, qgweth)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    ZWQ5(:,:) = 0.
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRCWETH(:) > 0. .AND. ZRCT(:) > XRTMIN_ELEC(2))
-!!provisoire pour changement interface!!!      ZWQ5(:,1) = XCOEF_RQ_C * ZQCT(:) * ZRCWETH(:) / ZRCT(:)        ! QCWETH
-!!provisoire pour changement interface!!!      ZWQ5(:,1) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ5(:,1)) ),ZQCS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQCS(:) = ZQCS(:) - ZWQ5(:,1)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,1)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRIWETH(:) > 0. .AND. ZRIT(:) > XRTMIN_ELEC(4))
-!!provisoire pour changement interface!!!      ZWQ5(:,2) = XCOEF_RQ_I * ZQIT(:) * ZRIWETH(:) / ZRIT(:)        ! QIWETH
-!!provisoire pour changement interface!!!      ZWQ5(:,2) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ5(:,2)) ),ZQIS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQIS(:) = ZQIS(:) - ZWQ5(:,2)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,2)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRSWETH(:) > 0. .AND. ZRST(:) > XRTMIN_ELEC(5))
-!!provisoire pour changement interface!!!      ZWQ5(:,3) = XCOEF_RQ_S * ZQST(:) * ZRSWETH(:) / ZRST(:)        ! QSWETH
-!!provisoire pour changement interface!!!      ZWQ5(:,3) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,3)) ),ZQSS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQSS(:) = ZQSS(:) - ZWQ5(:,3)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,3)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRGWETH(:) > 0. .AND. ZRGT(:) > XRTMIN_ELEC(6))
-!!provisoire pour changement interface!!!      ZWQ5(:,5) = XCOEF_RQ_G * ZQGT(:) * ZRGWETH(:) / ZRGT(:)        ! QGWETH
-!!provisoire pour changement interface!!!      ZWQ5(:,5) = SIGN( MIN( ABS(ZQGT(:)/PTSTEP),ABS(ZWQ5(:,5)) ),ZQGS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQGS(:) = ZQGS(:) - ZWQ5(:,5)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,5)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRRWETH(:) > 0. .AND. ZRRT(:) > XRTMIN_ELEC(3))
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = XCOEF_RQ_R * ZQRT(:) * ZRRWETH(:) / ZRRT(:)        ! QRWETH
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,4)) ),ZQRS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQRS(:) = ZQRS(:) - ZWQ5(:,4)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,4)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'WETH', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq5(:, 1) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'WETH', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq5(:, 4) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'WETH', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq5(:, 2) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'WETH', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq5(:, 3) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'WETH', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq5(:, 5) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 6 )%PTR%ADD_PHY(D, 'WETH',                      &
-!!provisoire pour changement interface!!!                             Unpack( ( zwq5(:, 1) + zwq5(:, 2) + zwq5(:, 3) + zwq5(:, 4) + zwq5(:, 5) ) &
-!!provisoire pour changement interface!!!                                       * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      7.2   dry growth of hail (qcdryh, qrdryh, qidryh, qsdryh, qgdryh)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    ZWQ5(:,:) = 0.
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRCDRYH(:) > 0. .AND. ZRCT(:) > XRTMIN_ELEC(2))
-!!provisoire pour changement interface!!!      ZWQ5(:,1) = XCOEF_RQ_C * ZQCT(:) * ZRCDRYH(:) / ZRCT(:)        ! QCDRYH
-!!provisoire pour changement interface!!!      ZWQ5(:,1) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ5(:,1)) ),ZQCS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQCS(:) = ZQCS(:) - ZWQ5(:,1)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,1)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRIDRYH(:) > 0. .AND. ZRIT(:) > XRTMIN_ELEC(4))
-!!provisoire pour changement interface!!!      ZWQ5(:,2) = XCOEF_RQ_I * ZQIT(:) * ZRIDRYH(:) / ZRIT(:)        ! QIDRYH
-!!provisoire pour changement interface!!!      ZWQ5(:,2) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ5(:,2)) ),ZQIS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQIS(:) = ZQIS(:) - ZWQ5(:,2)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,2)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRSDRYH(:) > 0. .AND. ZRST(:) > XRTMIN_ELEC(5))
-!!provisoire pour changement interface!!!      ZWQ5(:,3) = XCOEF_RQ_S * ZQST(:) * ZRSDRYH(:) / ZRST(:)        ! QSDRYH
-!!provisoire pour changement interface!!!      ZWQ5(:,3) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,3)) ),ZQSS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQSS(:) = ZQSS(:) - ZWQ5(:,3)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,3)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRGDRYH(:) > 0. .AND. ZRGT(:) > XRTMIN_ELEC(6))
-!!provisoire pour changement interface!!!      ZWQ5(:,5) = XCOEF_RQ_G * ZQGT(:) * ZRGDRYH(:) / ZRGT(:)        ! QGDRYH
-!!provisoire pour changement interface!!!      ZWQ5(:,5) = SIGN( MIN( ABS(ZQGT(:)/PTSTEP),ABS(ZWQ5(:,5)) ),ZQGS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQGS(:) = ZQGS(:) - ZWQ5(:,5)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,5)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    WHERE (ZRRDRYH(:) > 0. .AND. ZRRT(:) > XRTMIN_ELEC(3))
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = XCOEF_RQ_R * ZQRT(:) * ZRRDRYH(:) / ZRRT(:)        ! QRDRYH
-!!provisoire pour changement interface!!!      ZWQ5(:,4) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,4)) ),ZQRS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQRS(:) = ZQRS(:) - ZWQ5(:,4)
-!!provisoire pour changement interface!!!      ZQHS(:) = ZQHS(:) + ZWQ5(:,4)
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      7.3   conversion of hail into graupel (qdryhg)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    CALL COMPUTE_CHARGE_TRANSFER (ZRDRYHG, ZRHT, ZQHT, PTSTEP, &
-!!provisoire pour changement interface!!!                                  XRTMIN_ELEC(7), XQTMIN(7), XCOEF_RQ_H, &
-!!provisoire pour changement interface!!!                                  ZWQ, ZQHS, ZQGS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'DRYH', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq5(:, 1) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'DRYH', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq5(:, 4) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'DRYH', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq5(:, 2) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'DRYH', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq5(:, 3) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'DRYH', &
-!!provisoire pour changement interface!!!                             Unpack( (-zwq5(:, 5) - zwq(:)) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 6 )%PTR%ADD_PHY(D, 'DRYH',                      &
-!!provisoire pour changement interface!!!                             Unpack( ( zwq5(:, 1) + zwq5(:, 2) + zwq5(:, 3) + zwq5(:, 4) + zwq5(:, 5) + zwq(:) ) &
-!!provisoire pour changement interface!!!                                       * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      7.4   melting of hail (qhmltr)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    CALL COMPUTE_CHARGE_TRANSFER (ZRHMLTR, ZRHT, ZQHT, PTSTEP, &
-!!provisoire pour changement interface!!!                                  XRTMIN_ELEC(7), XQTMIN(7), XCOEF_RQ_H, &
-!!provisoire pour changement interface!!!                                  ZWQ, ZQHS, ZQRS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'HMLT', &
-!!provisoire pour changement interface!!!                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 6 )%PTR%ADD_PHY(D, 'HMLT', &
-!!provisoire pour changement interface!!!                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  END IF  ! end if krr==7
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      8.    COMPUTE THE FAST COLD PROCESS SOURCES FOR r_i
-!!provisoire pour changement interface!!!!             ---------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      8.1   Bergeron-Findeisen effect (qcberi)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  CALL COMPUTE_CHARGE_TRANSFER (ZRCBERI, ZRCT, ZQCT, PTSTEP, &
-!!provisoire pour changement interface!!!                                XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
-!!provisoire pour changement interface!!!                                ZWQ, ZQCS, ZQIS)
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'BERFI', &
-!!provisoire pour changement interface!!!                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'BERFI', &
-!!provisoire pour changement interface!!!                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!  end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      9.    COMPUTE THE CHARGE TRANSFER ASSOCIATED WITH THE CORRECTION TERM
-!!provisoire pour changement interface!!!!             ---------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  IF (HCLOUD == 'LIMA') THEN
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'CORR2', &
-!!provisoire pour changement interface!!!                              Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'CORR2', &
-!!provisoire pour changement interface!!!                              Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    ZWQ1(:) = 0.
-!!provisoire pour changement interface!!!    WHERE (ZRCCORR2(:) .NE. 0. .AND. ZRCT(:) .GT. XRTMIN_ELEC(2))
-!!provisoire pour changement interface!!!      ZWQ1(:) = XCOEF_RQ_C * ZQCT(:) * ZRCCORR2(:) / ZRCT(:)
-!!provisoire pour changement interface!!!      ZWQ(:) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ1(:)) ),ZQCS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQCS(:)  = ZQCS(:)  - ZWQ1(:)
-!!provisoire pour changement interface!!!      ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ1(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!      ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ1(:)/ELECD%XECHARGE )      
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZWQ2(:) = 0.
-!!provisoire pour changement interface!!!    WHERE (ZRRCORR2(:) .NE. 0. .AND. ZRRT(:) .GT. XRTMIN_ELEC(3))
-!!provisoire pour changement interface!!!      ZWQ2(:) = XCOEF_RQ_R * ZQRT(:) * ZRRCORR2(:) / ZRRT(:)
-!!provisoire pour changement interface!!!      ZWQ2(:) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ2(:)) ),ZQRS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQRS(:)  = ZQRS(:)  - ZWQ2(:)
-!!provisoire pour changement interface!!!      ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ2(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!      ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ2(:)/ELECD%XECHARGE )      
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!    !
-!!provisoire pour changement interface!!!    ZWQ3(:) = 0.
-!!provisoire pour changement interface!!!    WHERE (ZRICORR2(:) .NE. 0. .AND. ZRIT(:) .GT. XRTMIN_ELEC(4))
-!!provisoire pour changement interface!!!      ZWQ3(:) = XCOEF_RQ_I * ZQIT(:) * ZRICORR2(:) / ZRIT(:)
-!!provisoire pour changement interface!!!      ZWQ3(:) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ3(:)) ),ZQIS(:) )
-!!provisoire pour changement interface!!!      !
-!!provisoire pour changement interface!!!      ZQIS(:)  = ZQIS(:)  - ZWQ3(:)
-!!provisoire pour changement interface!!!      ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ3(:)/ELECD%XECHARGE )
-!!provisoire pour changement interface!!!      ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ3(:)/ELECD%XECHARGE )      
-!!provisoire pour changement interface!!!    END WHERE
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!    if ( BUCONF%LBUDGET_SV ) then
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'CORR2', &
-!!provisoire pour changement interface!!!                             Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'CORR2', &
-!!provisoire pour changement interface!!!                             Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'CORR2', &
-!!provisoire pour changement interface!!!                             Unpack( zwq1(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'CORR2', &
-!!provisoire pour changement interface!!!                             Unpack( zwq2(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )                     
-!!provisoire pour changement interface!!!      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'CORR2', &
-!!provisoire pour changement interface!!!                             Unpack( zwq3(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
-!!provisoire pour changement interface!!!    end if    
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      X.    COMPUTE THE SEDIMENTATION SOURCE FOR Q_x
-!!provisoire pour changement interface!!!!             ----------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!! The sedimentation for electric charges is computed directly 
-!!provisoire pour changement interface!!!! in the microphysics scheme
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      10.   UPDATE VOLUMETRIC CHARGE CONCENTRATIONS
-!!provisoire pour changement interface!!!!             ---------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!  DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!    PQPIS(II1(JL),II2(JL),II3(JL)) = ZQPIS(JL)
-!!provisoire pour changement interface!!!    PQNIS(II1(JL),II2(JL),II3(JL)) = ZQNIS(JL)
-!!provisoire pour changement interface!!!    PQCS (II1(JL),II2(JL),II3(JL)) = ZQCS(JL)
-!!provisoire pour changement interface!!!    PQRS (II1(JL),II2(JL),II3(JL)) = ZQRS(JL)
-!!provisoire pour changement interface!!!    PQIS (II1(JL),II2(JL),II3(JL)) = ZQIS(JL)
-!!provisoire pour changement interface!!!    PQSS (II1(JL),II2(JL),II3(JL)) = ZQSS(JL)
-!!provisoire pour changement interface!!!    PQGS (II1(JL),II2(JL),II3(JL)) = ZQGS(JL)
-!!provisoire pour changement interface!!!  END DO
-!!provisoire pour changement interface!!!  IF ( KRR == 7 ) THEN
-!!provisoire pour changement interface!!!    DO JL = 1, KMICRO
-!!provisoire pour changement interface!!!      PQHS(II1(JL),II2(JL),II3(JL)) = ZQHS(JL)
-!!provisoire pour changement interface!!!    END DO
-!!provisoire pour changement interface!!!  END IF
-!!provisoire pour changement interface!!!END IF  ! end if kmicro>0
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!------------------------------------------------------------------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!!*      11.   DEALLOCATE
-!!provisoire pour changement interface!!!!             ----------
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZDELTALWC )) DEALLOCATE( ZDELTALWC )   
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZFT ))       DEALLOCATE( ZFT )
-!!provisoire pour changement interface!!!!  
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZEW ))          DEALLOCATE( ZEW )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNSK ))      DEALLOCATE( ZSAUNSK )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNIM ))      DEALLOCATE( ZSAUNIM )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNIN ))      DEALLOCATE( ZSAUNIN )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNSM ))      DEALLOCATE( ZSAUNSM )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNSN ))      DEALLOCATE( ZSAUNSN )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZFQIAGGS ))     DEALLOCATE( ZFQIAGGS )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZFQIDRYGBS ))   DEALLOCATE( ZFQIDRYGBS )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZLBQSDRYGB1S )) DEALLOCATE( ZLBQSDRYGB1S )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZLBQSDRYGB2S )) DEALLOCATE( ZLBQSDRYGB2S )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZLBQSDRYGB3S )) DEALLOCATE( ZLBQSDRYGB3S )
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZDQ ))        DEALLOCATE( ZDQ )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZRAR ))       DEALLOCATE( ZRAR )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZDQ_IS ))     DEALLOCATE( ZDQ_IS )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNIM_IS )) DEALLOCATE( ZSAUNIM_IS )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNIN_IS )) DEALLOCATE( ZSAUNIN_IS )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZDQ_IG ))     DEALLOCATE( ZDQ_IG )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNIM_IG )) DEALLOCATE( ZSAUNIM_IG )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNIN_IG )) DEALLOCATE( ZSAUNIN_IG )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZDQ_SG ))     DEALLOCATE( ZDQ_SG )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNSK_SG )) DEALLOCATE( ZSAUNSK_SG )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNSM_SG )) DEALLOCATE( ZSAUNSM_SG )
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZSAUNSN_SG )) DEALLOCATE( ZSAUNSN_SG )
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!IF (ALLOCATED( ZEFIELDW ))   DEALLOCATE( ZEFIELDW )
-!!provisoire pour changement interface!!!!
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRCMLTSR)) DEALLOCATE(ZRCMLTSR)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRICFRR))  DEALLOCATE(ZRICFRR)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRVHENC))  DEALLOCATE(ZRVHENC)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRCHINC))  DEALLOCATE(ZRCHINC)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRVHONH))  DEALLOCATE(ZRVHONH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRRCVRC))  DEALLOCATE(ZRRCVRC)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRICNVI))  DEALLOCATE(ZRICNVI)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRVDEPI))  DEALLOCATE(ZRVDEPI)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRSHMSI))  DEALLOCATE(ZRSHMSI)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRGHMGI))  DEALLOCATE(ZRGHMGI)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRICIBU))  DEALLOCATE(ZRICIBU)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRIRDSF))  DEALLOCATE(ZRIRDSF)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRCCORR2)) DEALLOCATE(ZRCCORR2)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRRCORR2)) DEALLOCATE(ZRRCORR2)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRICORR2)) DEALLOCATE(ZRICORR2)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRWETGH))  DEALLOCATE(ZRWETGH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRCWETH))  DEALLOCATE(ZRCWETH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRIWETH))  DEALLOCATE(ZRIWETH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRSWETH))  DEALLOCATE(ZRSWETH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRGWETH))  DEALLOCATE(ZRGWETH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRRWETH))  DEALLOCATE(ZRRWETH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRCDRYH))  DEALLOCATE(ZRCDRYH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRRDRYH))  DEALLOCATE(ZRRDRYH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRIDRYH))  DEALLOCATE(ZRIDRYH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRSDRYH))  DEALLOCATE(ZRSDRYH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRGDRYH))  DEALLOCATE(ZRGDRYH)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRHMLTR))  DEALLOCATE(ZRHMLTR)
-!!provisoire pour changement interface!!!IF (ALLOCATED(ZRDRYHG))  DEALLOCATE(ZRDRYHG)
+IF (LINDUCTIVE) ALLOCATE (ZEFIELDW(KMICRO))
+!
+!
+!*      1.3   packing
+!
+!  optimization by looking for locations where
+!  the microphysical fields are larger than a minimal value only !!!
+!
+IF (KMICRO >= 0) THEN
+  IMICRO = COUNTJV(ODMICRO(:,:,:), II1(:), II2(:), II3(:))
+  !
+  ! some microphysical tendencies are optional: the corresponding 1D arrays must be allocated
+  IF (HCLOUD(1:3) == 'ICE') THEN  ! ICE3 scheme
+    ALLOCATE(ZRCMLTSR(IMICRO))
+    ALLOCATE(ZRICFRR(IMICRO))
+  END IF
+  IF (HCLOUD == 'LIMA') THEN  ! LIMA scheme
+    ALLOCATE(ZRVHENC(IMICRO))
+    ALLOCATE(ZRCHINC(IMICRO))
+    ALLOCATE(ZRVHONH(IMICRO))
+    ALLOCATE(ZRRCVRC(IMICRO))
+    ALLOCATE(ZRICNVI(IMICRO))
+    ALLOCATE(ZRVDEPI(IMICRO))
+    ALLOCATE(ZRSHMSI(IMICRO))
+    ALLOCATE(ZRGHMGI(IMICRO))
+    ALLOCATE(ZRICIBU(IMICRO))
+    ALLOCATE(ZRIRDSF(IMICRO))
+    ALLOCATE(ZRCCORR2(IMICRO))
+    ALLOCATE(ZRRCORR2(IMICRO))
+    ALLOCATE(ZRICORR2(IMICRO))
+  END IF
+  IF (KRR == 7) THEN ! hail activated
+    ALLOCATE(ZRWETGH(IMICRO))
+    ALLOCATE(ZRCWETH(IMICRO))
+    ALLOCATE(ZRIWETH(IMICRO))
+    ALLOCATE(ZRSWETH(IMICRO))
+    ALLOCATE(ZRGWETH(IMICRO))
+    ALLOCATE(ZRRWETH(IMICRO))
+    ALLOCATE(ZRCDRYH(IMICRO))
+    ALLOCATE(ZRRDRYH(IMICRO))
+    ALLOCATE(ZRIDRYH(IMICRO))
+    ALLOCATE(ZRSDRYH(IMICRO))
+    ALLOCATE(ZRGDRYH(IMICRO))
+    ALLOCATE(ZRHMLTR(IMICRO))
+    ALLOCATE(ZRDRYHG(IMICRO))
+  END IF
+  !
+  DO JL = 1, IMICRO
+    ZZT(JL)      = PZT(II1(JL),II2(JL),II3(JL))
+    ZRHODREF(JL) = PRHODREF(II1(JL),II2(JL),II3(JL))
+    ZRHOCOR(JL)  = (ZRHO00 / ZRHODREF(JL))**ZCEXVT
+    ZRHODJ(JL)   = PRHODJ(II1(JL),II2(JL),II3(JL))
+    !
+    ZCIT(JL)     = PCIT(II1(JL),II2(JL),II3(JL))
+    IF (IMOM_C == 2) ZCCT(JL) = PCCT(II1(JL),II2(JL),II3(JL))
+    IF (IMOM_R == 2) ZCRT(JL) = PCRT(II1(JL),II2(JL),II3(JL))
+    IF (IMOM_S == 2) ZCST(JL) = PCST(II1(JL),II2(JL),II3(JL))
+    IF (IMOM_G == 2) ZCGT(JL) = PCGT(II1(JL),II2(JL),II3(JL))
+    IF (IMOM_H == 2) ZCHT(JL) = PCHT(II1(JL),II2(JL),II3(JL))
+    IF (IMOM_C == 1) ZCCT(JL) = 0.
+    IF (IMOM_R == 1) ZCRT(JL) = 0.
+    IF (IMOM_S == 1) ZCST(JL) = 0.
+    IF (IMOM_G == 1) ZCGT(JL) = 0.
+    IF (IMOM_H == 1) ZCHT(JL) = 0.
+    !
+    ZRVT(JL)  = PRVT(II1(JL),II2(JL),II3(JL))
+    ZRCT(JL)  = PRCT(II1(JL),II2(JL),II3(JL))
+    ZRRT(JL)  = PRRT(II1(JL),II2(JL),II3(JL))
+    ZRIT(JL)  = PRIT(II1(JL),II2(JL),II3(JL))
+    ZRST(JL)  = PRST(II1(JL),II2(JL),II3(JL))
+    ZRGT(JL)  = PRGT(II1(JL),II2(JL),II3(JL))
+    IF (KRR == 7) ZRHT(JL) = PRHT(II1(JL),II2(JL),II3(JL))
+    !
+    ZQPIT(JL) = PQPIT(II1(JL),II2(JL),II3(JL))
+    ZQNIT(JL) = PQNIT(II1(JL),II2(JL),II3(JL))
+    ZQCT(JL)  = PQCT(II1(JL),II2(JL),II3(JL))
+    ZQRT(JL)  = PQRT(II1(JL),II2(JL),II3(JL))
+    ZQIT(JL)  = PQIT(II1(JL),II2(JL),II3(JL))
+    ZQST(JL)  = PQST(II1(JL),II2(JL),II3(JL))
+    ZQGT(JL)  = PQGT(II1(JL),II2(JL),II3(JL))
+    IF (KRR == 7) ZQHT(JL) = PQHT(II1(JL),II2(JL),II3(JL))
+    !
+    ZQPIS(JL) = PQPIS(II1(JL), II2(JL), II3(JL))
+    ZQNIS(JL) = PQNIS(II1(JL), II2(JL), II3(JL))
+    ZQCS(JL)  = PQCS(II1(JL), II2(JL), II3(JL))
+    ZQRS(JL)  = PQRS(II1(JL), II2(JL), II3(JL))
+    ZQIS(JL)  = PQIS(II1(JL), II2(JL), II3(JL))
+    ZQSS(JL)  = PQSS(II1(JL), II2(JL), II3(JL))
+    ZQGS(JL)  = PQGS(II1(JL), II2(JL), II3(JL))
+    IF (KRR == 7) ZQHS(JL) = PQHS(II1(JL), II2(JL), II3(JL))
+    !
+    IF (LINDUCTIVE) ZEFIELDW(JL) = XEFIELDW(II1(JL), II2(JL), II3(JL))
+    !
+    ! microphysical tendencies
+    ZRVHENI(JL) = PRVHENI(II1(JL), II2(JL), II3(JL))
+    ZRRHONG(JL) = PRRHONG(II1(JL), II2(JL), II3(JL))
+    ZRIMLTC(JL) = PRIMLTC(II1(JL), II2(JL), II3(JL))
+    ZRCHONI(JL) = PRCHONI(II1(JL), II2(JL), II3(JL))
+    ZRVDEPS(JL) = PRVDEPS(II1(JL), II2(JL), II3(JL))
+    ZRIAGGS(JL) = PRIAGGS(II1(JL), II2(JL), II3(JL))
+    ZRIAUTS(JL) = PRIAUTS(II1(JL), II2(JL), II3(JL))
+    ZRVDEPG(JL) = PRVDEPG(II1(JL), II2(JL), II3(JL))
+    ZRCAUTR(JL) = PRCAUTR(II1(JL), II2(JL), II3(JL))
+    ZRCACCR(JL) = PRCACCR(II1(JL), II2(JL), II3(JL))
+    ZRREVAV(JL) = PRREVAV(II1(JL), II2(JL), II3(JL))
+    ZRCRIMSS(JL) = PRCRIMSS(II1(JL), II2(JL), II3(JL))
+    ZRCRIMSG(JL) = PRCRIMSG(II1(JL), II2(JL), II3(JL))
+    ZRSRIMCG(JL) = PRSRIMCG(II1(JL), II2(JL), II3(JL))
+    ZRRACCSS(JL) = PRRACCSS(II1(JL), II2(JL), II3(JL))
+    ZRRACCSG(JL) = PRRACCSG(II1(JL), II2(JL), II3(JL))
+    ZRSACCRG(JL) = PRSACCRG(II1(JL), II2(JL), II3(JL))
+    ZRSMLTG(JL) = PRSMLTG(II1(JL), II2(JL), II3(JL))
+    ZRICFRRG(JL) = PRICFRRG(II1(JL), II2(JL), II3(JL))
+    ZRRCFRIG(JL) = PRRCFRIG(II1(JL), II2(JL), II3(JL))
+    ZRCWETG(JL) = PRCWETG(II1(JL), II2(JL), II3(JL))
+    ZRIWETG(JL) = PRIWETG(II1(JL), II2(JL), II3(JL))
+    ZRRWETG(JL) = PRRWETG(II1(JL), II2(JL), II3(JL))
+    ZRSWETG(JL) = PRSWETG(II1(JL), II2(JL), II3(JL))
+    ZRCDRYG(JL) = PRCDRYG(II1(JL), II2(JL), II3(JL))
+    ZRIDRYG(JL) = PRIDRYG(II1(JL), II2(JL), II3(JL))
+    ZRRDRYG(JL) = PRRDRYG(II1(JL), II2(JL), II3(JL))
+    ZRSDRYG(JL) = PRSDRYG(II1(JL), II2(JL), II3(JL))
+    ZRGMLTR(JL) = PRGMLTR(II1(JL), II2(JL), II3(JL))
+    ZRCBERI(JL) = PRCBERI(II1(JL), II2(JL), II3(JL))
+    IF (HCLOUD(1:3) == 'ICE') THEN
+      ZRCMLTSR(JL) = PRCMLTSR(II1(JL), II2(JL), II3(JL))
+      ZRICFRR(JL)  = PRICFRR(II1(JL), II2(JL), II3(JL))
+    END IF
+    IF (HCLOUD == 'LIMA') THEN
+      ZCST(JL)    = PCST(II1(JL), II2(JL), II3(JL))
+      ZCGT(JL)    = PCGT(II1(JL), II2(JL), II3(JL))
+      ZRVHENC(JL) = PRVHENC(II1(JL), II2(JL), II3(JL))
+      ZRCHINC(JL) = PRCHINC(II1(JL), II2(JL), II3(JL))
+      ZRVHONH(JL) = PRVHONH(II1(JL), II2(JL), II3(JL))
+      ZRRCVRC(JL) = PRRCVRC(II1(JL), II2(JL), II3(JL))
+      ZRICNVI(JL) = PRICNVI(II1(JL), II2(JL), II3(JL))
+      ZRVDEPI(JL) = PRVDEPI(II1(JL), II2(JL), II3(JL))
+      ZRSHMSI(JL) = PRSHMSI(II1(JL), II2(JL), II3(JL))
+      ZRGHMGI(JL) = PRGHMGI(II1(JL), II2(JL), II3(JL))
+      ZRICIBU(JL) = PRICIBU(II1(JL), II2(JL), II3(JL))
+      ZRIRDSF(JL) = PRIRDSF(II1(JL), II2(JL), II3(JL))
+      ZRCCORR2(JL) = PRCCORR2(II1(JL), II2(JL), II3(JL))
+      ZRRCORR2(JL) = PRRCORR2(II1(JL), II2(JL), II3(JL))
+      ZRICORR2(JL) = PRICORR2(II1(JL), II2(JL), II3(JL))
+    END IF
+    IF (KRR == 7) THEN
+      ZCHT(JL)    = PCHT(II1(JL), II2(JL), II3(JL))
+      ZRWETGH(JL) = PRWETGH(II1(JL), II2(JL), II3(JL))
+      ZRCWETH(JL) = PRCWETH(II1(JL), II2(JL), II3(JL))
+      ZRIWETH(JL) = PRIWETH(II1(JL), II2(JL), II3(JL))
+      ZRSWETH(JL) = PRSWETH(II1(JL), II2(JL), II3(JL))
+      ZRGWETH(JL) = PRGWETH(II1(JL), II2(JL), II3(JL))
+      ZRRWETH(JL) = PRRWETH(II1(JL), II2(JL), II3(JL))
+      ZRCDRYH(JL) = PRCDRYH(II1(JL), II2(JL), II3(JL))
+      ZRRDRYH(JL) = PRRDRYH(II1(JL), II2(JL), II3(JL))
+      ZRIDRYH(JL) = PRIDRYH(II1(JL), II2(JL), II3(JL))
+      ZRSDRYH(JL) = PRSDRYH(II1(JL), II2(JL), II3(JL))
+      ZRGDRYH(JL) = PRGDRYH(II1(JL), II2(JL), II3(JL))
+      ZRHMLTR(JL) = PRHMLTR(II1(JL), II2(JL), II3(JL))
+      ZRDRYHG(JL) = PRDRYHG(II1(JL), II2(JL), II3(JL))
+    END IF
+  END DO
+  !
+  ZRHOCOR(:) = (ZRHO00 / ZRHODREF(:))**ZCEXVT
+!
+!
+!*      1.4   allocations for the non-inductive parameterizations
+!
+  IF (CNI_CHARGING == 'GARDI') THEN
+    ALLOCATE( ZDELTALWC(KMICRO) )
+    ALLOCATE( ZFT(KMICRO) )
+  END IF
+!
+  IF (CNI_CHARGING == 'SAUN1' .OR. CNI_CHARGING == 'SAUN2' .OR. &
+      CNI_CHARGING == 'TAKAH' .OR.                              &
+      CNI_CHARGING == 'BSMP1' .OR. CNI_CHARGING == 'BSMP2' .OR. &
+      CNI_CHARGING == 'TEEWC' .OR. CNI_CHARGING == 'TERAR') THEN
+    ALLOCATE( ZEW(KMICRO) )
+  END IF
+!
+  IF (CNI_CHARGING == 'SAUN1' .OR. CNI_CHARGING == 'SAUN2' .OR. &
+      CNI_CHARGING == 'TAKAH' .OR. CNI_CHARGING == 'TEEWC') THEN
+    ALLOCATE( ZDQ(KMICRO) )
+  END IF
+!
+  IF (CNI_CHARGING == 'SAUN1' .OR. CNI_CHARGING == 'SAUN2' .OR. &
+      CNI_CHARGING == 'TEEWC' )  THEN
+    ALLOCATE( ZSAUNSK(KMICRO) )
+    ALLOCATE( ZSAUNIM(KMICRO) )
+    ALLOCATE( ZSAUNIN(KMICRO) )
+    ALLOCATE( ZSAUNSM(KMICRO) )
+    ALLOCATE( ZSAUNSN(KMICRO) )
+  END IF
+!
+  IF (CNI_CHARGING == 'SAUN1' .OR. CNI_CHARGING == 'SAUN2' .OR. &
+      CNI_CHARGING == 'SAP98' .OR.                              &
+      CNI_CHARGING == 'BSMP1' .OR. CNI_CHARGING == 'BSMP2' .OR. &
+      CNI_CHARGING == 'TEEWC' .OR. CNI_CHARGING == 'TERAR') THEN
+    ALLOCATE( ZFQIAGGS(KMICRO) )
+    ALLOCATE( ZFQIDRYGBS(KMICRO) )
+    ALLOCATE( ZLBQSDRYGB1S(KMICRO) )
+    ALLOCATE( ZLBQSDRYGB2S(KMICRO) )
+    ALLOCATE( ZLBQSDRYGB3S(KMICRO) )
+  END IF
+!
+  IF (CNI_CHARGING == 'SAP98' .OR. CNI_CHARGING == 'TERAR' .OR. &
+      CNI_CHARGING == 'BSMP1' .OR. CNI_CHARGING == 'BSMP2') THEN
+    ALLOCATE( ZRAR(KMICRO) )
+    ALLOCATE( ZDQ_IS(KMICRO) )
+    ALLOCATE( ZDQ_IG(KMICRO) )
+    ALLOCATE( ZDQ_SG(KMICRO) )
+    ALLOCATE( ZSAUNIM_IS(KMICRO) )
+    ALLOCATE( ZSAUNIN_IS(KMICRO) )
+    ALLOCATE( ZSAUNIM_IG(KMICRO) )
+    ALLOCATE( ZSAUNIN_IG(KMICRO) )
+    ALLOCATE( ZSAUNSK_SG(KMICRO) )
+    ALLOCATE( ZSAUNSM_SG(KMICRO) )
+    ALLOCATE( ZSAUNSN_SG(KMICRO) )
+  END IF
+!
+!
+!*      1.5   select parameters between ICEx and LIMA
+!
+  ALLOCATE(ZRTMIN(KRR))
+  IF (HCLOUD(1:3) == 'ICE') THEN
+! in ini_rain_ice, xrtmin is initialized with dimension 6 (hail not activated) or 7 (hail activated)
+    ZRTMIN(1:KRR) = XRTMIN_I(1:KRR)
+    !
+    ZALPHAI = XALPHAI_I
+    ZNUI = XNUI_I
+    ZAI = XAI_I
+    ZBI = XBI_I
+    ZDS = XDS_I
+    ZDG = XDG_I
+    ZCXS = XCXS_I
+    ZCXG = XCXG_I
+    !
+    ZCOLIS   = XCOLIS_I
+    ZCOLEXIS = XCOLEXIS_I
+    ZCOLIG   = XCOLIG_I
+    ZCOLEXIG = XCOLEXIG_I
+    ZCOLSG   = XCOLSG_I
+    ZCOLEXSG = XCOLEXSG_I
+    !
+    IGAMINC = NGAMINC_I
+    !
+    IACCLBDAR = NACCLBDAR_I
+    IACCLBDAS = NACCLBDAS_I
+    ZACCINTP1S = XACCINTP1S_I
+    ZACCINTP2S = XACCINTP2S_I
+    ZACCINTP1R = XACCINTP1R_I
+    ZACCINTP2R = XACCINTP2R_I
+    ! 
+    IDRYLBDAR = NDRYLBDAR_I
+    IDRYLBDAS = NDRYLBDAS_I
+    IDRYLBDAG = NDRYLBDAG_I
+    ZDRYINTP1R = XDRYINTP1R_I
+    ZDRYINTP2R = XDRYINTP2R_I
+    ZDRYINTP1S = XDRYINTP1S_I
+    ZDRYINTP2S = XDRYINTP2S_I
+    ZDRYINTP1G = XDRYINTP1G_I
+    ZDRYINTP2G = XDRYINTP2G_I
+    !
+    ZRIMINTP1 = XRIMINTP1_I
+    ZRIMINTP2 = XRIMINTP2_I
+    !
+  ELSE IF (HCLOUD == 'LIMA') THEN
+! in ini_lima, xrtmin is initialized with dimension 7
+    ZRTMIN(1:KRR) = XRTMIN_L(1:KRR)
+    !
+    ZALPHAI = XALPHAI_L
+    ZNUI = XNUI_L
+    ZAI = XAI_L
+    ZBI = XBI_L
+    ZDS = XDS_L
+    ZDG = XDG_L
+    ZCXS = XCXS_L
+    ZCXG = XCXG_L
+    !
+    ZCOLIS   = 0.25  ! variable not defined in LIMA, the value of ICEx is used 
+    ZCOLEXIS = XCOLEXIS_L
+    ZCOLIG   = XCOLIG_L
+    ZCOLEXIG = XCOLEXIG_L
+    ZCOLSG   = XCOLSG_L
+    ZCOLEXSG = XCOLEXSG_L
+    !
+    IGAMINC = NGAMINC_L
+    !
+    IACCLBDAR = NACCLBDAR_L
+    IACCLBDAS = NACCLBDAS_L
+    ZACCINTP1S = XACCINTP1S_L
+    ZACCINTP2S = XACCINTP2S_L
+    ZACCINTP1R = XACCINTP1R_L
+    ZACCINTP2R = XACCINTP2R_L
+    ! 
+    IDRYLBDAR = NDRYLBDAR_L
+    IDRYLBDAS = NDRYLBDAS_L
+    IDRYLBDAG = NDRYLBDAG_L
+    ZDRYINTP1R = XDRYINTP1R_L
+    ZDRYINTP2R = XDRYINTP2R_L
+    ZDRYINTP1S = XDRYINTP1S_L
+    ZDRYINTP2S = XDRYINTP2S_L
+    ZDRYINTP1G = XDRYINTP1G_L
+    ZDRYINTP2G = XDRYINTP2G_L
+    !
+    ZRIMINTP1 = XRIMINTP1_L
+    ZRIMINTP2 = XRIMINTP2_L
+  END IF
+!
+!
+!*      1.6   update the slope parameter of the distribution
+!*            and compute N_x if necessary
+!
+  IF (HCLOUD(1:3) == 'ICE') ZCCT(:) = 0.
+  CALL COMPUTE_LAMBDA(2, IMOM_C, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(2), ZRCT, ZCCT, ZLBDAC)
+  CALL COMPUTE_LAMBDA(3, IMOM_R, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(3), ZRRT, ZCRT, ZLBDAR)
+  CALL COMPUTE_LAMBDA(4, IMOM_I, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(4), ZRIT, ZCIT, ZLBDAI)
+  CALL COMPUTE_LAMBDA(5, IMOM_S, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(5), ZRST, ZCST, ZLBDAS)
+  CALL COMPUTE_LAMBDA(6, IMOM_G, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(6), ZRGT, ZCGT, ZLBDAG)
+  IF (KRR == 7) CALL COMPUTE_LAMBDA(7, IMOM_H, KMICRO, HCLOUD, ZRHODREF, ZRTMIN(7), ZRHT, ZCHT, ZLBDAH)
+!
+!
+!*      1.7   update the parameter e in the charge-diameter relationship
+!
+! Compute e_x at time t
+  IF (HCLOUD == 'LIMA') THEN
+    CALL ELEC_COMPUTE_EX(2, IMOM_C, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(2), ZRCT, ZQCT, ZECT, PLBDX=ZLBDAC, PCX=ZCCT)
+    CALL ELEC_COMPUTE_EX(3, IMOM_R, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(3), ZRRT, ZQRT, ZERT, PLBDX=ZLBDAR, PCX=ZCRT)
+    CALL ELEC_COMPUTE_EX(4, IMOM_I, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(4), ZRIT, ZQIT, ZEIT, PLBDX=ZLBDAI, PCX=ZCIT)
+    CALL ELEC_COMPUTE_EX(5, IMOM_S, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(5), ZRST, ZQST, ZEST, PLBDX=ZLBDAS, PCX=ZCST)
+    CALL ELEC_COMPUTE_EX(6, IMOM_G, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(6), ZRGT, ZQGT, ZEGT, PLBDX=ZLBDAG, PCX=ZCGT)
+    IF (KRR == 7) CALL ELEC_COMPUTE_EX(7, IMOM_H, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(7), ZRHT, ZQHT, ZEHT, PLBDX=ZLBDAH, PCX=ZCHT)
+  ELSE IF (HCLOUD(1:3) == 'ICE') THEN
+    CALL ELEC_COMPUTE_EX(2, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(2), ZRCT, ZQCT, ZECT)
+    CALL ELEC_COMPUTE_EX(3, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(3), ZRRT, ZQRT, ZERT, PLBDX=ZLBDAR)
+    CALL ELEC_COMPUTE_EX(4, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(4), ZRIT, ZQIT, ZEIT, PCX=ZCIT)
+    CALL ELEC_COMPUTE_EX(5, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(5), ZRST, ZQST, ZEST, PLBDX=ZLBDAS)
+    CALL ELEC_COMPUTE_EX(6, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(6), ZRGT, ZQGT, ZEGT, PLBDX=ZLBDAG)
+    IF (KRR == 7) CALL ELEC_COMPUTE_EX(7, 1, KMICRO, HCLOUD, 1., ZRHODREF, ZRTMIN(7), ZRHT, ZQHT, ZEHT, PLBDX=ZLBDAH)
+  END IF
+!
+!
+!*      1.8   initialization for the non-inductive charging process
+!
+  SELECT CASE (CNI_CHARGING)
+    ! Initialization for the parameterization of Gardiner et al. (1995)
+    CASE ('GARDI')
+      CALL ELEC_INIT_NOIND_GARDI()
+      ! Save the effective water content
+      DO JL = 1, KMICRO
+        XEW(II1(JL),II2(JL),II3(JL)) = ZDELTALWC(JL) ! 
+      END DO      
+    !
+    ! Initialization for the parameterizations of Saunders et al. (1991)
+    ! with and without anomalies, and Tsenova and Mitzeva (2009)
+    CASE ('SAUN1', 'SAUN2', 'TEEWC')
+      CALL ELEC_INIT_NOIND_EWC()
+      ! Save the effective water content
+      DO JL = 1, KMICRO
+        XEW(II1(JL),II2(JL),II3(JL)) = ZEW(JL) ! g/m3
+      END DO
+    !
+    ! Initialization for the parameterizations of Saunders and Peck (1998), 
+    ! Brooks et al. (1997) and Tsenova and Mitzeva (2011)
+    CASE ('SAP98', 'BSMP1', 'BSMP2', 'TERAR')
+      CALL ELEC_INIT_NOIND_RAR()
+      ! Save the rime accretion rate (not recorded properly: 3 different RAR are computed !!!)
+      DO JL = 1, KMICRO
+        XEW(II1(JL),II2(JL),II3(JL)) = ZRAR(JL) ! g/m3
+      END DO
+    !
+    ! Initialization for the parameterization of Takahashi (1978)
+    CASE ('TAKAH')
+      CALL ELEC_INIT_NOIND_TAKAH()
+      ! Save the effective water content
+      DO JL = 1, KMICRO
+        XEW(II1(JL),II2(JL),II3(JL)) = ZEW(JL) ! g/m3
+      END DO
+  END SELECT
+!
+!
+!------------------------------------------------------------------
+!
+!*      2.    COMPUTE THE SLOW COLD PROCESS SOURCES
+!             -------------------------------------
+!
+!*      2.1   heterogeneous nucleation
+!
+! --> rien n'est fait pour l'elec pour le moment
+! ICE3/4 : rvheni/rvhind
+! LIMA : rvhenc, rchinc, rvhonh
+!
+!
+!*      2.2   spontaneous freezing (rhong)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%INIT_PHY(D, 'SFR', &
+                            Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%INIT_PHY(D, 'SFR', &
+                            Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!  
+  ZWQ(:) = 0.
+  WHERE (ZRRHONG(:) > 0. .AND. &
+         ZRRT(:) > XRTMIN_ELEC(3) .AND. ABS(ZQRT(:)) > XQTMIN(3))
+    ZWQ(:) = ZQRS(:)
+    !
+    ZQGS(:) = ZQGS(:) + ZQRS(:)
+    ZQRS(:) = 0.
+  END WHERE
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%END_PHY(D, 'SFR', &
+                           Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%END_PHY(D, 'SFR', &
+                           Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      2.3   cloud ice melting (rimltc)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%INIT_PHY(D, 'IMLT', &
+                            Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%INIT_PHY(D, 'IMLT', &
+                            Unpack( zqis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+  WHERE (ZRIMLTC(:) > 0.)
+    ZQCS(:) = ZQCS(:) + ZQIS(:)
+    ZQIS(:) = 0.
+  END WHERE
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%END_PHY(D, 'IMLT', &
+                           Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%END_PHY(D, 'IMLT', &
+                           Unpack( zqis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      2.4   riming-conversion of the large sized aggregates into graupel ???
+! ancienne param => on calcule plutot cette tendance un peu plus loin ?
+!
+!
+!*      2.5   homogeneous nucleation (rchoni)
+!
+! CB : traitement different entre ice3 et lima --> a modifier eventuellement
+!
+  ZWQ(:) = 0.
+  WHERE (ZRCHONI(:) > 0. .AND.           &
+         ZRCT(:) > XRTMIN_ELEC(2) .AND.  &
+         ABS(ZQCT(:)) > XQTMIN(2) .AND. ABS(ZECT(:)) > ELECP%XECMIN)
+    ZWQ(:) = XQHON * ZECT(:) * ZRCHONI(:)
+    ZWQ(:) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQCS(:) )
+    !
+    ZQIS(:) = ZQIS(:) + ZWQ(:)
+    ZQCS(:) = ZQCS(:) - ZWQ(:)
+  END WHERE
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'HON', &
+                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'HON', &
+                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      2.6   deposition on snow/aggregates (rvdeps)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'DEPS', &
+                            Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field =  0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'DEPS', &
+                            Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field =  0. ) )
+  end if
+!
+  ZWQ(:) = 0.
+  !
+  ! Only the sublimation of snow/aggregates is considered (negative part of PRVDEPS)
+  WHERE (ZRVDEPS(:) < 0. .AND. & 
+         ZRST(:) > XRTMIN_ELEC(5) .AND. ABS(ZQST(:)) > XQTMIN(5))
+    ZWQ(:) = XCOEF_RQ_S * ZQST(:) * ZRVDEPS(:) / ZRST(:)
+    ZWQ(:) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ(:)) ),ZQSS(:) )
+    !
+    ZQSS(:)  = ZQSS(:)  - ZWQ(:)
+    ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ(:)/ELECD%XECHARGE )
+    ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ(:)/ELECD%XECHARGE )
+  END WHERE
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'DEPS', &
+                           Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field =  0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'DEPS', &
+                           Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field =  0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'DEPS', &
+                           Unpack( -zwq(:) * zrhodj(:),  mask = odmicro(:, :, :), field =  0. ) )
+  end if
+!
+!
+!*      2.7   aggregation on snow/aggregates (riaggs)
+!
+  CALL COMPUTE_CHARGE_TRANSFER (ZRIAGGS, ZRIT, ZQIT, PTSTEP, &
+                                XRTMIN_ELEC(4), XQTMIN(4), XCOEF_RQ_I, &
+                                ZWQ, ZQIS, ZQSS)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'AGGS', &
+                           Unpack( -zwq(:), mask = odmicro(:, :, :), field =  0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'AGGS', &
+                           Unpack(  zwq(:), mask = odmicro(:, :, :), field =  0. ) )
+  end if
+!
+!
+!*      2.8   non-inductive charging during ice - snow collisions
+!
+  CALL ELEC_IAGGS_B()
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'NIIS', &
+                           Unpack( -zwq_ni(:), mask = odmicro(:, :, :), field =  0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'NIIS', &
+                           Unpack(  zwq_ni(:), mask = odmicro(:, :, :), field =  0. ) )
+  end if
+!
+! Save the NI charging rate
+  DO JL = 1, KMICRO
+    XNI_IAGGS(II1(JL),II2(JL),II3(JL)) = ZWQ_NI(JL) * ZRHODREF(JL) ! C/m3/s
+  END DO
+!
+!
+!*      2.9   autoconversion of r_i for r_s production (riauts/ricnvs)
+!
+  CALL COMPUTE_CHARGE_TRANSFER (ZRIAUTS, ZRIT, ZQIT, PTSTEP, &
+                                XRTMIN_ELEC(4), XQTMIN(4), XCOEF_RQ_I, &
+                                ZWQ, ZQIS, ZQSS)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'AUTS', &
+                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'AUTS', &
+                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      2.10  snow --> ice conversion (rscnvi)
+!
+  IF (HCLOUD == 'LIMA') THEN
+    CALL COMPUTE_CHARGE_TRANSFER (ZRICNVI, ZRST, ZQST, PTSTEP, &
+                                  XRTMIN_ELEC(5), XQTMIN(5), XCOEF_RQ_S, &
+                                  ZWQ, ZQSS, ZQIS)          
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'CNVI', &
+                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'CNVI', &
+                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+!
+!*      2.11  water vapor deposition on ice crystals (rvdepi)
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'SUBI', &
+                              Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'SUBI', &
+                              Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+    !
+    ZWQ(:) = 0.
+    !
+    ! Only the sublimation of ice crystals is considered (negative part of PRVDEPI)
+    WHERE (ZRVDEPI(:) < 0. .AND. &
+           ZRIT(:) > XRTMIN_ELEC(4) .AND. ABS(ZQIT(:)) > XQTMIN(4))
+      ZWQ(:) = XCOEF_RQ_I * ZQIT(:) * ZRVDEPI(:) / ZRIT(:)
+      ZWQ(:) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQIS(:) )
+      !
+      ZQIS(:)  = ZQIS(:)  - ZWQ(:)
+      ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ(:)/ELECD%XECHARGE )
+      ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ(:)/ELECD%XECHARGE )
+    END WHERE
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'SUBI', &
+                             Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'SUBI', &
+                             Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )           
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'SUBI', &
+                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if    
+  END IF
+!
+!
+!*      2.12  water vapor deposition on graupel (rvdepg)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'DEPG', &
+                            Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'DEPG', &
+                            Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+  ZWQ(:) = 0.
+  !
+  ! Only the sublimation of graupel is considered (negative part of PRVDEPG)
+  WHERE (ZRVDEPG(:) < 0. .AND. &
+         ZRGT(:) > XRTMIN_ELEC(6) .AND. ABS(ZQGT(:)) > XQTMIN(6))
+    ZWQ(:) = XCOEF_RQ_G * ZQGT(:) * ZRVDEPG(:) / ZRGT(:)
+    ZWQ(:) = SIGN( MIN( ABS(ZQGT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQGS(:) )
+    !
+    ZQGS(:)  = ZQGS(:)  - ZWQ(:) 
+    ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ(:)/ELECD%XECHARGE )
+    ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ(:)/ELECD%XECHARGE )
+  END WHERE
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'DEPG', &
+                           Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'DEPG', &
+                           Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'DEPG', &
+                           Unpack( -zwq(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!------------------------------------------------------------------
+!
+!*      3.    COMPUTE THE WARM PROCESS SOURCES
+!             --------------------------------
+!
+!*      3.1   autoconversion of r_c for r_r production (rcautr)
+!
+  CALL COMPUTE_CHARGE_TRANSFER (ZRCAUTR, ZRCT, ZQCT, PTSTEP,           &
+                                XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
+                                ZWQ, ZQCS, ZQRS)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'AUTO', &
+                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'AUTO', &
+                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      3.2   accretion of r_c for r_r production (rcaccr)
+!
+  CALL COMPUTE_CHARGE_TRANSFER (ZRCACCR, ZRCT, ZQCT, PTSTEP,           &
+                                XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
+                                ZWQ, ZQCS, ZQRS)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'ACCR', &
+                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'ACCR', &
+                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      3.3   evaporation of raindrops (rrevav)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'REVA', &
+                            Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'REVA', &
+                            Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+  ZWQ(:) = 0.
+  WHERE (ZRREVAV(:) > 0. .AND. &
+         ZRRT(:) > XRTMIN_ELEC(3) .AND. ABS(ZQRT(:)) > XQTMIN(3))
+    ZWQ(:) = XCOEF_RQ_R * ZQRT(:) * ZRREVAV(:) / ZRRT(:)
+    ZWQ(:) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQRS(:) )
+    !
+    ZQRS(:)  = ZQRS(:)  - ZWQ(:)
+    ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ(:)/ELECD%XECHARGE )
+    ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ(:)/ELECD%XECHARGE )
+  END WHERE
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'REVA', &
+                           Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'REVA', &
+                           Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'REVA', &
+                           Unpack( -zwq(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      3.4   conversion of drops to droplets (rrcvrc)
+!
+  IF (HCLOUD == 'LIMA') THEN
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%INIT_PHY(D, 'R2C1', &
+                              Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%INIT_PHY(D, 'R2C1', &
+                              Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+!
+    CALL COMPUTE_CHARGE_TRANSFER (ZRRCVRC, ZRRT, ZQRT, PTSTEP,           &
+                                  XRTMIN_ELEC(3), XQTMIN(3), XCOEF_RQ_R, &
+                                  ZWQ, ZQRS, ZQCS)
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%END_PHY(D, 'R2C1', &
+                             Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%END_PHY(D, 'R2C1', &
+                             Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+  END IF
+!
+!------------------------------------------------------------------
+!
+!*      4.    COMPUTE THE FAST COLD PROCESS SOURCES FOR r_s
+!             ---------------------------------------------
+!
+!*      4.1   cloud droplet riming of the aggregates
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%INIT_PHY(D, 'RIM', &
+                           Unpack( zqcs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%INIT_PHY(D, 'RIM', &
+                           Unpack( zqss(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%INIT_PHY(D, 'RIM', &
+                           Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!*      4.1.1 riming of the small sized aggregates (rcrimss)
+!
+  CALL COMPUTE_CHARGE_TRANSFER (ZRCRIMSS, ZRCT, ZQCT, PTSTEP,          &
+                                XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
+                                ZWQ, ZQCS, ZQSS)
+!
+!
+!*      4.1.2 riming conversion of the large sized aggregates into graupel (rcrimsg)
+!
+  ZWQ(:) = 0.
+  WHERE (ZRCRIMSG(:) > 0. .AND.                                        &
+         ZRCT(:) > XRTMIN_ELEC(2) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
+         ABS(ZQCT(:)) > XQTMIN(2))
+    ZWQ(:) = XCOEF_RQ_C * ZQCT(:) * ZRCRIMSG(:) / ZRCT(:)      ! QCRIMSG
+    ZWQ(:) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQCS(:) )
+    !
+    ZQGS(:) = ZQGS(:) + ZWQ(:)
+    ZQCS(:) = ZQCS(:) - ZWQ(:)
+  END WHERE
+!
+!
+!*      4.1.3 riming conversion of the large sized aggregates into graupel (rsrimcg)
+!
+  GMASK(:) = .FALSE.
+  IGMASK = 0
+  DO JL = 1, SIZE(GMASK)
+    IF (ZRSRIMCG(JL) > 0. .AND. ZZT(JL) < CST%XTT .AND. &
+        ZRCT(JL) > XRTMIN_ELEC(2) .AND. ZRST(JL) > XRTMIN_ELEC(5) .AND. &
+        ZLBDAS(JL) > 0.) THEN  !++cb-- 12/07/23 condition ajoutee pour eviter log(0)
+      IGMASK = IGMASK + 1
+      I1(IGMASK) = JL
+      GMASK(JL) = .TRUE.
+    ELSE
+      GMASK(JL) = .FALSE.
+    END IF
+  END DO
+  !
+  ALLOCATE(ZVEC1(IGMASK))
+  ALLOCATE(ZVEC2(IGMASK))
+  ALLOCATE(IVEC2(IGMASK))
+  !
+  ! select the ZLBDAS
+  DO JL = 1, IGMASK
+    ZVEC1(JL) = ZLBDAS(I1(JL))
+  END DO
+  ! find the next lower indice for the ZLBDAS in the geometrical set of Lbda_s 
+  ! used to tabulate some moments of the incomplete gamma function
+  ZVEC2(1:IGMASK) = MAX( 1.00001, MIN( REAL(IGAMINC)-0.00001,           &
+                        ZRIMINTP1 * LOG( ZVEC1(1:IGMASK) ) + ZRIMINTP2 ) )
+  IVEC2(1:IGMASK) = INT( ZVEC2(1:IGMASK) )
+  ZVEC2(1:IGMASK) = ZVEC2(1:IGMASK) - REAL( IVEC2(1:IGMASK) )
+  !
+  ! perform the linear interpolation of the normalized "XFS"-moment of
+  ! the incomplete gamma function
+  ZVEC1(1:IGMASK) =  XGAMINC_RIM3( IVEC2(1:IGMASK)+1 ) *  ZVEC2(1:IGMASK)      &
+                   - XGAMINC_RIM3( IVEC2(1:IGMASK)   ) * (ZVEC2(1:IGMASK) - 1.0)
+  !
+  ZWQ(:) = 0.
+  DO JL = 1, IGMASK
+    ZWQ(I1(JL)) = ZVEC1(JL)
+  END DO
+  !
+  DEALLOCATE(ZVEC1)
+  DEALLOCATE(ZVEC2)
+  DEALLOCATE(IVEC2)
+  !
+  ! riming-conversion of the large sized aggregates into graupeln (rsrimcg)
+  WHERE (ZRSRIMCG(:) > 0. .AND.                                        &
+         ZRCT(:) > XRTMIN_ELEC(2) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
+         ABS(ZQCT(:)) > XQTMIN(2) .AND. ABS(ZEST(:)) > XESMIN)
+    ZWQ(:) = XQSRIMCG * ZEST(:) * ZCST(:) *          &    ! QSRIMCG
+             ZLBDAS(:)**XEXQSRIMCG * (1. - ZWQ(:)) / &
+             (PTSTEP * ZRHODREF(:))
+    ZWQ(:) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ(:)) ),ZQSS(:) )
+    !
+    ZQGS(:) = ZQGS(:) + ZWQ(:)
+    ZQSS(:) = ZQSS(:) - ZWQ(:)
+  END WHERE
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%END_PHY(D, 'RIM', &
+                           Unpack( zqcs(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%END_PHY(D, 'RIM', &
+                           Unpack( zqss(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%END_PHY(D, 'RIM', &
+                           Unpack( zqgs(:) * zrhodj(:),  mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      4.2   Hallett-Mossop ice multiplication process due to snow riming (rhmsi)
+!
+  IF (HCLOUD == 'LIMA') THEN
+    CALL COMPUTE_CHARGE_TRANSFER (ZRSHMSI, ZRST, ZQST, PTSTEP,          &
+                                  XRTMIN_ELEC(4), XQTMIN(4), XCOEF_RQ_S, &
+                                  ZWQ, ZQSS, ZQIS)       
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'HMS', &
+                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'HMS', &
+                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+  END IF
+!
+!
+!*      4.3   Raindrop accretion onto the aggregates
+!
+  IGMASK = 0
+  DO JL = 1, SIZE(GMASK)
+    IF (ZRRT(JL) > ZRTMIN(3) .AND. ZLBDAR(JL) > 0. .AND. &
+        ZRST(JL) > ZRTMIN(5) .AND. ZLBDAS(JL) > 0.) THEN
+      IGMASK = IGMASK + 1
+      I1(IGMASK) = JL
+      GMASK(JL) = .TRUE.
+    ELSE
+      GMASK(JL) = .FALSE.
+    END IF
+  END DO
+  !
+  IF (IGMASK > 0) THEN
+    ALLOCATE(ZVEC1(IGMASK))
+    ALLOCATE(ZVEC2(IGMASK))
+    ALLOCATE(IVEC1(IGMASK))
+    ALLOCATE(IVEC2(IGMASK))
+    ALLOCATE(ZVECQ1(IGMASK))
+    ALLOCATE(ZVECQ2(IGMASK))
+    ALLOCATE(ZVECQ3(IGMASK))
+    !
+    ! select the (ZLBDAS,ZLBDAR) couplet
+    DO JL = 1, IGMASK
+      ZVEC1(JL) = ZLBDAS(I1(JL))
+      ZVEC2(JL) = ZLBDAR(I1(JL))
+    END DO
+    !
+    ! find the next lower indice for the ZLBDAS and for the ZLBDAR in the geometrical 
+    ! set of (Lbda_s,Lbda_r) couplet use to tabulate the kernels
+    ZVEC1(1:IGMASK) = MAX( 1.00001, MIN( REAL(IACCLBDAS)-0.00001,           &
+                          ZACCINTP1S * LOG( ZVEC1(1:IGMASK) ) + ZACCINTP2S ) )
+    IVEC1(1:IGMASK) = INT( ZVEC1(1:IGMASK) )
+    ZVEC1(1:IGMASK) = ZVEC1(1:IGMASK) - REAL( IVEC1(1:IGMASK) )
+    !
+    ZVEC2(1:IGMASK) = MAX( 1.00001, MIN( REAL(IACCLBDAR)-0.00001,           &
+                          ZACCINTP1R * LOG( ZVEC2(1:IGMASK) ) + ZACCINTP2R ) )
+    IVEC2(1:IGMASK) = INT( ZVEC2(1:IGMASK) )
+    ZVEC2(1:IGMASK) = ZVEC2(1:IGMASK) - REAL( IVEC2(1:IGMASK) )
+    !
+    ! perform the bilinear interpolation of the normalized kernels
+    ZVECQ1(:) = BI_LIN_INTP_V(XKER_Q_RACCSS, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
+    ZVECQ2(:) = BI_LIN_INTP_V(XKER_Q_RACCS,  IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
+    ZVECQ3(:) = BI_LIN_INTP_V(XKER_Q_SACCRG, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
+    ZWQ1(:) = 0.
+    ZWQ2(:) = 0.
+    ZWQ3(:) = 0.
+    DO JL = 1, IGMASK
+      ZWQ1(I1(JL)) = ZVECQ1(JL)
+      ZWQ2(I1(JL)) = ZVECQ2(JL)
+      ZWQ3(I1(JL)) = ZVECQ3(JL)
+    END DO
+!
+    DEALLOCATE(ZVEC1)
+    DEALLOCATE(ZVEC2)
+    DEALLOCATE(IVEC1)
+    DEALLOCATE(IVEC2)
+    DEALLOCATE(ZVECQ1)
+    DEALLOCATE(ZVECQ2)
+    DEALLOCATE(ZVECQ3)
+!
+!
+!*      4.3.1 raindrop accretion onto the small sized aggregates (rraccss)
+!
+    ZWQ4(:)   = 0.
+    ZWQ5(:,:) = 0.
+    WHERE (ZRRACCSS(:) > 0. .AND. &
+           ZRRT(:) > XRTMIN_ELEC(3) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
+           ZCRT(:) > 0.             .AND. ZCST(:) > 0.             .AND. &
+           ZLBDAR(:) > 0.           .AND. ZLBDAS(:) > 0.           .AND. &
+           ABS(ZERT(:)) > ELECP%XERMIN)  ! and zzt(:) < xtt ?
+      ZWQ4(:) = XFQRACCS * ZERT(:) * ZRHOCOR(:) / (ZCOR00 * ZRHODREF(:)) * &
+                ZCRT(:) * ZCST(:)                                        * &
+               (XLBQRACCS1 * ZLBDAR(:)**(-2.0 - XFR)                     + &
+                XLBQRACCS2 * ZLBDAR(:)**(-1.0 - XFR) * ZLBDAS(:)**(-1.0) + &
+                XLBQRACCS3 * ZLBDAR(:)**(-XFR)       * ZLBDAS(:)**(-2.0))
+      ZWQ5(:,1) = ZWQ4(:) * ZWQ1(:)                       ! QRACCSS
+      ZWQ5(:,1) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,1)) ),ZQRS(:) )
+      !
+      ZQRS(:) = ZQRS(:) - ZWQ5(:,1)
+      ZQSS(:) = ZQSS(:) + ZWQ5(:,1)
+    END WHERE
+!
+!
+!*      4.3.2 raindrop accretion-conversion of the large sized aggregates into graupel 
+!*            (rsaccrg & rraccsg)
+!
+    ZWQ5(:,2) = ZWQ2(:) * ZWQ4(:) ! QRACCS
+    WHERE (ZRRACCSG(:) > 0. .AND. &
+           ZRRT(:) > XRTMIN_ELEC(3) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
+           ZLBDAR(:) > 0.           .AND. ZLBDAS(:) > 0.)
+      ZWQ5(:,3) = ZWQ5(:,2) - ZWQ5(:,1)         ! QRACCSG
+      ZWQ5(:,3) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,3)) ),ZQRS(:) )
+      !
+      ZQRS(:) = ZQRS(:) - ZWQ5(:,3)
+      ZQGS(:) = ZQGS(:) + ZWQ5(:,3)
+    END WHERE
+!
+    WHERE (ZRSACCRG(:) > 0. .AND.                                        &
+           ZRRT(:) > XRTMIN_ELEC(3) .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. &
+           ZCRT(:) > 0.             .AND. ZCST(:) > 0.             .AND. &
+           ZLBDAR(:) > 0.           .AND. ZLBDAS(:) > 0.           .AND. &
+           ABS(ZEST(:)) > XESMIN)
+      ZWQ5(:,4) = ZWQ3(:) * XFQRACCS * ZEST(:) *                               &
+                  ZRHOCOR(:) / (ZCOR00 * ZRHODREF(:)) *                        &
+                  ZCRT(:) * ZCST(:) *                                          &
+                 (XLBQSACCRG1 * ZLBDAS(:)**(-2.0 - XFS) +                      &
+                  XLBQSACCRG2 * ZLBDAS(:)**(-1.0 - XFS) * ZLBDAR(:)**(-1.0) +  &
+                  XLBQSACCRG3 * ZLBDAS(:)**(-XFS)       * ZLBDAR(:)**(-2.0)) ! QSACCR
+      ZWQ5(:,4) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,4)) ),ZQSS(:) )
+      !
+      ZQSS(:) = ZQSS(:) - ZWQ5(:,4)
+      ZQGS(:) = ZQGS(:) + ZWQ5(:,4)
+    END WHERE
+    !
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'ACC', &
+                             Unpack( (-zwq5(:,1) - zwq5(:,3)) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'ACC', &
+                             Unpack( ( zwq5(:,1) - zwq5(:,4)) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'ACC', &
+                             Unpack( ( zwq5(:,3) + zwq5(:,4)) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if    
+    !
+  END IF  ! end if igmask>0
+!
+!
+!*      4.4   conversion-melting of the aggregates (rsmltg)
+!
+  CALL COMPUTE_CHARGE_TRANSFER (ZRSMLTG, ZRST, ZQST, PTSTEP,           &
+                                XRTMIN_ELEC(5), XQTMIN(5), XCOEF_RQ_S, &
+                                ZWQ, ZQSS, ZQGS)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'CMEL', &
+                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'CMEL', &
+                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      4.5   cloud droplet collection onto aggregates by positive temperature (rcmltsr)
+!
+  IF (HCLOUD(1:3) == 'ICE') THEN
+    CALL COMPUTE_CHARGE_TRANSFER (ZRCMLTSR, ZRCT, ZQCT, PTSTEP,           &
+                                  XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
+                                  ZWQ, ZQCS, ZQRS)
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'CMEL', &
+                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'CMEL', &
+                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+  END IF
+!
+!
+!------------------------------------------------------------------
+!
+!*      5.    COMPUTE THE FAST COLD PROCESS SOURCES FOR r_g
+!             ---------------------------------------------
+!
+!*      5.1   rain contact freezing (ricfrrg, rrcfrig, ricfrr)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%INIT_PHY(D, 'CFRZ', &
+                           Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%INIT_PHY(D, 'CFRZ', &
+                           Unpack( zqis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%INIT_PHY(D, 'CFRZ', &
+                           Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+  !
+  ZWQ(:) = 0.
+  WHERE (ZRRCFRIG(:) > 0. .AND.                                        &
+         ZRIT(:) > XRTMIN_ELEC(4) .AND. ZRRT(:) > XRTMIN_ELEC(3) .AND. &
+         ZCRT(:) > 0.             .AND.                                &
+         ABS(ZERT(:)) > ELECP%XERMIN    .AND. ABS(ZQRT(:)) > XQTMIN(3))
+    ZWQ(:) = XQRCFRIG * ZLBDAR(:)**XEXQRCFRIG * ZCIT(:) * ZCRT(:) * &
+             ZERT(:) * ZRHOCOR(:) / (ZCOR00 * ZRHODREF(:))  ! QRCFRIG
+    ZWQ(:) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQRS(:) )
+    !
+    ZQGS(:) = ZQGS(:) + ZWQ(:)
+    ZQRS(:) = ZQRS(:) - ZWQ(:)
+  END WHERE
+  !
+  ZWQ(:) = 0.
+  WHERE (ZRICFRRG(:) > 0. .AND.                                        &
+         ZRIT(:) > XRTMIN_ELEC(4) .AND. ZRRT(:) > XRTMIN_ELEC(3) .AND. &
+         ABS(ZQIT(:)) > XQTMIN(4))
+    ZWQ(:) = XCOEF_RQ_I * ZQIT(:) * ZRICFRRG(:) / ZRIT(:)     ! QICFRRG
+    ZWQ(:) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ(:)) ),ZQIS(:) )
+    !
+    ZQGS(:) = ZQGS(:) + ZWQ(:)
+    ZQIS(:) = ZQIS(:) - ZWQ(:)
+  ENDWHERE
+!
+!++CB-- 16/06/2022 il manque le traitement de qricfrr
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%END_PHY(D, 'CFRZ', &
+                           Unpack( zqrs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%END_PHY(D, 'CFRZ', &
+                           Unpack( zqis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%END_PHY(D, 'CFRZ', &
+                           Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      5.2   graupel dry growth (qcdryg, qrdryg, qidryg & qsdryg)
+!
+  ZWQ5(:,:) = 0.
+!
+!*      5.2.1 compute qcdryg
+!
+  WHERE (ZRCDRYG(:) > 0. .AND.                                         &
+         ZRCT(:) > XRTMIN_ELEC(2) .AND. ZRGT(:) > XRTMIN_ELEC(6) .AND. &
+         ABS(ZQCT(:)) > XQTMIN(2)) 
+    ZWQ5(:,1) = XCOEF_RQ_C * ZQCT(:) * ZRCDRYG(:) / ZRCT(:)
+    ZWQ5(:,1) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ5(:,1)) ),ZQCS(:) )
+    !
+    ZQCS(:) = ZQCS(:) - ZWQ5(:,1)
+    ZQGS(:) = ZQGS(:) + ZWQ5(:,1)
+  ENDWHERE
+!
+!
+!*      5.2.2 compute qidryg = qidryg_coal + qidryg_boun
+!
+  WHERE (ZRIDRYG(:) > 0. .AND.                                         &
+         ZRIT(:) > XRTMIN_ELEC(4) .AND. ZRGT(:) > XRTMIN_ELEC(6) .AND. &
+         ABS(ZQIT(:)) > XQTMIN(4))
+    ZWQ5(:,2) = XCOEF_RQ_I * ZQIT(:) * ZRIDRYG(:) / ZRIT(:)         ! QIDRYG_coal
+    ZWQ5(:,2) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ5(:,2)) ),ZQIS(:) )
+    !
+    ZQIS(:) = ZQIS(:) - ZWQ5(:,2)
+    ZQGS(:) = ZQGS(:) + ZWQ5(:,2)
+  END WHERE
+!
+!
+!*      5.2.3 compute non-inductive charging durig ice - graupel collisions
+!
+  ! charge separation during collision between ice and graupel
+  CALL ELEC_IDRYG_B()  ! QIDRYG_boun
+  !
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'NIIG', &
+                            Unpack( -zwq_ni(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'NIIG', &
+                            Unpack(  zwq_ni(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+  !
+  ! Save the NI charging rate
+  DO JL = 1, KMICRO
+    XNI_IDRYG(II1(JL),II2(JL),II3(JL)) = ZWQ_NI(JL) * ZRHODREF(JL) ! C/m3/s
+  END DO
+!
+!
+!*      5.2.4 compute qsdryg
+!
+  IGMASK = 0
+  DO JL = 1, SIZE(GMASK)
+    IF (ZRST(JL) > ZRTMIN(5) .AND. ZLBDAS(JL) > 0. .AND. &
+        ZRGT(JL) > ZRTMIN(6) .AND. ZLBDAG(JL) > 0.) THEN
+      IGMASK = IGMASK + 1
+      I1(IGMASK) = JL
+      GMASK(JL) = .TRUE.
+    ELSE
+      GMASK(JL) = .FALSE.
+    END IF
+  END DO
+  !
+  IF (IGMASK > 0) THEN
+  !
+    ALLOCATE(ZVEC1(IGMASK))
+    ALLOCATE(ZVEC2(IGMASK))
+    ALLOCATE(IVEC1(IGMASK))
+    ALLOCATE(IVEC2(IGMASK))
+    ALLOCATE(ZVECQ1(IGMASK))
+    ALLOCATE(ZVECQ2(IGMASK))
+    ALLOCATE(ZVECQ3(IGMASK))
+    ALLOCATE(ZVECQ4(IGMASK))
+  !
+  ! select the (ZLBDAG,ZLBDAS) couplet
+    DO JL = 1, IGMASK
+      ZVEC1(JL) = ZLBDAG(I1(JL))
+      ZVEC2(JL) = ZLBDAS(I1(JL))
+    END DO
+  !
+  ! find the next lower indice for the ZLBDAG and for the ZLBDAS in the geometrical set 
+  ! of (Lbda_g,Lbda_s) couplet use to tabulate the SDRYG-kernel
+    ZVEC1(1:IGMASK) = MAX(1.00001, MIN(REAL(IDRYLBDAG)-0.00001,  &
+                          ZDRYINTP1G*LOG(ZVEC1(1:IGMASK))+ZDRYINTP2G))
+    IVEC1(1:IGMASK) = INT(ZVEC1(1:IGMASK) )
+    ZVEC1(1:IGMASK) = ZVEC1(1:IGMASK) - REAL(IVEC1(1:IGMASK))
+    !
+    ZVEC2(1:IGMASK) = MAX(1.00001, MIN( REAL(IDRYLBDAS)-0.00001, &
+                          ZDRYINTP1S*LOG(ZVEC2(1:IGMASK))+ZDRYINTP2S))
+    IVEC2(1:IGMASK) = INT(ZVEC2(1:IGMASK))
+    ZVEC2(1:IGMASK) = ZVEC2(1:IGMASK) - REAL(IVEC2(1:IGMASK))
+    !
+    ! perform the bilinear interpolation of the normalized QSDRYG-kernels
+    ! normalized Q-SDRYG-kernel 
+    ZVECQ1(:) = BI_LIN_INTP_V(XKER_Q_SDRYG, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
+    ZWQ5(:,3) = 0.  ! normalement pas utile
+    DO JL = 1, IGMASK
+      ZWQ5(I1(JL),3) = ZVECQ1(JL)
+    END DO    
+    !
+    ! normalized Q-???-kernel
+    IF (CNI_CHARGING == 'TAKAH' .OR. CNI_CHARGING == 'SAUN1' .OR. &
+        CNI_CHARGING == 'SAUN2' .OR. CNI_CHARGING == 'SAP98' .OR. &
+        CNI_CHARGING == 'GARDI' .OR.                              &
+        CNI_CHARGING == 'BSMP1' .OR. CNI_CHARGING == 'BSMP2' .OR. &
+        CNI_CHARGING == 'TEEWC' .OR. CNI_CHARGING == 'TERAR') THEN
+      ZVECQ2(:)  = BI_LIN_INTP_V(XKER_Q_LIMSG, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK) 
+      ZWQ5(:,4) = 0.  ! normalement pas utile
+      DO JL = 1, IGMASK
+        ZWQ5(I1(JL),4) = ZVECQ2(JL)
+      END DO
+    END IF
+    !
+    ! normalized Q-SDRYG-bouncing kernel
+    IF (CNI_CHARGING == 'TAKAH' .OR. CNI_CHARGING == 'HELFA' .OR. &
+        CNI_CHARGING == 'GARDI') THEN
+      ZVECQ3(:)  = BI_LIN_INTP_V(XKER_Q_SDRYGB,IVEC1,IVEC2,ZVEC1,ZVEC2,IGMASK)
+      ZWQ5(:,5) = 0.  ! normalement pas utile
+      DO JL = 1, IGMASK
+        ZWQ5(I1(JL),5) = ZVECQ3(JL)
+      END DO
+    ELSE
+      ZVECQ3(:) = BI_LIN_INTP_V(XKER_Q_SDRYGB1,IVEC1,IVEC2,ZVEC1,ZVEC2,IGMASK)
+      ZVECQ4(:) = BI_LIN_INTP_V(XKER_Q_SDRYGB2,IVEC1,IVEC2,ZVEC1,ZVEC2,IGMASK)
+      ZWQ5(:,6:7) = 0.  ! normalement pas utile
+      DO JL = 1, IGMASK
+        ZWQ5(I1(JL),6) = ZVECQ3(JL) ! Dvqsgmn if charge>0
+        ZWQ5(I1(JL),7) = ZVECQ4(JL) ! Dvqsgmn if charge<0
+      END DO
+    ENDIF
+    !
+    DEALLOCATE(ZVEC1)
+    DEALLOCATE(ZVEC2)
+    DEALLOCATE(IVEC1)
+    DEALLOCATE(IVEC2)
+    DEALLOCATE(ZVECQ1)
+    DEALLOCATE(ZVECQ2)
+    DEALLOCATE(ZVECQ3)
+    DEALLOCATE(ZVECQ4)
+!
+!++CB-- CALCULER E_SG ICI POUR EVITER DES CALCULS REDONDANTS
+    !
+    ! compute QSDRYG_coal
+    WHERE (ZRSDRYG(:) > 0 .AND.                                & !GDRY(:) .AND. &
+           ZRST(:) > XRTMIN_ELEC(5) .AND.                      &
+           ZLBDAS(:) > 0.           .AND. ZLBDAG(:) > 0. .AND. &
+           ABS(ZQST(:)) > XQTMIN(5) .AND. ABS(ZEST(:)) > XESMIN)
+      ZWQ5(:,3) = ZWQ5(:,3) * XFQSDRYG *                                   &
+                  ZCOLSG * EXP(ZCOLEXSG * (ZZT(:) - CST%XTT)) *                &
+                  ZEST(:) * ZRHOCOR(:) / (ZCOR00 * ZRHODREF(:)) *          & 
+                  ZCGT(:) * ZCST(:) *                                      &
+                 (XLBQSDRYG1 * ZLBDAS(:)**(-2.0-XFS) +                     &
+                  XLBQSDRYG2 * ZLBDAS(:)**(-1.0-XFS) * ZLBDAG(:)**(-1.0) + &
+                  XLBQSDRYG3 * ZLBDAS(:)**(-XFS)     * ZLBDAG(:)**(-2.0)) ! QSDRYG_coal
+      ZWQ5(:,3) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,3)) ),ZQSS(:) )
+      !
+      ZQSS(:) = ZQSS(:) - ZWQ5(:,3)
+      ZQGS(:) = ZQGS(:) + ZWQ5(:,3)
+    ELSEWHERE
+      ZWQ5(:,3) = 0.
+    END WHERE
+!
+!
+!*      5.2.5 compute non-inductive charging during snow - graupel collisions
+!
+    ! compute QSDRYG_boun
+    CALL ELEC_SDRYG_B()
+    !
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'NISG', &
+                              Unpack( -zwq_ni(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'NISG', &
+                              Unpack(  zwq_ni(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+    !
+    ! Save the NI charging rate
+    DO JL = 1, KMICRO
+      XNI_SDRYG(II1(JL),II2(JL),II3(JL)) = ZWQ_NI(JL) * ZRHODREF(JL) ! C/m3/s
+    END DO
+  END IF  ! end if igmask>0
+!
+!
+!*      5.2.6 compute qrdryg
+!
+  IGMASK = 0
+  GMASK(:) = .FALSE.
+  DO JL = 1, SIZE(GMASK)
+    IF (ZRRT(JL) > ZRTMIN(3) .AND. ZLBDAR(JL) > 0. .AND. &
+        ZRGT(JL) > ZRTMIN(6) .AND. ZLBDAG(JL) > 0.) THEN
+      IGMASK = IGMASK + 1
+      I1(IGMASK) = JL
+      GMASK(JL) = .TRUE.
+    ELSE
+      GMASK(JL) = .FALSE.
+    END IF
+  END DO
+  !
+  IF (IGMASK > 0) THEN
+    !
+    ALLOCATE(ZVEC1(IGMASK))
+    ALLOCATE(ZVEC2(IGMASK))
+    ALLOCATE(IVEC1(IGMASK))
+    ALLOCATE(IVEC2(IGMASK))
+    ALLOCATE(ZVECQ1(IGMASK))
+    !
+    ! select the (ZLBDAG,ZLBDAR) couplet
+    DO JL = 1, IGMASK
+      ZVEC1(JL) = ZLBDAG(I1(JL))
+      ZVEC2(JL) = ZLBDAR(I1(JL))
+    END DO
+    !
+    ! find the next lower indice for the ZLBDAG and for the ZLBDAR in the geometrical set 
+    ! of (Lbda_g,Lbda_r) couplet use to tabulate the QDRYG-kernel
+    ZVEC1(1:IGMASK) = MAX(1.00001, MIN( REAL(IDRYLBDAG)-0.00001,           &
+                         ZDRYINTP1G*LOG(ZVEC1(1:IGMASK))+ZDRYINTP2G))
+    IVEC1(1:IGMASK) = INT(ZVEC1(1:IGMASK))
+    ZVEC1(1:IGMASK) = ZVEC1(1:IGMASK) - REAL(IVEC1(1:IGMASK))
+    !
+    ZVEC2(1:IGMASK) = MAX(1.00001, MIN( REAL(IDRYLBDAR)-0.00001,           &
+                          ZDRYINTP1R*LOG(ZVEC2(1:IGMASK))+ZDRYINTP2R))
+    IVEC2(1:IGMASK) = INT(ZVEC2(1:IGMASK))
+    ZVEC2(1:IGMASK) = ZVEC2(1:IGMASK) - REAL(IVEC2(1:IGMASK))
+    !
+    ! perform the bilinear interpolation of the normalized RDRYG-kernel
+    ZVECQ1(:) = BI_LIN_INTP_V(XKER_Q_RDRYG, IVEC1, IVEC2, ZVEC1, ZVEC2, IGMASK)
+    ZWQ5(:,4) = 0.
+    DO JL = 1, IGMASK
+      ZWQ5(I1(JL),4) = ZVECQ1(JL)
+    END DO
+    !
+    DEALLOCATE(ZVEC1)
+    DEALLOCATE(ZVEC2)
+    DEALLOCATE(IVEC1)
+    DEALLOCATE(IVEC2)
+    DEALLOCATE(ZVECQ1)  
+    !
+    ! compute QRDRYG
+    WHERE (ZRRDRYG(:) > 0. .AND.                                         &
+           ZRRT(:) > XRTMIN_ELEC(3) .AND. ZRGT(:) > XRTMIN_ELEC(6) .AND. & 
+           ZCRT(:) > 0.             .AND. ZCGT(:) > 0.             .AND. & 
+           ZLBDAR(:) > 0.           .AND. ZLBDAG(:) > 0.           .AND. &
+           ABS(ZERT(:)) > ELECP%XERMIN .AND. ABS(ZQRT(:)) > XQTMIN(3))
+      ZWQ5(:,4) = ZWQ5(:,4) * XFQRDRYG *                                       &
+                  ZRHODREF(:)**(-ZCEXVT) *                                     &
+                  ZERT(:) * ZCGT(:) * ZCRT(:) *                                &
+                 (XLBQRDRYG1 * ZLBDAR(:)**(-2.0 - XFR) +                       &
+                  XLBQRDRYG2 * ZLBDAR(:)**(-1.0 - XFR) * ZLBDAG(:)**(-1.0) +   &
+                  XLBQRDRYG3 * ZLBDAR(:)**(-XFR)       * ZLBDAG(:)**(-2.0))
+      ZWQ5(:,4) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,4)) ),ZQRS(:) )
+      !
+      ZQRS(:) = ZQRS(:) - ZWQ5(:,4)
+      ZQGS(:) = ZQGS(:) + ZWQ5(:,4)
+    ELSEWHERE
+      ZWQ5(:,4) = 0.
+    ENDWHERE
+!    ZRDRYG(:) = ZWQ5(:,1) + ZWQ5(:,2) + ZWQ5(:,3) + ZWQ5(:,4)
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'DRYG', &
+                              Unpack( -zwq5(:,1) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'DRYG', &
+                              Unpack( -zwq5(:,4) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'DRYG', &
+                              Unpack( -zwq5(:,2) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'DRYG', &
+                              Unpack( -zwq5(:,3) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'DRYG', &
+                              Unpack( (zwq5(:,1) + zwq5(:,2) + zwq5(:,3) + zwq5(:,4)) * zrhodj(:), &
+                              mask = odmicro(:, :, :), field = 0. ) )
+    end if
+!
+  END IF  ! end if igmask>0
+!
+!
+!*      5.3   Hallett-Mossop ice multiplication process due to graupel riming (rhmgi)
+!
+  IF (HCLOUD == 'LIMA') THEN
+    CALL COMPUTE_CHARGE_TRANSFER (ZRGHMGI, ZRGT, ZQGT, PTSTEP,          &
+                                  XRTMIN_ELEC(6), XQTMIN(6), XCOEF_RQ_G, &
+                                  ZWQ, ZQGS, ZQIS)          
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'HMG', &
+                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'HMG', &
+                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+  END IF
+!
+!
+!*      5.4   graupel wet growth (rcwetg, rrwetg, riwetg & rswetg)
+!
+!*      5.4.1 compute qcwetg
+!
+  ZWQ5(:,5) = 0.
+  WHERE (ZRCWETG(:) > 0. .AND. ZRCT(:) > XRTMIN_ELEC(2) .AND. ABS(ZQCT(:)) > XQTMIN(2) .AND. &
+         ZRGT(:) > XRTMIN_ELEC(6))
+    ZWQ5(:,5) = XCOEF_RQ_C * ZRCWETG(:) * ZQCT(:) / ZRCT(:)
+    ZWQ5(:,5) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ5(:,5)) ),ZQCS(:) )
+  END WHERE
+!
+!
+!*      5.4.1 compute qiwetg
+!
+  ZWQ5(:,6) = 0.
+  WHERE (ZRIWETG(:) > 0. .AND. ZRIT(:) > XRTMIN_ELEC(4) .AND. ABS(ZQIT(:)) > XQTMIN(4) .AND. &
+         ZRGT(:) > XRTMIN_ELEC(6))
+    ZWQ5(:,6) = XCOEF_RQ_I * ZRIWETG(:) * ZQIT(:) / ZRIT(:)
+    ZWQ5(:,6) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ5(:,6)) ),ZQIS(:) )
+  END WHERE
+!
+!
+!*      5.4.2 compute qswetg
+!
+  ZWQ5(:,7) = 0.
+  WHERE (ZRSWETG(:) > 0. .AND. ZRST(:) > XRTMIN_ELEC(5) .AND. ABS(ZQST(:)) > XQTMIN(5) .AND. &
+         ZRGT(:) > XRTMIN_ELEC(6))
+    ZWQ5(:,7) = XCOEF_RQ_S * ZRSWETG(:) * ZQST(:) / ZRST(:)
+    ZWQ5(:,7) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,7)) ),ZQSS(:) )
+  END WHERE
+!
+!
+!*      5.4.3 compute qrwetg
+!
+  ZWQ5(:,8) = 0.
+  WHERE (ZRRWETG(:) > 0. .AND. ZRRT(:) > XRTMIN_ELEC(3) .AND. ABS(ZQRT(:)) > XQTMIN(3) .AND. &
+         ZRGT(:) > XRTMIN_ELEC(6))
+    ZWQ5(:,8) = XCOEF_RQ_R * ZQRT(:) * ZRRWETG(:) / ZRRT(:)
+    ZWQ5(:,8) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,8)) ),ZQRS(:) )
+  ENDWHERE
+!
+!
+!*      5.4.4 conversion of graupel into hail (rwetgh)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%INIT_PHY(D, 'WETG', &
+                            Unpack( zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+  IF (KRR == 7) THEN
+    ZWQ5(:,9) = 0.
+    WHERE (ZRWETGH(:) > 0. .AND. ZRGT(:) > XRTMIN_ELEC(6) .AND. ABS(ZQGT(:)) > XQTMIN(6))
+      ZWQ5(:,9) = XCOEF_RQ_G * ZQGT(:) * ZRWETGH(:) / ZRGT(:)
+      ZWQ5(:,9) = SIGN( MIN( ABS(ZQGT(:)/PTSTEP),ABS(ZWQ5(:,9)) ),ZQGS(:) )
+    END WHERE
+    !
+    WHERE (ZRCWETG(:) > 0. .OR. ZRRWETG(:) > 0. .OR. ZRIWETG(:) > 0. .OR. &
+           ZRSWETG(:) > 0. .OR. ZRWETGH(:) > 0.)
+      ZQCS(:) = ZQCS(:) - ZWQ5(:,5)
+      ZQRS(:) = ZQRS(:) - ZWQ5(:,8)
+      ZQIS(:) = ZQIS(:) - ZWQ5(:,6)
+      ZQSS(:) = ZQSS(:) - ZWQ5(:,7)
+      ZQGS(:) = ZQGS(:) + ZWQ5(:,5) + ZWQ5(:,8) + ZWQ5(:,6) + ZWQ5(:,7) - ZWQ5(:,9)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,9)
+    END WHERE
+  ELSE IF (KRR == 6) THEN
+    WHERE (ZRCWETG(:) > 0. .OR. ZRRWETG(:) > 0. .OR. ZRIWETG(:) > 0. .OR. &
+           ZRSWETG(:) > 0.)
+      ZQCS(:) = ZQCS(:) - ZWQ5(:,5)
+      ZQRS(:) = ZQRS(:) - ZWQ5(:,8)
+      ZQIS(:) = ZQIS(:) - ZWQ5(:,6)
+      ZQSS(:) = ZQSS(:) - ZWQ5(:,7)
+      ZQGS(:) = ZQGS(:) + ZWQ5(:,5) + ZWQ5(:,8) + ZWQ5(:,6) + ZWQ5(:,7)
+    END WHERE
+  END IF
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'WETG', &
+                           Unpack( -zwq5(:,5) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'WETG', &
+                           Unpack( -zwq5(:,8) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'WETG', &
+                           Unpack( -zwq5(:,6) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'WETG', &
+                           Unpack( -zwq5(:,7) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%END_PHY(D, 'WETG', &
+                           Unpack(  zqgs(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    if ( krr == 7 ) &
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 6 )%PTR%ADD_PHY(D, 'WETG', &
+                           Unpack( zwq5(:,9) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!*      5.5   compute charge separation by the inductive mechanism
+!
+! Computation of the charge transfer rate during inductive mechanism
+! Only the bouncing droplet-graupel collision when the graupel is in the dry 
+! growth mode is considered
+! The electric field is limited to 100 kV/m
+!
+  IF (LINDUCTIVE) THEN
+    ZWQ(:) = 0.
+    GMASK(:) = ZRCDRYG(:) > 0. 
+    IGMASK   = COUNT(GMASK(:))
+    !
+    IF (IGMASK > 0) THEN
+      ZWQ(:) = 0.
+      !
+      WHERE (GMASK(:) .AND.                                      &
+             ZEFIELDW(:) /= 0. .AND. ABS(ZEGT(:)) > ELECP%XEGMIN .AND. &
+             ZLBDAG(:) > 0. .AND. ZCGT(:) > 0. .AND.             &
+             ZRGT(:) > XRTMIN_ELEC(6) .AND. ZRCT(:) > XRTMIN_ELEC(2))
+        ZWQ(:) = XIND1 * ZCGT(:) * ZRHOCOR(:) *                             &
+                (XIND2 * SIGN(MIN(100.E3, ABS(ZEFIELDW(:))), ZEFIELDW(:)) * &
+                 ZLBDAG(:) **(-2.-ZDG) -                                    &
+                 XIND3 * ZEGT(:) * ZLBDAG(:)**(-XFG-ZDG))
+        ZWQ(:) = ZWQ(:) / ZRHODREF(:)
+        !
+        ZQGS(:) = ZQGS(:) + ZWQ(:)
+        ZQCS(:) = ZQCS(:) - ZWQ(:)
+      END WHERE
+    !
+      if ( BUCONF%LBUDGET_SV ) then
+        CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'INCG', &
+                               Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+        CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'INCG', &
+                               Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      end if    
+      !
+      ! Save the inductive charging rate
+      DO JL = 1, KMICRO
+        XIND_RATE(II1(JL),II2(JL),II3(JL)) = ZWQ(JL) * ZRHODREF(JL) ! C/m3/s
+      END DO
+    END IF
+    !
+    ! Save the inductive charging rate
+    DO JL = 1, KMICRO
+      XIND_RATE(II1(JL),II2(JL),II3(JL)) = ZWQ(JL) * ZRHODREF(JL) ! C/m3/s
+    END DO
+  END IF
+!
+!
+!*      5.6   melting of the graupel (rgmltr)
+!
+  CALL COMPUTE_CHARGE_TRANSFER (ZRGMLTR, ZRGT, ZQGT, PTSTEP, &
+                                XRTMIN_ELEC(6), XQTMIN(6), XCOEF_RQ_G, &
+                                ZWQ, ZQGS, ZQRS)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'GMLT', &
+                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'GMLT', &
+                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!------------------------------------------------------------------
+!
+!*      6.    COMPUTE THE OPTIONAL SECONDARY ICE PRODUCTION
+!             ---------------------------------------------
+!
+! dans un premier temps, on considere que la charge echangee est proportionnelle
+! a la masse echangee
+!
+!*      6.1   collisional ice breakup (cibu)
+!
+  IF (HCLOUD == 'LIMA' .AND. LCIBU) &
+    CALL COMPUTE_CHARGE_TRANSFER (ZRICIBU, ZRST, ZQST, PTSTEP,           &
+                                  XRTMIN_ELEC(5), XQTMIN(5), XCOEF_RQ_S, &
+                                  ZWQ, ZQSS, ZQIS)
+!
+!*      6.2   raindrop shattering freezing (rdsf)
+!
+  IF (HCLOUD == 'LIMA' .AND. LRDSF) &
+    CALL COMPUTE_CHARGE_TRANSFER (ZRIRDSF, ZRRT, ZQRT, PTSTEP,           &
+                                  XRTMIN_ELEC(3), XQTMIN(3), XCOEF_RQ_R, &
+                                  ZWQ, ZQRS, ZQIS)
+!
+!
+!------------------------------------------------------------------
+!
+!*      7.    COMPUTE THE FAST COLD PROCESS SOURCES FOR r_h
+!             ---------------------------------------------
+!
+  IF (KRR == 7) THEN
+!
+!*      7.1   wet growth of hail (qcweth, qrweth, qiweth, qsweth, qgweth)
+!
+    ZWQ5(:,:) = 0.
+    !
+    WHERE (ZRCWETH(:) > 0. .AND. ZRCT(:) > XRTMIN_ELEC(2))
+      ZWQ5(:,1) = XCOEF_RQ_C * ZQCT(:) * ZRCWETH(:) / ZRCT(:)        ! QCWETH
+      ZWQ5(:,1) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ5(:,1)) ),ZQCS(:) )
+      !
+      ZQCS(:) = ZQCS(:) - ZWQ5(:,1)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,1)
+    END WHERE
+    !
+    WHERE (ZRIWETH(:) > 0. .AND. ZRIT(:) > XRTMIN_ELEC(4))
+      ZWQ5(:,2) = XCOEF_RQ_I * ZQIT(:) * ZRIWETH(:) / ZRIT(:)        ! QIWETH
+      ZWQ5(:,2) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ5(:,2)) ),ZQIS(:) )
+      !
+      ZQIS(:) = ZQIS(:) - ZWQ5(:,2)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,2)
+    END WHERE
+    !
+    WHERE (ZRSWETH(:) > 0. .AND. ZRST(:) > XRTMIN_ELEC(5))
+      ZWQ5(:,3) = XCOEF_RQ_S * ZQST(:) * ZRSWETH(:) / ZRST(:)        ! QSWETH
+      ZWQ5(:,3) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,3)) ),ZQSS(:) )
+      !
+      ZQSS(:) = ZQSS(:) - ZWQ5(:,3)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,3)
+    END WHERE
+    !
+    WHERE (ZRGWETH(:) > 0. .AND. ZRGT(:) > XRTMIN_ELEC(6))
+      ZWQ5(:,5) = XCOEF_RQ_G * ZQGT(:) * ZRGWETH(:) / ZRGT(:)        ! QGWETH
+      ZWQ5(:,5) = SIGN( MIN( ABS(ZQGT(:)/PTSTEP),ABS(ZWQ5(:,5)) ),ZQGS(:) )
+      !
+      ZQGS(:) = ZQGS(:) - ZWQ5(:,5)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,5)
+    END WHERE
+    !
+    WHERE (ZRRWETH(:) > 0. .AND. ZRRT(:) > XRTMIN_ELEC(3))
+      ZWQ5(:,4) = XCOEF_RQ_R * ZQRT(:) * ZRRWETH(:) / ZRRT(:)        ! QRWETH
+      ZWQ5(:,4) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,4)) ),ZQRS(:) )
+      !
+      ZQRS(:) = ZQRS(:) - ZWQ5(:,4)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,4)
+    END WHERE
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'WETH', &
+                             Unpack( -zwq5(:, 1) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'WETH', &
+                             Unpack( -zwq5(:, 4) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'WETH', &
+                             Unpack( -zwq5(:, 2) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'WETH', &
+                             Unpack( -zwq5(:, 3) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'WETH', &
+                             Unpack( -zwq5(:, 5) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 6 )%PTR%ADD_PHY(D, 'WETH',                      &
+                             Unpack( ( zwq5(:, 1) + zwq5(:, 2) + zwq5(:, 3) + zwq5(:, 4) + zwq5(:, 5) ) &
+                                       * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+!
+!
+!*      7.2   dry growth of hail (qcdryh, qrdryh, qidryh, qsdryh, qgdryh)
+!
+    ZWQ5(:,:) = 0.
+    !
+    WHERE (ZRCDRYH(:) > 0. .AND. ZRCT(:) > XRTMIN_ELEC(2))
+      ZWQ5(:,1) = XCOEF_RQ_C * ZQCT(:) * ZRCDRYH(:) / ZRCT(:)        ! QCDRYH
+      ZWQ5(:,1) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ5(:,1)) ),ZQCS(:) )
+      !
+      ZQCS(:) = ZQCS(:) - ZWQ5(:,1)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,1)
+    END WHERE
+    !
+    WHERE (ZRIDRYH(:) > 0. .AND. ZRIT(:) > XRTMIN_ELEC(4))
+      ZWQ5(:,2) = XCOEF_RQ_I * ZQIT(:) * ZRIDRYH(:) / ZRIT(:)        ! QIDRYH
+      ZWQ5(:,2) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ5(:,2)) ),ZQIS(:) )
+      !
+      ZQIS(:) = ZQIS(:) - ZWQ5(:,2)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,2)
+    END WHERE
+    !
+    WHERE (ZRSDRYH(:) > 0. .AND. ZRST(:) > XRTMIN_ELEC(5))
+      ZWQ5(:,3) = XCOEF_RQ_S * ZQST(:) * ZRSDRYH(:) / ZRST(:)        ! QSDRYH
+      ZWQ5(:,3) = SIGN( MIN( ABS(ZQST(:)/PTSTEP),ABS(ZWQ5(:,3)) ),ZQSS(:) )
+      !
+      ZQSS(:) = ZQSS(:) - ZWQ5(:,3)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,3)
+    END WHERE
+    !
+    WHERE (ZRGDRYH(:) > 0. .AND. ZRGT(:) > XRTMIN_ELEC(6))
+      ZWQ5(:,5) = XCOEF_RQ_G * ZQGT(:) * ZRGDRYH(:) / ZRGT(:)        ! QGDRYH
+      ZWQ5(:,5) = SIGN( MIN( ABS(ZQGT(:)/PTSTEP),ABS(ZWQ5(:,5)) ),ZQGS(:) )
+      !
+      ZQGS(:) = ZQGS(:) - ZWQ5(:,5)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,5)
+    END WHERE
+    !
+    WHERE (ZRRDRYH(:) > 0. .AND. ZRRT(:) > XRTMIN_ELEC(3))
+      ZWQ5(:,4) = XCOEF_RQ_R * ZQRT(:) * ZRRDRYH(:) / ZRRT(:)        ! QRDRYH
+      ZWQ5(:,4) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ5(:,4)) ),ZQRS(:) )
+      !
+      ZQRS(:) = ZQRS(:) - ZWQ5(:,4)
+      ZQHS(:) = ZQHS(:) + ZWQ5(:,4)
+    END WHERE
+!
+!
+!*      7.3   conversion of hail into graupel (qdryhg)
+!
+    CALL COMPUTE_CHARGE_TRANSFER (ZRDRYHG, ZRHT, ZQHT, PTSTEP, &
+                                  XRTMIN_ELEC(7), XQTMIN(7), XCOEF_RQ_H, &
+                                  ZWQ, ZQHS, ZQGS)
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'DRYH', &
+                             Unpack( -zwq5(:, 1) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'DRYH', &
+                             Unpack( -zwq5(:, 4) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'DRYH', &
+                             Unpack( -zwq5(:, 2) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 4 )%PTR%ADD_PHY(D, 'DRYH', &
+                             Unpack( -zwq5(:, 3) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 5 )%PTR%ADD_PHY(D, 'DRYH', &
+                             Unpack( (-zwq5(:, 5) - zwq(:)) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 6 )%PTR%ADD_PHY(D, 'DRYH',                      &
+                             Unpack( ( zwq5(:, 1) + zwq5(:, 2) + zwq5(:, 3) + zwq5(:, 4) + zwq5(:, 5) + zwq(:) ) &
+                                       * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+!
+!
+!*      7.4   melting of hail (qhmltr)
+!
+    CALL COMPUTE_CHARGE_TRANSFER (ZRHMLTR, ZRHT, ZQHT, PTSTEP, &
+                                  XRTMIN_ELEC(7), XQTMIN(7), XCOEF_RQ_H, &
+                                  ZWQ, ZQHS, ZQRS)
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'HMLT', &
+                             Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 6 )%PTR%ADD_PHY(D, 'HMLT', &
+                             Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+!
+  END IF  ! end if krr==7
+!
+!
+!------------------------------------------------------------------
+!
+!*      8.    COMPUTE THE FAST COLD PROCESS SOURCES FOR r_i
+!             ---------------------------------------------
+!
+!*      8.1   Bergeron-Findeisen effect (qcberi)
+!
+  CALL COMPUTE_CHARGE_TRANSFER (ZRCBERI, ZRCT, ZQCT, PTSTEP, &
+                                XRTMIN_ELEC(2), XQTMIN(2), XCOEF_RQ_C, &
+                                ZWQ, ZQCS, ZQIS)
+!
+  if ( BUCONF%LBUDGET_SV ) then
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'BERFI', &
+                           Unpack( -zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'BERFI', &
+                           Unpack(  zwq(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+  end if
+!
+!
+!------------------------------------------------------------------
+!
+!*      9.    COMPUTE THE CHARGE TRANSFER ASSOCIATED WITH THE CORRECTION TERM
+!             ---------------------------------------------------------------
+!
+  IF (HCLOUD == 'LIMA') THEN
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%INIT_PHY(D, 'CORR2', &
+                              Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%INIT_PHY(D, 'CORR2', &
+                              Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if
+!
+    ZWQ1(:) = 0.
+    WHERE (ZRCCORR2(:) .NE. 0. .AND. ZRCT(:) .GT. XRTMIN_ELEC(2))
+      ZWQ1(:) = XCOEF_RQ_C * ZQCT(:) * ZRCCORR2(:) / ZRCT(:)
+      ZWQ(:) = SIGN( MIN( ABS(ZQCT(:)/PTSTEP),ABS(ZWQ1(:)) ),ZQCS(:) )
+      !
+      ZQCS(:)  = ZQCS(:)  - ZWQ1(:)
+      ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ1(:)/ELECD%XECHARGE )
+      ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ1(:)/ELECD%XECHARGE )      
+    END WHERE
+    !
+    !
+    ZWQ2(:) = 0.
+    WHERE (ZRRCORR2(:) .NE. 0. .AND. ZRRT(:) .GT. XRTMIN_ELEC(3))
+      ZWQ2(:) = XCOEF_RQ_R * ZQRT(:) * ZRRCORR2(:) / ZRRT(:)
+      ZWQ2(:) = SIGN( MIN( ABS(ZQRT(:)/PTSTEP),ABS(ZWQ2(:)) ),ZQRS(:) )
+      !
+      ZQRS(:)  = ZQRS(:)  - ZWQ2(:)
+      ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ2(:)/ELECD%XECHARGE )
+      ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ2(:)/ELECD%XECHARGE )      
+    END WHERE
+    !
+    ZWQ3(:) = 0.
+    WHERE (ZRICORR2(:) .NE. 0. .AND. ZRIT(:) .GT. XRTMIN_ELEC(4))
+      ZWQ3(:) = XCOEF_RQ_I * ZQIT(:) * ZRICORR2(:) / ZRIT(:)
+      ZWQ3(:) = SIGN( MIN( ABS(ZQIT(:)/PTSTEP),ABS(ZWQ3(:)) ),ZQIS(:) )
+      !
+      ZQIS(:)  = ZQIS(:)  - ZWQ3(:)
+      ZQPIS(:) = ZQPIS(:) + MAX( 0.0,ZWQ3(:)/ELECD%XECHARGE )
+      ZQNIS(:) = ZQNIS(:) - MIN( 0.0,ZWQ3(:)/ELECD%XECHARGE )      
+    END WHERE
+!
+    if ( BUCONF%LBUDGET_SV ) then
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG )%PTR%END_PHY(D, 'CORR2', &
+                             Unpack( zqpis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECEND )%PTR%END_PHY(D, 'CORR2', &
+                             Unpack( zqnis(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 1 )%PTR%ADD_PHY(D, 'CORR2', &
+                             Unpack( zwq1(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 2 )%PTR%ADD_PHY(D, 'CORR2', &
+                             Unpack( zwq2(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )                     
+      CALL TBUDGETS(NBUDGET_SV1 - 1 + NSV_ELECBEG + 3 )%PTR%ADD_PHY(D, 'CORR2', &
+                             Unpack( zwq3(:) * zrhodj(:), mask = odmicro(:, :, :), field = 0. ) )
+    end if    
+  END IF
+!
+!
+!------------------------------------------------------------------
+!
+!*      X.    COMPUTE THE SEDIMENTATION SOURCE FOR Q_x
+!             ----------------------------------------
+!
+! The sedimentation for electric charges is computed directly 
+! in the microphysics scheme
+!
+!
+!------------------------------------------------------------------
+!
+!*      10.   UPDATE VOLUMETRIC CHARGE CONCENTRATIONS
+!             ---------------------------------------
+!
+  DO JL = 1, KMICRO
+    PQPIS(II1(JL),II2(JL),II3(JL)) = ZQPIS(JL)
+    PQNIS(II1(JL),II2(JL),II3(JL)) = ZQNIS(JL)
+    PQCS (II1(JL),II2(JL),II3(JL)) = ZQCS(JL)
+    PQRS (II1(JL),II2(JL),II3(JL)) = ZQRS(JL)
+    PQIS (II1(JL),II2(JL),II3(JL)) = ZQIS(JL)
+    PQSS (II1(JL),II2(JL),II3(JL)) = ZQSS(JL)
+    PQGS (II1(JL),II2(JL),II3(JL)) = ZQGS(JL)
+  END DO
+  IF ( KRR == 7 ) THEN
+    DO JL = 1, KMICRO
+      PQHS(II1(JL),II2(JL),II3(JL)) = ZQHS(JL)
+    END DO
+  END IF
+END IF  ! end if kmicro>0
+!
+!
+!------------------------------------------------------------------
+!
+!*      11.   DEALLOCATE
+!             ----------
+!
+IF (ALLOCATED( ZDELTALWC )) DEALLOCATE( ZDELTALWC )   
+IF (ALLOCATED( ZFT ))       DEALLOCATE( ZFT )
+!  
+IF (ALLOCATED( ZEW ))          DEALLOCATE( ZEW )
+IF (ALLOCATED( ZSAUNSK ))      DEALLOCATE( ZSAUNSK )
+IF (ALLOCATED( ZSAUNIM ))      DEALLOCATE( ZSAUNIM )
+IF (ALLOCATED( ZSAUNIN ))      DEALLOCATE( ZSAUNIN )
+IF (ALLOCATED( ZSAUNSM ))      DEALLOCATE( ZSAUNSM )
+IF (ALLOCATED( ZSAUNSN ))      DEALLOCATE( ZSAUNSN )
+IF (ALLOCATED( ZFQIAGGS ))     DEALLOCATE( ZFQIAGGS )
+IF (ALLOCATED( ZFQIDRYGBS ))   DEALLOCATE( ZFQIDRYGBS )
+IF (ALLOCATED( ZLBQSDRYGB1S )) DEALLOCATE( ZLBQSDRYGB1S )
+IF (ALLOCATED( ZLBQSDRYGB2S )) DEALLOCATE( ZLBQSDRYGB2S )
+IF (ALLOCATED( ZLBQSDRYGB3S )) DEALLOCATE( ZLBQSDRYGB3S )
+!
+IF (ALLOCATED( ZDQ ))        DEALLOCATE( ZDQ )
+IF (ALLOCATED( ZRAR ))       DEALLOCATE( ZRAR )
+IF (ALLOCATED( ZDQ_IS ))     DEALLOCATE( ZDQ_IS )
+IF (ALLOCATED( ZSAUNIM_IS )) DEALLOCATE( ZSAUNIM_IS )
+IF (ALLOCATED( ZSAUNIN_IS )) DEALLOCATE( ZSAUNIN_IS )
+IF (ALLOCATED( ZDQ_IG ))     DEALLOCATE( ZDQ_IG )
+IF (ALLOCATED( ZSAUNIM_IG )) DEALLOCATE( ZSAUNIM_IG )
+IF (ALLOCATED( ZSAUNIN_IG )) DEALLOCATE( ZSAUNIN_IG )
+IF (ALLOCATED( ZDQ_SG ))     DEALLOCATE( ZDQ_SG )
+IF (ALLOCATED( ZSAUNSK_SG )) DEALLOCATE( ZSAUNSK_SG )
+IF (ALLOCATED( ZSAUNSM_SG )) DEALLOCATE( ZSAUNSM_SG )
+IF (ALLOCATED( ZSAUNSN_SG )) DEALLOCATE( ZSAUNSN_SG )
+!
+IF (ALLOCATED( ZEFIELDW ))   DEALLOCATE( ZEFIELDW )
+!
+IF (ALLOCATED(ZRCMLTSR)) DEALLOCATE(ZRCMLTSR)
+IF (ALLOCATED(ZRICFRR))  DEALLOCATE(ZRICFRR)
+IF (ALLOCATED(ZRVHENC))  DEALLOCATE(ZRVHENC)
+IF (ALLOCATED(ZRCHINC))  DEALLOCATE(ZRCHINC)
+IF (ALLOCATED(ZRVHONH))  DEALLOCATE(ZRVHONH)
+IF (ALLOCATED(ZRRCVRC))  DEALLOCATE(ZRRCVRC)
+IF (ALLOCATED(ZRICNVI))  DEALLOCATE(ZRICNVI)
+IF (ALLOCATED(ZRVDEPI))  DEALLOCATE(ZRVDEPI)
+IF (ALLOCATED(ZRSHMSI))  DEALLOCATE(ZRSHMSI)
+IF (ALLOCATED(ZRGHMGI))  DEALLOCATE(ZRGHMGI)
+IF (ALLOCATED(ZRICIBU))  DEALLOCATE(ZRICIBU)
+IF (ALLOCATED(ZRIRDSF))  DEALLOCATE(ZRIRDSF)
+IF (ALLOCATED(ZRCCORR2)) DEALLOCATE(ZRCCORR2)
+IF (ALLOCATED(ZRRCORR2)) DEALLOCATE(ZRRCORR2)
+IF (ALLOCATED(ZRICORR2)) DEALLOCATE(ZRICORR2)
+IF (ALLOCATED(ZRWETGH))  DEALLOCATE(ZRWETGH)
+IF (ALLOCATED(ZRCWETH))  DEALLOCATE(ZRCWETH)
+IF (ALLOCATED(ZRIWETH))  DEALLOCATE(ZRIWETH)
+IF (ALLOCATED(ZRSWETH))  DEALLOCATE(ZRSWETH)
+IF (ALLOCATED(ZRGWETH))  DEALLOCATE(ZRGWETH)
+IF (ALLOCATED(ZRRWETH))  DEALLOCATE(ZRRWETH)
+IF (ALLOCATED(ZRCDRYH))  DEALLOCATE(ZRCDRYH)
+IF (ALLOCATED(ZRRDRYH))  DEALLOCATE(ZRRDRYH)
+IF (ALLOCATED(ZRIDRYH))  DEALLOCATE(ZRIDRYH)
+IF (ALLOCATED(ZRSDRYH))  DEALLOCATE(ZRSDRYH)
+IF (ALLOCATED(ZRGDRYH))  DEALLOCATE(ZRGDRYH)
+IF (ALLOCATED(ZRHMLTR))  DEALLOCATE(ZRHMLTR)
+IF (ALLOCATED(ZRDRYHG))  DEALLOCATE(ZRDRYHG)
 !
 !------------------------------------------------------------------
 END ASSOCIATE

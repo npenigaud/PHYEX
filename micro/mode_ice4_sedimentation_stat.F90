@@ -123,19 +123,18 @@ LLSEA_AND_TOWN=PRESENT(PSEA).AND.PRESENT(PTOWN)
 !*       2.    compute the fluxes
 !
 ! Start shift mechanism:
-!!!!ISHIFT=0
-!!!!CALL SHIFT
 
 ! Initialize vertical loop
+IKPLUS=0
 DO JRR=IRC,KRR
-!!!!  ZSED(:,IKPLUS,JRR) = 0.
-  ZSED(:,0,JRR) = 0.
+  ZSED(:,IKPLUS,JRR) = 0.
 ENDDO
 
 ! calculation sedimentation flux
 DO JK = IKE , IKB, -1*IKL
 
-  !!attempt to replace the shift mechanism
+  !replaces the shift mechanism, necessary for GPU port
+  !current level now takes place of previous one
   IKPLUS = MODULO(IKE-JK,2)
   IK = 1 - IKPLUS
 
@@ -212,9 +211,6 @@ DO JK = IKE , IKB, -1*IKL
       ENDIF
     ENDDO
   ENDIF
-
-  ! shift mechanism : current level now takes the place of previous one
-!!!!  CALL SHIFT
 
 ENDDO ! JK
 

@@ -95,12 +95,12 @@ CONTAINS
     IKL = D%NKL
     IIJE = D%NIJE
     IIJB = D%NIJB
-!!    IF (TURBN%CTURBDIM /= '1DIM') THEN
-!!      CALL MXF_PHY(D, PDXX, PWORK1)
-!!      IF (.not.O2D) THEN
-!!        CALL MYF_PHY(D, PDYY, PWORK2)
-!!      END IF
-!!    END IF
+    IF (TURBN%CTURBDIM /= '1DIM') THEN
+      CALL MXF_PHY(D, PDXX, PWORK1)
+      IF (.not.O2D) THEN
+        CALL MYF_PHY(D, PDYY, PWORK2)
+      END IF
+    END IF
     ! 1D turbulence scheme
 DO JK=IKTB, IKTE
       DO JIJ=IIJB, IIJE
