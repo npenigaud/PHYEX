@@ -36,8 +36,6 @@ CONTAINS
                                   PRHMLTR, PRDRYHG,                                           & !|     for
                                   PRHT, PCHT, PQHT, PQHS)                                 !--    hail
 
-!$ACDC singlecolumn --dummy
-!$ACDC manyblocks --dummy --ignore-array-variables=PBUDGETS
 
 !     ##########################################################################################
 !
@@ -147,7 +145,7 @@ REAL,                                 INTENT(IN)    :: PTSTEP  ! Double Time ste
                                                                ! (single if cold start)
 INTEGER,                              INTENT(IN)    :: KRR     ! Number of moist variable
 !
-LOGICAL, DIMENSION(D%NIJT,D%NKT), INTENT(IN)   :: ODMICRO ! mask to limit computation
+LOGICAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(IN)   :: ODMICRO ! mask to limit computation
 CHARACTER (LEN=4),      INTENT(IN)   ::  HCLOUD       ! Kind of microphysical scheme
 !
 REAL, DIMENSION(D%NIT,D%NJT,D%NKT),   INTENT(IN)    :: PRHODREF! Reference density
@@ -214,10 +212,10 @@ REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRVHENC, &  ! Cld
                                                                PRCCORR2, PRRCORR2, PRICORR2 ! Correction inside LIMA splitting
 ! microphysics rates related to hail (krr == 7, lhail = .t.)
 REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PRWETGH, &  ! Conversion of graupel into hail
-                                                                    PRCWETH, PRIWETH, PRSWETH, PRGWETH, PRRWETH, & ! Dry growth of hail
-                                                                    PRCDRYH, PRIDRYH, PRSDRYH, PRRDRYH, PRGDRYH, & ! Wet growth of hail
-                                                                    PRHMLTR, &                                     ! Melting of hail  
-                                                                    PRDRYHG     ! Conversion of hail into graupel
+                                                               PRCWETH, PRIWETH, PRSWETH, PRGWETH, PRRWETH, & ! Dry growth of hail
+                                                               PRCDRYH, PRIDRYH, PRSDRYH, PRRDRYH, PRGDRYH, & ! Wet growth of hail
+                                                               PRHMLTR, &                                     ! Melting of hail  
+                                                               PRDRYHG     ! Conversion of hail into graupel
 !
 REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCCT   ! Cloud droplets conc. at t
 REAL, DIMENSION(D%NIT,D%NJT,D%NKT), OPTIONAL, INTENT(IN)    :: PCRT   ! Raindrops conc. at t

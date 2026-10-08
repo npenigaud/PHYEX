@@ -14,9 +14,6 @@ SUBROUTINE ICE4_BUDGETS(D, PARAMI, BUCONF, KRR, &
                         PRVHENI, PBUDGETS, &
                         TBUDGETS, KBUDGETS)
 
-!$ACDC singlecolumn --dummy
-!$ACDC manyblocks --dummy --ignore-array-variables=PBUDGETS --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR
-
 !
 !*       0.    DECLARATIONS
 !              ------------

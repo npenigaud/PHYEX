@@ -12,8 +12,7 @@ SUBROUTINE ICE4_STEPPING(D, CST, PARAMI, ICEP, ICED, BUCONF, PTSTEP, &
                         &PBUDGETS, PLATHAM_IAGGS)
 
 !$ACDC singlecolumn --nocreate-interface
-!$ACDC manyblocks --nocreate-interface --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR &
-!$ACDC --parallel-iterator-list=JV --ignore-array-variables=PBUDGETS --reduction-to-loop
+!$ACDC manyblocks --nocreate-interface --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR --parallel-iterator-list=JV --ignore-array-variables=PBUDGETS --reduction-to-loop
 
 !     ######################################################################
 !
