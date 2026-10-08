@@ -9,7 +9,7 @@ SUBROUTINE TRIDIAG_MASSFLUX(D,PVARM,PF,PDFDT,PTSTEP,PIMPL,  &
                                  PDZZ,PRHODJ,PVARP             )
 
 !$ACDC singlecolumn
-
+!$ACDC manyblocks
        USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 !      #################################################
 !

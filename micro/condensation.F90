@@ -15,6 +15,7 @@
                            &PICE_CLD_WGT)
 
 !$ACDC singlecolumn --nocreate-interface
+!$ACDC manyblocks --nocreate-interface  
 
 !   ################################################################################
 !

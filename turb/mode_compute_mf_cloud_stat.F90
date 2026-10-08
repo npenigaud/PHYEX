@@ -17,6 +17,7 @@ CONTAINS
                             &PEMF, PTHL_UP, PRT_UP,&
                             &PSIGMF)
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy
 
 !     #################################################################
 !!

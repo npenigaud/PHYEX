@@ -6,6 +6,7 @@
 MODULE MODE_CLOUD_MODIF_LM
 
 !$ACDC singlecolumn --dummy
+!$ACDC manyblocks --dummy
 
 IMPLICIT NONE
 CONTAINS

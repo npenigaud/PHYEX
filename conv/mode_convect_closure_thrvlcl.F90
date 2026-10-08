@@ -8,6 +8,7 @@ CONTAINS
                                           KLCL, KDPL, KPBL )
 
 !$ACDC singlecolumn
+!$ACDC manyblocks  
 
       USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 !     #########################################################################

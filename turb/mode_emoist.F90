@@ -5,6 +5,7 @@
 MODULE MODE_EMOIST
 
 !$ACDC singlecolumn
+!$ACDC manyblocks --parallel-iterator-list=JRR
 
 IMPLICIT NONE
 CONTAINS

@@ -22,6 +22,7 @@ INTERFACE
                                    PT, PLVFACT, PLSFACT, PWR, PWTH, PZCONC3D, OMICRO,    &
                                    PRVHENI, PZZZZ )
 !$ACDC singlecolumn
+!$ACDC manyblocks
 
 !
 USE MODD_BUDGET,         ONLY: TBUDGETDATA_PTR, TBUDGETCONF_t

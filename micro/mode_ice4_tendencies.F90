@@ -23,6 +23,7 @@ SUBROUTINE ICE4_TENDENCIES(CST, PARAMI, ICEP, ICED, BUCONF, D, &
                           &PRAINFR)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks --not-present-types=TBUDGETCONF_T --parallel-iterator-list=JV
 
 !!
 !!**  PURPOSE

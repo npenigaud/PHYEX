@@ -22,6 +22,7 @@ INTERFACE
                             &PHLC_HRC_MF, PHLC_HCF_MF, PHLI_HRI_MF, PHLI_HCF_MF)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks 
 
 USE MODD_BUDGET,         ONLY: TBUDGETDATA_PTR, TBUDGETCONF_T
 USE MODD_CST,            ONLY: CST_t

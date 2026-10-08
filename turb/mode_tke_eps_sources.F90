@@ -6,7 +6,7 @@
 MODULE MODE_TKE_EPS_SOURCES
 
 !$ACDC singlecolumn
-
+!$ACDC manyblocks --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR,TLES_T,TFILEDATA
 IMPLICIT NONE
 CONTAINS
       SUBROUTINE TKE_EPS_SOURCES(D,CST,CSTURB,BUCONF,TURBN,TLES,       &
@@ -234,12 +234,14 @@ REAL, DIMENSION(D%NIJT,D%NKT) ::ZDZF2D_WORK1
 INTEGER :: JIJ,JK
 !
 !----------------------------------------------------------------------------
-NULLIFY(TZFIELDDISS_ll)
 !
 !*       1.   PRELIMINARY COMPUTATIONS
 !             ------------------------
 !
 IF (LHOOK) CALL DR_HOOK('TKE_EPS_SOURCES',0,ZHOOK_HANDLE)
+NULLIFY(TZFIELDDISS_ll)
+
+
 !
 IKB=D%NKB
 IKE=D%NKE

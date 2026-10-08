@@ -1,6 +1,7 @@
 MODULE MODE_GRADIENT_V_PHY
 
 !$ACDC singlecolumn
+!$ACDC manyblocks
 
 IMPLICIT NONE
 CONTAINS
@@ -67,11 +68,11 @@ IMPLICIT NONE
 !
 TYPE(DIMPHYEX_t),       INTENT(IN)   :: D
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the U point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the U point
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(OUT) :: PGZ_V_VW ! result UW point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT) :: PA_WORK, PDZZ_WORK
+REAL, DIMENSION(D%NIJT,D%NKT), INTENT(OUT) :: PGZ_V_VW ! result UW point
+REAL, DIMENSION(D%NIJT,D%NKT) :: PA_WORK, PDZZ_WORK
 !
 INTEGER :: JI,JJ,JK
 INTEGER :: IIB,IJB,IIE,IJE,IKT
@@ -96,8 +97,8 @@ CALL MYM_PHY(D,PDZZ,PDZZ_WORK)
 DO JK=1, IKT
   DO JJ=IJB, IJE
     DO JI=IIB, IIE
-      PGZ_V_VW(JI, JJ, JK)= PA_WORK(JI, JJ, JK) &
-                                                     / PDZZ_WORK(JI, JJ, JK)
+      PGZ_V_VW(JI+IKT*(JJ-1), JK)= PA_WORK(JI+IKT*(JJ-1), JK) &
+                                                     / PDZZ_WORK(JI+IKT*(JJ-1), JK)
     END DO
   END DO
 END DO
@@ -173,14 +174,14 @@ IMPLICIT NONE
 TYPE(DIMPHYEX_t),       INTENT(IN)   :: D
 !
 LOGICAL, INTENT(IN) :: OFLAT
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the V point
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDYY    ! metric coefficient dyy
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT),  INTENT(IN)  :: PDZY    ! metric coefficient dzy
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PA      ! variable at the V point
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDYY    ! metric coefficient dyy
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZZ    ! metric coefficient dzz
+REAL, DIMENSION(D%NIJT,D%NKT),  INTENT(IN)  :: PDZY    ! metric coefficient dzy
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT), INTENT(OUT)  :: PGY_V_M ! result mass point
+REAL, DIMENSION(D%NIJT,D%NKT), INTENT(OUT)  :: PGY_V_M ! result mass point
 !
-REAL, DIMENSION(D%NIT,D%NJT,D%NKT)  :: ZWORK1, ZWORK2, ZWORK3, ZWORK4
+REAL, DIMENSION(D%NIJT,D%NKT)  :: ZWORK1, ZWORK2, ZWORK3, ZWORK4
 INTEGER :: IIB,IJB,IIE,IJE,IKT
 INTEGER :: JI,JJ,JK
 !
@@ -209,7 +210,7 @@ IF (.NOT. OFLAT) THEN
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        ZWORK3(JI, JJ, JK) = ZWORK3(JI, JJ, JK) * PDZY(JI, JJ, JK)
+        ZWORK3(JI+IKT*(JJ-1), JK) = ZWORK3(JI+IKT*(JJ-1), JK) * PDZY(JI+IKT*(JJ-1), JK)
       END DO
     END DO
   END DO
@@ -219,7 +220,7 @@ IF (.NOT. OFLAT) THEN
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        ZWORK4(JI, JJ, JK) = ZWORK4(JI, JJ, JK) / PDZZ(JI, JJ, JK)
+        ZWORK4(JI+IKT*(JJ-1), JK) = ZWORK4(JI+IKT*(JJ-1), JK) / PDZZ(JI+IKT*(JJ-1), JK)
       END DO
     END DO
   END DO
@@ -229,8 +230,8 @@ IF (.NOT. OFLAT) THEN
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        PGY_V_M(JI, JJ, JK) = ( ZWORK1(JI, JJ, JK) - ZWORK3(JI, JJ, JK)) &
-                                           / ZWORK2(JI, JJ, JK)
+        PGY_V_M(JI+IKT*(JJ-1), JK) = ( ZWORK1(JI+IKT*(JJ-1), JK) - ZWORK3(JI+IKT*(JJ-1), JK)) &
+                                           / ZWORK2(JI+IKT*(JJ-1), JK)
       END DO
     END DO
   END DO
@@ -240,7 +241,7 @@ ELSE
   DO JK=1, IKT
     DO JJ=IJB, IJE
       DO JI=IIB, IIE
-        PGY_V_M(JI, JJ, JK)= ZWORK1(JI, JJ, JK) / ZWORK2(JI, JJ, JK)
+        PGY_V_M(JI+IKT*(JJ-1), JK)= ZWORK1(JI+IKT*(JJ-1), JK) / ZWORK2(JI+IKT*(JJ-1), JK)
       END DO
     END DO
   END DO

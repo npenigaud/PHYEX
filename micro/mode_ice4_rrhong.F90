@@ -13,6 +13,7 @@ SUBROUTINE ICE4_RRHONG(CST, PARAMI, ICED, D, LDCOMPUTE, &
                        &PRRHONG_MR)
 
 !$ACDC singlecolumn
+!$ACDC manyblocks 
 
 !!
 !!**  PURPOSE

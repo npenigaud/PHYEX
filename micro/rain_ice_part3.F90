@@ -21,6 +21,7 @@
                                    ZBUDGETS )
 
 !$ACDC singlecolumn --nocreate-interface
+!$ACDC manyblocks --nocreate-interface --not-present-types=TBUDGETCONF_T,TBUDGETDATA_PTR --ignore-array-variables=ZBUDGETS
 
 !     #############################################################################
 !!!****  * -  compute the explicit microphysical sources
@@ -303,12 +304,14 @@ IF(BUCONF%LBU_ENABLE .OR. OELEC) THEN
   ENDDO
 ENDIF
 !
+!$ACDC SKIP {
 IF(BUCONF%LBU_ENABLE) THEN
   CALL ICE4_BUDGETS(D, PARAMI, BUCONF, KRR, &
                     PLVFACT, PLSFACT, PRHODJ, PEXNREF, &
                     PRVHENI, ZBUDGETS, &
                     TBUDGETS, KBUDGETS)
 ENDIF
+!$ACDC }
 !
 !-------------------------------------------------------------------------------
 !
@@ -320,6 +323,8 @@ ENDIF
 !
 !*       7.1    Cloud electrification
 !
+
+!$ACDC SKIP {
 IF (OELEC) THEN
   GMASK_ELEC(:,:)=.FALSE.
   DO JK = IKTB, IKTE
@@ -330,6 +335,7 @@ IF (OELEC) THEN
       END DO
     END DO
   END DO
+
   !
   IELEC = COUNT(GMASK_ELEC)
   !
@@ -392,6 +398,7 @@ IF (OELEC) THEN
                          PRCMLTSR=ZBUDGETS(:,:,IRCMLTSR), PRICFRR=ZBUDGETS(:,:,IRICFRR))
   END IF
 END IF
+!$ACDC }
 !
 !
 !*       7.2    Water isotopologues

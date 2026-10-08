@@ -6,7 +6,7 @@ CONTAINS
                                              PUMF, PZUMF, PUER, PZUER, PUDR, PZUDR  )
 
 !$ACDC singlecolumn
-
+!$ACDC manyblocks  
      USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 !    ################################################################################
 !
