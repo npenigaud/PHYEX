@@ -95,8 +95,12 @@ CALL MXM_PHY(D,PDZZ,PDZZ_WORK)
 
 DO JK=1, IKT
   DO JIJ=IIJB, IIJE
+<<<<<<< HEAD
       PGZ_U_UW(JIJ, JK)= PA_WORK(JIJ, JK) &
                                                      / PDZZ_WORK(JIJ, JK)
+=======
+      PGZ_U_UW(JIJ, JK)= PA_WORK(JIJ, JK)/PDZZ_WORK(JIJ, JK)
+>>>>>>> d96a0dd34a45b07468a7b7be24a495ecc25a64c1
   END DO
 END DO
 
@@ -225,7 +229,11 @@ IF (.NOT. OFLAT) THEN
   
   DO JK=1, IKT
     DO JIJ=IIJB, IIJE
+<<<<<<< HEAD
         PGX_U_M(JIJ, JK) = ( ZWORK1(JIJ, JK) - ZWORK3(JIJ, JK)) &
+=======
+      PGX_U_M(JIJ, JK) = ( ZWORK1(JIJ, JK) - ZWORK3(JIJ, JK)) &
+>>>>>>> d96a0dd34a45b07468a7b7be24a495ecc25a64c1
                                            / ZWORK2(JIJ, JK)
     END DO
   END DO

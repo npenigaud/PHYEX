@@ -14,6 +14,7 @@ CONTAINS
 !$ACDC singlecolumn
 !$ACDC manyblocks  
 
+    USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 !    ###############################################################################
 !
 !!**** Compute updraft properties from DPL to CTL.

@@ -239,6 +239,9 @@ INTEGER :: JIJ,JK
 !             ------------------------
 !
 IF (LHOOK) CALL DR_HOOK('TKE_EPS_SOURCES',0,ZHOOK_HANDLE)
+NULLIFY(TZFIELDDISS_ll)
+
+
 !
 NULLIFY(TZFIELDDISS_ll)
 !

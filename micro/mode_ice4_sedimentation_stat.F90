@@ -132,7 +132,8 @@ ENDDO
 ! calculation sedimentation flux
 DO JK = IKE , IKB, -1*IKL
 
-  !!replaces the shift mechanism to facilitate GPU port
+  !replaces the shift mechanism, necessary for GPU port
+  !current level now takes place of previous one
   IKPLUS = MODULO(IKE-JK,2)
   IK = 1 - IKPLUS
 

@@ -10,6 +10,7 @@ CONTAINS
 
 !$ACDC singlecolumn
 !$ACDC manyblocks  
+     USE YOMHOOK , ONLY : LHOOK, DR_HOOK, JPHOOK
 !    ################################################################################
 !
 !!**** Uses closure adjustment factor to adjust mass flux and to modify

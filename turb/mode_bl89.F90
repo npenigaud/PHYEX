@@ -249,6 +249,7 @@ ZTMP(:)=0.
 !*       3.  loop on model levels
 !            --------------------
 !
+DO JK=IKTB,IKTE
 
 DO JK=IKTB,IKTE
 !
@@ -284,7 +285,7 @@ DO JK=IKTB,IKTE
       ZLWORK(JIJ,JK)=ZLWORK(JIJ,JK)+ZTEST0(JIJ)*(ZTEST*ZLWORK1+(1-ZTEST)*ZLWORK2)
       ZINTE(JIJ) = ZINTE(JIJ) - ZPOTE
     END DO
-    IF (.NOT. ANY(ZTEST0(IIJB:IIJE)<0.5)) THEN
+    IF (.NOT. ANY(ZTEST0(IIJB:IIJE)>0.5)) THEN
       EXIT
     ENDIF
   END DO

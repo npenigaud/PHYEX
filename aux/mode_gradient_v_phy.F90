@@ -79,7 +79,7 @@ INTEGER :: IIJB,IIJE,IKT
 !
 !*       0.2   declaration of local variables
 !
-IIJE=D%NIJEC
+IIJE=D%NIJE
 IIJB=D%NIJB
 IKT=D%NKT
 !
@@ -218,7 +218,7 @@ IF (.NOT. OFLAT) THEN
   
   DO JK=1, IKT
     DO JIJ=IIJB, IIJE
-        PGY_V_M(JIJ, JK) = ( ZWORK1(JIJ, JK) - ZWORK3(JIJ, JK)) &
+      PGY_V_M(JIJ, JK) = ( ZWORK1(JIJ, JK) - ZWORK3(JIJ, JK)) &
                                            / ZWORK2(JIJ, JK)
     END DO
   END DO
