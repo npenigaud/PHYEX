@@ -104,24 +104,24 @@ IF (LHOOK) CALL DR_HOOK('ICE4_WARM', 0, ZHOOK_HANDLE)
 !*       4.2    compute the autoconversion of r_c for r_r production: RCAUTR
 !
 
-!$mnh_do_concurrent( JL=1:KSIZE )
-DO JL=1, KSIZE
-  IF(LDCOMPUTE(JL)) THEN
+!$mnh_do_concurrent( JIJ=D%NIJB:D%NIJE )
+DO JIJ=D%NIJB, D%NIJE
+  IF(LDCOMPUTE(JIJ)) THEN
     IF(PARAMI%LKOGAN .AND. .NOT. LDSOFT) THEN
-      PRCAUTR(JL) = 0.
-      IF (PRCT(JL) >  1.0E-8) THEN
-        PRCAUTR(JL) =  1350.0 * ICEP%XFRMIN(10)* PCONC(JL)**(-1.79) * &
-            &  (PRCT(JL)/(MAX(ICEP%XFRMIN(11),PCF(JL))))**2.47
-        PRCAUTR(JL) = PRCAUTR(JL)*MAX(ICEP%XFRMIN(11),PCF(JL))
+      PRCAUTR(JIJ) = 0.
+      IF (PRCT(JIJ) >  1.0E-8) THEN
+        PRCAUTR(JIJ) =  1350.0 * ICEP%XFRMIN(10)* PCONC(JIJ)**(-1.79) * &
+            &  (PRCT(JIJ)/(MAX(ICEP%XFRMIN(11),PCF(JIJ))))**2.47
+        PRCAUTR(JIJ) = PRCAUTR(JIJ)*MAX(ICEP%XFRMIN(11),PCF(JIJ))
       ENDIF
     ELSE
-      IF(PHLC_HRC(JL)>ICED%XRTMIN(2) .AND. PHLC_HCF(JL)>0. ) THEN
+      IF(PHLC_HRC(JIJ)>ICED%XRTMIN(2) .AND. PHLC_HCF(JIJ)>0. ) THEN
         IF (.NOT. LDSOFT)THEN
           !HCF*autoconv(HRC/HCF) with simplification
-          PRCAUTR(JL) = ICEP%XTIMAUTC*MAX(PHLC_HRC(JL) - PHLC_HCF(JL)*ICEP%XCRIAUTC/PRHODREF(JL), 0.0)
+          PRCAUTR(JIJ) = ICEP%XTIMAUTC*MAX(PHLC_HRC(JIJ) - PHLC_HCF(JIJ)*ICEP%XCRIAUTC/PRHODREF(JIJ), 0.0)
         ENDIF
       ELSE
-        PRCAUTR(JL) = 0.
+        PRCAUTR(JIJ) = 0.
       ENDIF
     ENDIF
   ELSE
